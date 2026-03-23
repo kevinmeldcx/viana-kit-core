@@ -3,11 +3,5 @@
   "buildCommand": "npm run build --workspace=@viana/docs",
   "outputDirectory": "apps/docs/.next",
   "installCommand": "npm install",
-  "framework": "nextjs",
-  "projects": [
-    {
-      "path": "apps/docs",
-      "name": "viana-kit-docs"
-    }
-  ]
+  "framework": "nextjs"
 }
