@@ -14,8 +14,8 @@ function AppSheet({ children, ...props }: React.ComponentProps<typeof Sheet>) {
   return <Sheet {...props}>{children}</Sheet>
 }
 
-function AppSheetTrigger({ children }: { children: React.ReactNode }) {
-  return <SheetTrigger>{children}</SheetTrigger>
+function AppSheetTrigger({ children, asChild, ...props }: React.ComponentProps<typeof SheetTrigger>) {
+  return <SheetTrigger asChild={asChild} {...props}>{children}</SheetTrigger>
 }
 
 function AppSheetContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof SheetContent>) {

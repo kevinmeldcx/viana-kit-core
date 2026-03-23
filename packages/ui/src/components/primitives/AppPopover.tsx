@@ -9,8 +9,8 @@ function AppPopover({ children, ...props }: AppPopoverProps) {
   return <Popover {...props}>{children}</Popover>
 }
 
-function AppPopoverTrigger({ children, ...props }: React.ComponentProps<typeof PopoverTrigger>) {
-  return <PopoverTrigger {...props}>{children}</PopoverTrigger>
+function AppPopoverTrigger({ children, asChild, ...props }: React.ComponentProps<typeof PopoverTrigger>) {
+  return <PopoverTrigger asChild={asChild} {...props}>{children}</PopoverTrigger>
 }
 
 function AppPopoverContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof PopoverContent>) {

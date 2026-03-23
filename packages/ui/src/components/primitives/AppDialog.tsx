@@ -20,8 +20,8 @@ function AppDialog({ children, ...props }: AppDialogProps) {
   return <Dialog {...props}>{children}</Dialog>
 }
 
-function AppDialogTrigger({ children }: { children: React.ReactNode }) {
-  return <DialogTrigger>{children}</DialogTrigger>
+function AppDialogTrigger({ children, asChild, ...props }: React.ComponentProps<typeof DialogTrigger>) {
+  return <DialogTrigger asChild={asChild} {...props}>{children}</DialogTrigger>
 }
 
 function AppDialogContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof DialogContent>) {
