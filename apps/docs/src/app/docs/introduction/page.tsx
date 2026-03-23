@@ -11,7 +11,7 @@ export default function IntroductionPage() {
       <div className="mb-8 space-y-2">
         <p className="text-sm font-medium text-primary">Getting Started</p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Introduction
+          What is Viana Kit?
         </h1>
         <p className="text-lg text-muted-foreground">
           An AI-native design system built on React, Tailwind CSS v4, and
@@ -22,99 +22,69 @@ export default function IntroductionPage() {
       <hr className="border-border mb-8" />
 
       <section className="space-y-10">
-        {/* What is Viana Kit */}
+        {/* Three Use Cases */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            What is Viana Kit?
+            Three Ways to Use Viana Kit
           </h2>
-          <p className="text-muted-foreground leading-7">
-            Viana Kit is a centrally governed component library that decouples
-            brand identity from individual product lifecycles. It gives
-            engineering teams a clean, pre-wired starting point — so they can
-            focus exclusively on business logic while the design system team
-            maintains total governance over the visual language.
-          </p>
-          <p className="text-muted-foreground leading-7">
-            Unlike traditional UI libraries shipped as compiled NPM packages,
-            Viana Kit uses a{" "}
-            <strong className="text-foreground">source-code-first</strong>{" "}
-            model. Components live directly in your repository, which means you
-            own them entirely — no version conflicts, no black-box internals,
-            and no breaking changes forced on you.
-          </p>
-          <p className="text-muted-foreground leading-7">
-            It is also designed from the ground up to be{" "}
-            <strong className="text-foreground">machine-readable</strong>.
-            Design tokens, component APIs, and usage guidelines are all
-            structured so that AI agents can reason about the design system,
-            generate compliant code, and inspect visual output — without human
-            intervention.
-          </p>
-        </div>
-
-        {/* Two-Repo Architecture */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Repository Architecture
-          </h2>
-          <p className="text-muted-foreground leading-7">
-            Viana Kit uses a two-tier model to separate governance from
-            consumption.
-          </p>
-
-          <div className="space-y-4">
-            <div className="rounded-lg border border-border p-5">
-              <div className="mb-2 flex items-center gap-2">
-                <span className="rounded bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
-                  Factory
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="rounded-lg border border-primary/50 bg-primary/5 p-5">
+              <div className="mb-3 flex items-center gap-2">
+                <span className="rounded bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">
+                  For Developers
                 </span>
-                <code className="text-sm font-mono text-foreground">
-                  viana-kit-core
-                </code>
               </div>
-              <p className="text-sm text-muted-foreground leading-6">
-                The monorepo owned by the design system team. This is where
-                branded primitives, design tokens, and documentation are
-                developed and maintained. Engineers on product teams do not
-                commit here.
+              <p className="text-sm text-muted-foreground">
+                Clone the starter kit and build your app with pre-configured components. No setup required.
               </p>
             </div>
 
             <div className="rounded-lg border border-border p-5">
-              <div className="mb-2 flex items-center gap-2">
+              <div className="mb-3 flex items-center gap-2">
                 <span className="rounded bg-secondary px-2 py-0.5 text-xs font-semibold text-secondary-foreground">
-                  Product
+                  For Product
                 </span>
-                <code className="text-sm font-mono text-foreground">
-                  viana-kit
-                </code>
+                <span className="rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+                  Soon
+                </span>
               </div>
-              <p className="text-sm text-muted-foreground leading-6">
-                A pre-configured starter template for new product initiatives.
-                Clone it to bootstrap your project. It comes with a mirrored
-                copy of all branded components already in place.
+              <p className="text-sm text-muted-foreground">
+                Build rapid prototypes with Skills and MCP. Connect AI agents to generate compliant code.
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-border p-5">
+              <div className="mb-3 flex items-center gap-2">
+                <span className="rounded bg-secondary px-2 py-0.5 text-xs font-semibold text-secondary-foreground">
+                  For Designers
+                </span>
+                <span className="rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+                  Soon
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Link to Figma, Paper.design, and Pencil.dev. Generate mockups rapidly from design systems.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Getting Started */}
+        {/* Getting Started for Developers */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Getting Started
+            For Developers
           </h2>
           <p className="text-muted-foreground leading-7">
-            The fastest way to start a new product is to clone the{" "}
+            The fastest way to start is to clone the{" "}
             <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
               viana-kit
             </code>{" "}
-            starter. It is a blank canvas pre-wired with all branded components,
-            Tailwind v4, and the correct directory structure.
+            starter — a blank canvas pre-wired with all components, Tailwind v4, and the correct directory structure.
           </p>
           <CodeBlock
             language="bash"
-            code={`# Clone the starter into your new project
-git clone https://github.com/your-org/viana-kit my-app
+            code={`# Clone the starter kit
+git clone https://github.com/kevinmeldcx/viana-kit.git my-app
 cd my-app
 
 # Install dependencies
@@ -124,16 +94,11 @@ npm install
 npm run dev`}
           />
           <p className="text-muted-foreground leading-7">
-            To add new components from the registry as they are released, use
-            the Viana CLI:
+            Visit the repository for the latest components and documentation:
           </p>
           <CodeBlock
             language="bash"
-            code={`# Add a component to your project
-npx viana-kit add button
-
-# Update an existing component to the latest version
-npx viana-kit update button`}
+            code={`https://github.com/kevinmeldcx/viana-kit`}
           />
         </div>
 
@@ -163,8 +128,8 @@ npx viana-kit update button`}
           </p>
           <CodeBlock
             filename="src/components/submit-button.tsx"
-            code={`// ✅ Correct — wrap the primitive, extend in your own file
-import { AppButton, type AppButtonProps } from "@/components/ui/button"
+            code={`// Correct — wrap the primitive, extend in your own file
+import { AppButton, type AppButtonProps } from "@/components/primitives/AppButton"
 
 interface SubmitButtonProps extends AppButtonProps {
   loading?: boolean
@@ -177,11 +142,6 @@ export function SubmitButton({ loading, children, ...props }: SubmitButtonProps)
     </AppButton>
   )
 }`}
-          />
-          <CodeBlock
-            filename="src/components/ui/button.tsx"
-            code={`// ✅ This file is managed by Viana Kit — do not edit directly.
-// Run \`npx viana-kit update button\` to pull the latest version.`}
           />
         </div>
 
@@ -254,28 +214,18 @@ export function SubmitButton({ loading, children, ...props }: SubmitButtonProps)
             For AI Agents
           </h2>
           <p className="text-muted-foreground leading-7">
-            Viana Kit is designed to be connected to AI agents via the{" "}
-            <strong className="text-foreground">Model Context Protocol</strong>{" "}
-            (MCP). Once the MCP server is deployed (Phase 3), agents will be
-            able to query the component catalog, fetch design tokens, search
-            usage guidelines, and generate compliant code — all without leaving
-            your IDE.
-          </p>
-          <p className="text-muted-foreground leading-7">
-            This documentation is also structured for RAG ingestion. Every
-            component page includes machine-readable metadata: canonical IDs,
-            related components, enforcement levels, and platform tags — so AI
-            agents can reason about the design system with the same depth a
-            senior engineer would.
+            Viana Kit is designed to be AI-agent friendly. Every component page
+            includes machine-readable metadata: canonical IDs, related components,
+            enforcement levels, and platform tags — so AI agents can reason about
+            the design system with the same depth a senior engineer would.
           </p>
           <div className="rounded-lg border border-border bg-muted/30 px-5 py-4">
-            <p className="text-sm font-medium text-foreground">Coming in Phase 3</p>
-            <p className="mt-1 text-sm text-muted-foreground leading-6">
-              MCP server deployment, Viana CLI (<code className="font-mono">add</code> /{" "}
-              <code className="font-mono">update</code>), and paper.design
-              integration. The foundation you are building on now is already
-              designed to support it.
-            </p>
+            <p className="text-sm font-medium text-foreground">Coming Soon</p>
+            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+              <li>• MCP server for IDE integration</li>
+              <li>• Skills for rapid prototyping</li>
+              <li>• Auto-generated component documentation</li>
+            </ul>
           </div>
         </div>
       </section>

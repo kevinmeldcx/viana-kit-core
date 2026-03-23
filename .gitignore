@@ -23,3 +23,4 @@ npm-debug.log*
 .env.local
 .env.*.local
 .vercel
+.env*.local
