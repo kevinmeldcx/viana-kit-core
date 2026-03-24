@@ -1,23 +1,79 @@
-import { Metadata } from "next"
-import { CollapsibleDemo } from "./collapsible-demo"
+import type { Metadata } from "next";
+import { CodeBlock } from "@/components/code-block";
+import { ComponentPreview } from "@/components/component-preview";
+import { CollapsibleDefaultPreview } from "@/components/previews/collapsible-preview";
 
 export const metadata: Metadata = {
   title: "Collapsible - Viana Kit",
-  description: "An interactive component which expands and collapses child content.",
-}
+  description: "A component that reveals and hides content.",
+};
 
 export default function CollapsiblePage() {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+    <article className="mx-auto max-w-3xl px-8 py-10">
+      <div className="mb-8 space-y-2">
+        <p className="text-sm font-medium text-primary">Components</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Collapsible
         </h1>
-        <p className="leading-7 [&:not(:first-child)]:mt-6">
-          An interactive component for expanding and collapsing content.
+        <p className="text-lg text-muted-foreground">
+          A component that reveals and hides content.
         </p>
       </div>
-      <CollapsibleDemo />
-    </div>
+
+      <ComponentPreview
+        preview={<CollapsibleDefaultPreview />}
+        code={`import * as React from "react"
+import { AppCollapsible, AppCollapsibleTrigger, AppCollapsibleContent, AppButton } from "@viana/ui"
+import { ChevronDownIcon } from "lucide-react"
+
+export function Example() {
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  return (
+    <AppCollapsible open={isOpen} onOpenChange={setIsOpen}>
+      <div className="flex items-center justify-between">
+        <h4 className="text-sm font-semibold">@peduarte starred 3 repositories</h4>
+        <AppCollapsibleTrigger asChild>
+          <AppButton variant="ghost" size="sm">
+            <ChevronDownIcon className="h-4 w-4" />
+          </AppButton>
+        </AppCollapsibleTrigger>
+      </div>
+      <AppCollapsibleContent className="space-y-2 pt-2">
+        <p className="text-sm">@radix-ui/primitives</p>
+        <p className="text-sm">@radix-ui/colors</p>
+      </AppCollapsibleContent>
+    </AppCollapsible>
   )
+}`}
+        filename="example.tsx"
+      />
+
+      <hr className="border-border my-10" />
+
+      <section className="space-y-10">
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Installation
+          </h2>
+          <CodeBlock language="bash" code="npx viana-kit add collapsible" />
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Import
+          </h2>
+          <CodeBlock
+            language="tsx"
+            code={`import {
+  AppCollapsible,
+  AppCollapsibleTrigger,
+  AppCollapsibleContent,
+} from "@viana/ui"`}
+          />
+        </div>
+      </section>
+    </article>
+  );
 }

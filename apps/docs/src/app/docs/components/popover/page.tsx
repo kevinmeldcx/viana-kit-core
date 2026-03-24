@@ -13,7 +13,7 @@ export default function PopoverPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Popover</h1>
         <p className="text-lg text-muted-foreground">A floating panel that appears when triggered.</p>
       </div>
-      <ComponentPreview preview={<PopoverDefaultPreview />} code={`import { AppPopover, AppPopoverContent, AppPopoverTrigger } from "@/components/primitives/AppPopover"
+      <ComponentPreview preview={<PopoverDefaultPreview />} code={`import { AppPopover, AppPopoverContent, AppPopoverTrigger } from "@viana/ui"
 
 export function Example() {
   return (

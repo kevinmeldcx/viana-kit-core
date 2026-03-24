@@ -18,7 +18,7 @@ export default function SwitchPage() {
 
       <ComponentPreview
         preview={<SwitchDefaultPreview />}
-        code={`import { AppSwitch } from "@/components/primitives/AppSwitch"
+        code={`import { AppSwitch } from "@viana/ui"
 
 export function Example() {
   return (
@@ -40,7 +40,7 @@ export function Example() {
         </div>
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">Import</h2>
-          <CodeBlock language="tsx" code={`import { AppSwitch } from "@/components/primitives/AppSwitch"`} />
+          <CodeBlock language="tsx" code={`import { AppSwitch } from "@viana/ui"AppSwitch"`} />
         </div>
       </section>
     </article>

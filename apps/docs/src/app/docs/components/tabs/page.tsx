@@ -13,7 +13,7 @@ export default function TabsPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Tabs</h1>
         <p className="text-lg text-muted-foreground">A set of tabbed panels for navigating between views.</p>
       </div>
-      <ComponentPreview preview={<TabsDefaultPreview />} code={`import { AppTabs, AppTabsList, AppTabsTrigger, AppTabsContent } from "@/components/primitives/AppTabs"
+      <ComponentPreview preview={<TabsDefaultPreview />} code={`import { AppTabs, AppTabsList, AppTabsTrigger, AppTabsContent } from "@viana/ui"
 
 export function Example() {
   return (

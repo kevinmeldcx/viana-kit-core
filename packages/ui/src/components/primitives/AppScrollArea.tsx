@@ -1,14 +1,13 @@
 "use client"
 
-import { cn } from "../../lib/utils"
 import { ScrollArea, ScrollBar } from "../ui/scroll-area"
 
-function AppScrollArea({ className, ...props }: React.ComponentProps<typeof ScrollArea>) {
-  return <ScrollArea className={cn("rounded-md", className)} {...props} />
+function AppScrollArea(props: React.ComponentProps<typeof ScrollArea>) {
+  return <ScrollArea {...props} />
 }
 
-function AppScrollBar({ className, ...props }: React.ComponentProps<typeof ScrollBar>) {
-  return <ScrollBar className={cn("rounded-md", className)} {...props} />
+function AppScrollBar(props: React.ComponentProps<typeof ScrollBar>) {
+  return <ScrollBar {...props} />
 }
 
 export { AppScrollArea, AppScrollBar }

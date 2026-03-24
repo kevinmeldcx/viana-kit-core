@@ -1,18 +1,17 @@
 "use client"
 
-import { cn } from "../../lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
-function AppAvatar({ className, ...props }: React.ComponentProps<typeof Avatar>) {
-  return <Avatar className={cn("rounded-md", className)} {...props} />
+function AppAvatar(props: React.ComponentProps<typeof Avatar>) {
+  return <Avatar {...props} />
 }
 
-function AppAvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarImage>) {
-  return <AvatarImage className={cn("rounded-md", className)} {...props} />
+function AppAvatarImage(props: React.ComponentProps<typeof AvatarImage>) {
+  return <AvatarImage {...props} />
 }
 
-function AppAvatarFallback({ className, ...props }: React.ComponentProps<typeof AvatarFallback>) {
-  return <AvatarFallback className={cn("rounded-md", className)} {...props} />
+function AppAvatarFallback(props: React.ComponentProps<typeof AvatarFallback>) {
+  return <AvatarFallback {...props} />
 }
 
 export { AppAvatar, AppAvatarImage, AppAvatarFallback }

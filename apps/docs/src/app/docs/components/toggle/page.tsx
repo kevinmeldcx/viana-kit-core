@@ -18,7 +18,7 @@ export default function TogglePage() {
 
       <ComponentPreview
         preview={<ToggleDefaultPreview />}
-        code={`import { AppToggle } from "@/components/primitives/AppToggle"
+        code={`import { AppToggle } from "@viana/ui"
 
 export function Example() {
   return <AppToggle>Toggle</AppToggle>
@@ -36,7 +36,7 @@ export function Example() {
 
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">Import</h2>
-          <CodeBlock language="tsx" code={`import { AppToggle } from "@/components/primitives/AppToggle"`} />
+          <CodeBlock language="tsx" code={`import { AppToggle } from "@viana/ui"`} />
         </div>
 
         <div className="space-y-4">
@@ -44,7 +44,7 @@ export function Example() {
           <p className="text-muted-foreground">Use <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono">variant=&quot;outline&quot;</code> for an outline style.</p>
           <ComponentPreview
             preview={<ToggleOutlinePreview />}
-            code={`import { AppToggle } from "@/components/primitives/AppToggle"
+            code={`import { AppToggle } from "@viana/ui"
 import { Bold, Italic } from "lucide-react"
 
 export function Example() {
@@ -67,7 +67,7 @@ export function Example() {
           <p className="text-muted-foreground">Icons can be used inside a toggle. Use the <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono">group-data-[state=on]/toggle:fill-*</code> class to style the icon when the toggle is on.</p>
           <ComponentPreview
             preview={<ToggleBookmarkPreview />}
-            code={`import { AppToggle } from "@/components/primitives/AppToggle"
+            code={`import { AppToggle } from "@viana/ui"
 import { Bookmark } from "lucide-react"
 
 export function Example() {
@@ -86,7 +86,7 @@ export function Example() {
           <p className="text-muted-foreground">Use the <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono">size</code> prop to change the size of the toggle.</p>
           <ComponentPreview
             preview={<ToggleSizesPreview />}
-            code={`import { AppToggle } from "@/components/primitives/AppToggle"
+            code={`import { AppToggle } from "@viana/ui"
 
 export function Example() {
   return (

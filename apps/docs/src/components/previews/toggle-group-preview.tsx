@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { AppToggleGroup, AppToggleGroupItem } from "@viana/ui"
-import { Bold, Italic, Underline } from "lucide-react"
+import * as React from "react";
+import { AppToggleGroup, AppToggleGroupItem } from "@viana/ui";
+import { Bold, Italic, Underline } from "lucide-react";
 
-export function ToggleGroupDemo() {
-  const [formats, setFormats] = React.useState<string[]>([])
+export function ToggleGroupDefaultPreview() {
+  const [formats, setFormats] = React.useState<string[]>([]);
 
   return (
     <div className="space-y-4">
@@ -39,5 +39,5 @@ export function ToggleGroupDemo() {
         </AppToggleGroup>
       </div>
     </div>
-  )
+  );
 }

@@ -13,7 +13,7 @@ export default function AccordionPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Accordion</h1>
         <p className="text-lg text-muted-foreground">A vertically stacked set of interactive headings.</p>
       </div>
-      <ComponentPreview preview={<AccordionDefaultPreview />} code={`import { AppAccordion, AppAccordionContent, AppAccordionItem, AppAccordionTrigger } from "@/components/primitives/AppAccordion"
+      <ComponentPreview preview={<AccordionDefaultPreview />} code={`import { AppAccordion, AppAccordionContent, AppAccordionItem, AppAccordionTrigger } from "@viana/ui"
 
 export function Example() {
   return (

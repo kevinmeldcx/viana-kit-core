@@ -22,7 +22,7 @@ export default function CheckboxPage() {
 
       <ComponentPreview
         preview={<CheckboxDefaultPreview />}
-        code={`import { AppCheckbox } from "@/components/primitives/AppCheckbox"
+        code={`import { AppCheckbox } from "@viana/ui"AppCheckbox"
 
 export function Example() {
   return (
@@ -51,7 +51,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppCheckbox } from "@/components/primitives/AppCheckbox"`}
+            code={`import { AppCheckbox } from "@viana/ui"`}
           />
         </div>
 

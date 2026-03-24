@@ -13,7 +13,7 @@ export default function PaginationPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Pagination</h1>
         <p className="text-lg text-muted-foreground">A set of pagination controls.</p>
       </div>
-      <ComponentPreview preview={<PaginationDefaultPreview />} code={`import { AppPagination, AppPaginationContent, AppPaginationItem, AppPaginationLink, AppPaginationNext, AppPaginationPrevious } from "@/components/primitives/AppPagination"
+      <ComponentPreview preview={<PaginationDefaultPreview />} code={`import { AppPagination, AppPaginationContent, AppPaginationItem, AppPaginationLink, AppPaginationNext, AppPaginationPrevious } from "@viana/ui"
 
 export function Example() {
   return (

@@ -13,7 +13,7 @@ export default function AvatarPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Avatar</h1>
         <p className="text-lg text-muted-foreground">An image element with fallback support.</p>
       </div>
-      <ComponentPreview preview={<AvatarDefaultPreview />} code={`import { AppAvatar, AppAvatarImage, AppAvatarFallback } from "@/components/primitives/AppAvatar"
+      <ComponentPreview preview={<AvatarDefaultPreview />} code={`import { AppAvatar, AppAvatarImage, AppAvatarFallback } from "@viana/ui"
 
 export function Example() {
   return (

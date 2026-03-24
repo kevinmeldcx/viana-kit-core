@@ -24,7 +24,7 @@ export default function LabelPage() {
       {/* Main preview */}
       <ComponentPreview
         preview={<LabelDefaultPreview />}
-        code={`import { AppLabel } from "@/components/primitives/AppLabel"
+        code={`import { AppLabel } from "@viana/ui"
 
 export function Example() {
   return <AppLabel>Label</AppLabel>
@@ -81,7 +81,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppLabel } from "@/components/primitives/AppLabel"`}
+            code={`import { AppLabel } from "@viana/ui"`}
           />
         </div>
 
@@ -100,8 +100,7 @@ export function Example() {
           </p>
           <CodeBlock
             language="tsx"
-            code={`import { AppInput } from "@/components/primitives/AppInput"
-import { AppLabel } from "@/components/primitives/AppLabel"
+            code={`import { AppInput, AppLabel } from "@viana/ui"
 
 export function FormExample() {
   return (

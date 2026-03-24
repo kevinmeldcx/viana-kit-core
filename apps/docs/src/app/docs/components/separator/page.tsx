@@ -13,7 +13,7 @@ export default function SeparatorPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Separator</h1>
         <p className="text-lg text-muted-foreground">A visual divider between elements.</p>
       </div>
-      <ComponentPreview preview={<SeparatorDefaultPreview />} code={`import { AppSeparator } from "@/components/primitives/AppSeparator"
+      <ComponentPreview preview={<SeparatorDefaultPreview />} code={`import { AppSeparator } from "@viana/ui"
 
 export function Example() {
   return (

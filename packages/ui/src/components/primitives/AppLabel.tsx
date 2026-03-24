@@ -1,10 +1,9 @@
 "use client"
 
-import { cn } from "../../lib/utils"
 import { Label } from "../ui/label"
 
-function AppLabel({ className, ...props }: React.ComponentProps<typeof Label>) {
-  return <Label className={cn("rounded-md", className)} {...props} />
+function AppLabel(props: React.ComponentProps<typeof Label>) {
+  return <Label {...props} />
 }
 
 export { AppLabel }

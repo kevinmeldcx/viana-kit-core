@@ -24,7 +24,7 @@ export default function InputPage() {
       {/* Main preview */}
       <ComponentPreview
         preview={<InputDefaultPreview />}
-        code={`import { AppInput } from "@/components/primitives/AppInput"
+        code={`import { AppInput } from "@viana/ui"
 
 export function Example() {
   return <AppInput placeholder="Enter text..." />
@@ -81,7 +81,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppInput } from "@/components/primitives/AppInput"`}
+            code={`import { AppInput } from "@viana/ui"AppInput"`}
           />
         </div>
 

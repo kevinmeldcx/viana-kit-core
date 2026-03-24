@@ -32,7 +32,7 @@ export default function CardPage() {
   AppCardDescription,
   AppCardContent,
   AppCardFooter,
-} from "@/components/primitives/AppCard"
+} from "@viana/ui"
 
 export function Example() {
   return (
@@ -109,7 +109,7 @@ export function Example() {
   AppCardDescription,
   AppCardContent,
   AppCardFooter,
-} from "@/components/primitives/AppCard"`}
+} from "@viana/ui"AppCard"`}
           />
         </div>
 

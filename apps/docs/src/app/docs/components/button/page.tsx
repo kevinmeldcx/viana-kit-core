@@ -31,7 +31,7 @@ export default function ButtonPage() {
       {/* Main preview */}
       <ComponentPreview
         preview={<ButtonDefaultPreview />}
-        code={`import { AppButton } from "@/components/primitives/AppButton"
+        code={`import { AppButton } from "@viana/ui"AppButton"
 
 export function Example() {
   return <AppButton>Button</AppButton>
@@ -88,7 +88,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppButton } from "@/components/primitives/AppButton"`}
+            code={`import { AppButton } from "@viana/ui"AppButton"`}
           />
         </div>
 
@@ -232,7 +232,7 @@ export function Example() {
           <CodeBlock
             language="tsx"
             code={`import Link from "next/link"
-import { AppButton } from "@/components/primitives/AppButton"
+import { AppButton } from "@viana/ui"AppButton"
 
 export function NavigateButton() {
   return (

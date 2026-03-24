@@ -1,4 +1,3 @@
-import { cn } from "../../lib/utils"
 import {
   Card,
   CardHeader,
@@ -9,8 +8,8 @@ import {
   CardContent,
 } from "../ui/card"
 
-function AppCard({ className, ...props }: React.ComponentProps<typeof Card>) {
-  return <Card className={cn("rounded-md", className)} {...props} />
+function AppCard(props: React.ComponentProps<typeof Card>) {
+  return <Card {...props} />
 }
 
 function AppCardHeader(props: React.ComponentProps<typeof CardHeader>) {

@@ -18,7 +18,7 @@ export default function ProgressPage() {
 
       <ComponentPreview
         preview={<ProgressDefaultPreview />}
-        code={`import { AppProgress } from "@/components/primitives/AppProgress"
+        code={`import { AppProgress } from "@viana/ui"
 
 export function Example() {
   return <AppProgress value={33} />
@@ -35,7 +35,7 @@ export function Example() {
         </div>
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">Import</h2>
-          <CodeBlock language="tsx" code={`import { AppProgress } from "@/components/primitives/AppProgress"`} />
+          <CodeBlock language="tsx" code={`import { AppProgress } from "@viana/ui"AppProgress"`} />
         </div>
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">Usage</h2>

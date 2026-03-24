@@ -13,11 +13,11 @@ export default function ScrollAreaPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Scroll Area</h1>
         <p className="text-lg text-muted-foreground">A scrollable container with custom scrollbar.</p>
       </div>
-      <ComponentPreview preview={<ScrollAreaDefaultPreview />} code={`import { AppScrollArea } from "@/components/primitives/AppScrollArea"
+      <ComponentPreview preview={<ScrollAreaDefaultPreview />} code={`import { AppScrollArea } from "@viana/ui"
 
 export function Example() {
   return (
-    <AppScrollArea className="h-[200px] w-[300px] rounded-md border p-4">
+    <AppScrollArea className="h-[200px] w-[300px] border p-4">
       Scrollable content...
     </AppScrollArea>
   )

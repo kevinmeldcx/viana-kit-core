@@ -1,23 +1,33 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
-import { AppForm, AppFormField, AppFormItem, AppFormLabel, AppFormControl, AppFormMessage, AppFormDescription, AppButton, AppInput } from "@viana/ui"
+import { useForm } from "react-hook-form";
+import {
+  AppForm,
+  AppFormField,
+  AppFormItem,
+  AppFormLabel,
+  AppFormControl,
+  AppFormMessage,
+  AppFormDescription,
+  AppButton,
+  AppInput,
+} from "@viana/ui";
 
 type FormValues = {
-  username: string
-  email: string
-}
+  username: string;
+  email: string;
+};
 
-export function FormDemo() {
+export function FormDefaultPreview() {
   const form = useForm<FormValues>({
     defaultValues: {
       username: "",
       email: "",
     },
-  })
+  });
 
   function onSubmit(data: FormValues) {
-    console.log(data)
+    console.log(data);
   }
 
   return (
@@ -55,5 +65,5 @@ export function FormDemo() {
         <AppButton type="submit">Submit</AppButton>
       </form>
     </AppForm>
-  )
+  );
 }

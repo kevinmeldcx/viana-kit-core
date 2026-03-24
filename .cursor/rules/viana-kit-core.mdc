@@ -1,0 +1,14 @@
+---
+description: Viana Kit Core rules — applied to all files in this project
+alwaysApply: true
+---
+
+See `AGENTS.md` at the repo root for the full guide.
+
+Key rules:
+- Primitives in `packages/ui/src/components/primitives/` must re-export from `../ui/` — never from `@radix-ui/*`
+- Never add CVA variants or rebuild logic in a primitive — wrap the shadcn ui/ component
+- After any change to ui/ or primitives/, run `npm run sync` to push to viana-kit
+- Adding a component: ui/ → primitive → index.ts → docs preview → docs page → sidebar
+
+Full instructions → `AGENTS.md`

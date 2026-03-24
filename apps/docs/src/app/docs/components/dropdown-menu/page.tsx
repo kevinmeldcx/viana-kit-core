@@ -1,59 +1,84 @@
-import { Metadata } from "next"
-import { AppDropdownMenu, AppDropdownMenuTrigger, AppDropdownMenuContent, AppDropdownMenuLabel, AppDropdownMenuSeparator, AppDropdownMenuItem } from "@viana/ui"
-import { UserIcon, SettingsIcon, CreditCardIcon, KeyboardIcon } from "lucide-react"
+import type { Metadata } from "next";
+import { CodeBlock } from "@/components/code-block";
+import { ComponentPreview } from "@/components/component-preview";
+import { DropdownMenuDefaultPreview } from "@/components/previews/dropdown-menu-preview";
 
 export const metadata: Metadata = {
   title: "Dropdown Menu - Viana Kit",
-  description: "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
-}
+  description: "A menu that displays a list of actions or options.",
+};
 
 export default function DropdownMenuPage() {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+    <article className="mx-auto max-w-3xl px-8 py-10">
+      <div className="mb-8 space-y-2">
+        <p className="text-sm font-medium text-primary">Components</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Dropdown Menu
         </h1>
-        <p className="leading-7 [&:not(:first-child)]:mt-6">
-          Displays a menu to the user — such as a set of actions or functions — triggered by a button.
+        <p className="text-lg text-muted-foreground">
+          A menu that displays a list of actions or options.
         </p>
       </div>
 
-      <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">
-          Basic Example
-        </h2>
-        <div className="rounded-lg border p-8">
-          <AppDropdownMenu>
-            <AppDropdownMenuTrigger asChild>
-              <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-                Open Menu
-              </button>
-            </AppDropdownMenuTrigger>
-            <AppDropdownMenuContent className="w-56">
-              <AppDropdownMenuLabel>My Account</AppDropdownMenuLabel>
-              <AppDropdownMenuSeparator />
-              <AppDropdownMenuItem>
-                <UserIcon className="mr-2 h-4 w-4" />
-                <span>Profile</span>
-              </AppDropdownMenuItem>
-              <AppDropdownMenuItem>
-                <SettingsIcon className="mr-2 h-4 w-4" />
-                <span>Settings</span>
-              </AppDropdownMenuItem>
-              <AppDropdownMenuItem>
-                <CreditCardIcon className="mr-2 h-4 w-4" />
-                <span>Billing</span>
-              </AppDropdownMenuItem>
-              <AppDropdownMenuSeparator />
-              <AppDropdownMenuItem>
-                <KeyboardIcon className="mr-2 h-4 w-4" />
-                <span>Keyboard shortcuts</span>
-              </AppDropdownMenuItem>
-            </AppDropdownMenuContent>
-          </AppDropdownMenu>
-        </div>
-      </div>
-    </div>
+      <ComponentPreview
+        preview={<DropdownMenuDefaultPreview />}
+        code={`import {
+  AppDropdownMenu,
+  AppDropdownMenuTrigger,
+  AppDropdownMenuContent,
+  AppDropdownMenuLabel,
+  AppDropdownMenuSeparator,
+  AppDropdownMenuItem,
+  AppButton,
+} from "@viana/ui"
+
+export function Example() {
+  return (
+    <AppDropdownMenu>
+      <AppDropdownMenuTrigger asChild>
+        <AppButton>Open Menu</AppButton>
+      </AppDropdownMenuTrigger>
+      <AppDropdownMenuContent className="w-56">
+        <AppDropdownMenuLabel>My Account</AppDropdownMenuLabel>
+        <AppDropdownMenuSeparator />
+        <AppDropdownMenuItem>Profile</AppDropdownMenuItem>
+        <AppDropdownMenuItem>Settings</AppDropdownMenuItem>
+        <AppDropdownMenuItem>Billing</AppDropdownMenuItem>
+      </AppDropdownMenuContent>
+    </AppDropdownMenu>
   )
+}`}
+        filename="example.tsx"
+      />
+
+      <hr className="border-border my-10" />
+
+      <section className="space-y-10">
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Installation
+          </h2>
+          <CodeBlock language="bash" code="npx viana-kit add dropdown-menu" />
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Import
+          </h2>
+          <CodeBlock
+            language="tsx"
+            code={`import {
+  AppDropdownMenu,
+  AppDropdownMenuTrigger,
+  AppDropdownMenuContent,
+  AppDropdownMenuLabel,
+  AppDropdownMenuSeparator,
+  AppDropdownMenuItem,
+} from "@viana/ui"`}
+          />
+        </div>
+      </section>
+    </article>
+  );
 }

@@ -13,7 +13,7 @@ export default function HoverCardPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Hover Card</h1>
         <p className="text-lg text-muted-foreground">A card that appears on hover.</p>
       </div>
-      <ComponentPreview preview={<HoverCardDefaultPreview />} code={`import { AppHoverCard, AppHoverCardContent, AppHoverCardTrigger } from "@/components/primitives/AppHoverCard"
+      <ComponentPreview preview={<HoverCardDefaultPreview />} code={`import { AppHoverCard, AppHoverCardContent, AppHoverCardTrigger } from "@viana/ui"
 
 export function Example() {
   return (
