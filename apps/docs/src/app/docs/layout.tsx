@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SidebarNav } from "@/components/sidebar-nav";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function DocsLayout({
   children,
@@ -19,6 +20,9 @@ export default function DocsLayout({
           <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">
             v0.1.0
           </span>
+          <div className="ml-auto">
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 

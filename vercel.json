@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "npx turbo run build --filter=@viana/docs",
+  "outputDirectory": "apps/docs/.next",
   "installCommand": "npm install",
   "framework": "nextjs"
 }
