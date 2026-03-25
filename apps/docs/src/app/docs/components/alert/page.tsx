@@ -3,7 +3,7 @@ import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
 import {
   AlertDefaultPreview,
-  AlertDestructivePreview,
+  AlertAllVariantsPreview,
 } from "@/components/previews/alert-preview";
 
 export const metadata: Metadata = {
@@ -28,17 +28,21 @@ export default function AlertPage() {
       {/* Main preview */}
       <ComponentPreview
         preview={<AlertDefaultPreview />}
-        code={`import { AppAlert, AppAlertTitle, AppAlertDescription } from "@/components/primitives/AppAlert"
-import { InfoIcon } from "lucide-react"
+        code={`import { AppAlert, AppAlertContent, AppAlertTitle, AppAlertDescription } from "@/components/primitives/AppAlert"
+import { InfoIcon, XIcon } from "lucide-react"
+import { AppButton } from "@/components/primitives/AppButton"
 
 export function Example() {
   return (
     <AppAlert>
-      <InfoIcon className="h-4 w-4" />
-      <AppAlertTitle>Heads up</AppAlertTitle>
-      <AppAlertDescription>
-        This is an informational alert message.
-      </AppAlertDescription>
+      <InfoIcon className="w-8 h-8" />
+      <AppAlertContent>
+        <AppAlertTitle>Default Alert</AppAlertTitle>
+        <AppAlertDescription>This is a default alert message.</AppAlertDescription>
+      </AppAlertContent>
+      <AppButton variant="ghost" size="icon" className="ml-auto shrink-0 rounded-full">
+        <XIcon className="h-4 w-4" />
+      </AppButton>
     </AppAlert>
   )
 }`}
@@ -49,44 +53,12 @@ export function Example() {
 
       {/*
         canonical_id: component-alert-v1
-        related_components: ["AppAlert", "AppAlertTitle", "AppAlertDescription"]
+        related_components: ["AppAlert", "AppAlertContent", "AppAlertTitle", "AppAlertDescription"]
         platform_tags: ["web"]
         enforcement_level: strict
       */}
 
       <section className="space-y-10">
-        {/* Installation */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Installation
-          </h2>
-          <p className="text-muted-foreground leading-7">
-            Add the Alert component to your project using the Viana CLI. This
-            copies the source files directly into your repository and installs
-            any required dependencies.
-          </p>
-          <CodeBlock language="bash" code="npx viana-kit add alert" />
-          <p className="text-muted-foreground leading-7">
-            This will create two files in your project:
-          </p>
-          <ul className="space-y-1 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5">–</span>
-              <code className="font-mono text-foreground">
-                src/components/ui/alert.tsx
-              </code>
-              <span>— the base shadcn/ui primitive (do not modify)</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5">–</span>
-              <code className="font-mono text-foreground">
-                src/components/primitives/AppAlert.tsx
-              </code>
-              <span>— the Viana Kit wrapper (do not modify)</span>
-            </li>
-          </ul>
-        </div>
-
         {/* Import */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
@@ -94,7 +66,12 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppAlert, AppAlertTitle, AppAlertDescription } from "@/components/primitives/AppAlert"`}
+            code={`import {
+  AppAlert,
+  AppAlertContent,
+  AppAlertTitle,
+  AppAlertDescription,
+} from "@/components/primitives/AppAlert"`}
           />
         </div>
 
@@ -111,12 +88,37 @@ export function Example() {
             prop to change the visual style.
           </p>
           <ComponentPreview
-            preview={<AlertDestructivePreview />}
+            preview={<AlertAllVariantsPreview />}
             code={`<AppAlert variant="destructive">
-  <AppAlertTitle>Something went wrong</AppAlertTitle>
-  <AppAlertDescription>
-    Your session has expired. Please sign in again.
-  </AppAlertDescription>
+  <AlertCircleIcon className="w-8 h-8" />
+  <AppAlertContent>
+    <AppAlertTitle>Destructive</AppAlertTitle>
+    <AppAlertDescription>This is a destructive alert.</AppAlertDescription>
+  </AppAlertContent>
+</AppAlert>
+
+<AppAlert variant="success">
+  <CheckCircleIcon className="w-8 h-8" />
+  <AppAlertContent>
+    <AppAlertTitle>Success</AppAlertTitle>
+    <AppAlertDescription>Your changes have been saved successfully.</AppAlertDescription>
+  </AppAlertContent>
+</AppAlert>
+
+<AppAlert variant="warning">
+  <TriangleAlertIcon className="w-8 h-8" />
+  <AppAlertContent>
+    <AppAlertTitle>Warning</AppAlertTitle>
+    <AppAlertDescription>This action may have unintended consequences.</AppAlertDescription>
+  </AppAlertContent>
+</AppAlert>
+
+<AppAlert variant="info">
+  <InfoIcon className="w-8 h-8" />
+  <AppAlertContent>
+    <AppAlertTitle>Info</AppAlertTitle>
+    <AppAlertDescription>A new software update is available.</AppAlertDescription>
+  </AppAlertContent>
 </AppAlert>`}
           />
           <div className="overflow-hidden rounded-lg border border-border text-sm">
@@ -133,8 +135,11 @@ export function Example() {
               </thead>
               <tbody className="divide-y divide-border">
                 {[
-                  ["default", "Informational or neutral messages."],
+                  ["default", "Neutral or informational messages with no semantic weight."],
                   ["destructive", "Errors, failures, or dangerous conditions."],
+                  ["success", "Confirmation that an action completed successfully."],
+                  ["warning", "Caution — the action is allowed but has consequences."],
+                  ["info", "Supplementary information the user should be aware of."],
                 ].map(([variant, description]) => (
                   <tr key={variant}>
                     <td className="px-4 py-2.5 font-mono text-xs text-foreground">
@@ -148,6 +153,37 @@ export function Example() {
               </tbody>
             </table>
           </div>
+        </div>
+
+        {/* With close button */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            With close button
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Place an{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppButton
+            </code>{" "}
+            after{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppAlertContent
+            </code>{" "}
+            to add a dismiss action. The flex layout pushes it to the right automatically.
+          </p>
+          <CodeBlock
+            language="tsx"
+            code={`<AppAlert>
+  <InfoIcon className="w-8 h-8" />
+  <AppAlertContent>
+    <AppAlertTitle>Heads up</AppAlertTitle>
+    <AppAlertDescription>You have a new message.</AppAlertDescription>
+  </AppAlertContent>
+  <AppButton variant="ghost" size="icon" className="ml-auto shrink-0 rounded-full">
+    <XIcon className="h-4 w-4" />
+  </AppButton>
+</AppAlert>`}
+          />
         </div>
 
         {/* API Reference */}
@@ -169,25 +205,17 @@ export function Example() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Prop
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Default
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Description
-                  </th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Description</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {[
                   {
                     prop: "variant",
-                    type: '"default" | "destructive"',
+                    type: '"default" | "destructive" | "success" | "warning" | "info"',
                     default: '"default"',
                     description: "Visual style of the alert.",
                   },
@@ -195,28 +223,39 @@ export function Example() {
                     prop: "className",
                     type: "string",
                     default: "—",
-                    description:
-                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
+                    description: "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
                   },
                 ].map(({ prop, type, default: def, description }) => (
                   <tr key={prop}>
-                    <td className="px-4 py-3 font-mono text-xs text-foreground">
-                      {prop}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {type}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {def}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {description}
-                    </td>
+                    <td className="px-4 py-3 font-mono text-xs text-foreground">{prop}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{type}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{def}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{description}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          <p className="text-muted-foreground leading-7">
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppAlertContent
+            </code>{" "}
+            groups{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppAlertTitle
+            </code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppAlertDescription
+            </code>{" "}
+            in a flex column and takes up the remaining horizontal space in the alert row.
+            It extends all native{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              {"<div>"}
+            </code>{" "}
+            HTML attributes.
+          </p>
         </div>
 
         {/* Source */}
@@ -226,13 +265,75 @@ export function Example() {
           </h2>
           <CodeBlock
             filename="src/components/primitives/AppAlert.tsx"
-            code={`import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+            code={`import * as React from "react"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import { cn } from "@/lib/utils"
 
-const AppAlert = Alert
-const AppAlertTitle = AlertTitle
-const AppAlertDescription = AlertDescription
+const extendedVariantClasses = {
+  success: "border text-green-700 dark:text-green-700 [&>svg]:text-green-700",
+  warning: "border text-amber-600 dark:text-amber-600 [&>svg]:text-amber-600",
+  info: "border text-blue-400 dark:text-blue-400 [&>svg]:text-blue-400",
+} as const
 
-export { AppAlert, AppAlertTitle, AppAlertDescription }`}
+type ExtendedVariant = "default" | "destructive" | keyof typeof extendedVariantClasses
+
+type AppAlertProps = Omit<React.ComponentProps<typeof Alert>, "variant"> & {
+  variant?: ExtendedVariant
+}
+
+function AppAlert({ variant = "default", className, ...props }: AppAlertProps) {
+  const isExtended = variant in extendedVariantClasses
+  return (
+    <Alert
+      variant={isExtended ? "default" : (variant as "default" | "destructive")}
+      className={cn(
+        "flex items-center gap-3 p-4 [&>svg]:static [&>svg]:top-auto [&>svg]:left-auto [&>svg~*]:pl-0 [&>svg+div]:translate-y-0",
+        isExtended ? extendedVariantClasses[variant as keyof typeof extendedVariantClasses] : undefined,
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+const AppAlertTitle = React.forwardRef<
+  React.ComponentRef<typeof AlertTitle>,
+  React.ComponentPropsWithoutRef<typeof AlertTitle>
+>(({ className, ...props }, ref) => (
+  <AlertTitle
+    ref={ref}
+    className={cn("text-xl font-bold mb-0", className)}
+    {...props}
+  />
+))
+AppAlertTitle.displayName = "AppAlertTitle"
+
+const AppAlertDescription = React.forwardRef<
+  React.ComponentRef<typeof AlertDescription>,
+  React.ComponentPropsWithoutRef<typeof AlertDescription>
+>(({ className, ...props }, ref) => (
+  <AlertDescription
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+))
+AppAlertDescription.displayName = "AppAlertDescription"
+
+const AppAlertContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col", className)}
+    {...props}
+  />
+))
+AppAlertContent.displayName = "AppAlertContent"
+
+export { AppAlert, AppAlertTitle, AppAlertDescription, AppAlertContent }
+export type { AppAlertProps }`}
           />
         </div>
       </section>

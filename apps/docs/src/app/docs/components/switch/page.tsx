@@ -10,12 +10,18 @@ export const metadata: Metadata = {
 export default function SwitchPage() {
   return (
     <article className="mx-auto max-w-3xl px-8 py-10">
+      {/* Header */}
       <div className="mb-8 space-y-2">
         <p className="text-sm font-medium text-primary">Components</p>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Switch</h1>
-        <p className="text-lg text-muted-foreground">A control that allows the user to toggle between checked and not checked.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Switch
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          A control that allows the user to toggle between checked and not checked.
+        </p>
       </div>
 
+      {/* Main preview */}
       <ComponentPreview
         preview={<SwitchDefaultPreview />}
         code={`import { AppSwitch } from "@/components/primitives/AppSwitch"
@@ -33,14 +39,125 @@ export function Example() {
 
       <hr className="border-border my-10" />
 
+      {/*
+        canonical_id: component-switch-v1
+        related_components: ["AppSwitch"]
+        platform_tags: ["web"]
+        enforcement_level: strict
+      */}
+
       <section className="space-y-10">
+        {/* Import */}
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">Installation</h2>
-          <CodeBlock language="bash" code="npx viana-kit add switch" />
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Import
+          </h2>
+          <CodeBlock
+            language="tsx"
+            code={`import { AppSwitch } from "@/components/primitives/AppSwitch"`}
+          />
         </div>
+
+        {/* API Reference - AppSwitch */}
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">Import</h2>
-          <CodeBlock language="tsx" code={`import { AppSwitch } from "@/components/primitives/AppSwitch"`} />
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            API Reference
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppSwitch
+            </code>{" "}
+            extends all native{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              {"<button>"}
+            </code>{" "}
+            HTML attributes.
+          </p>
+          <div className="overflow-hidden rounded-lg border border-border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-muted/50">
+                  <th className="px-4 py-3 text-left font-medium text-foreground">
+                    Prop
+                  </th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">
+                    Type
+                  </th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">
+                    Default
+                  </th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">
+                    Description
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {[
+                  {
+                    prop: "checked",
+                    type: "boolean",
+                    default: "—",
+                    description: "The controlled checked state of the switch.",
+                  },
+                  {
+                    prop: "onCheckedChange",
+                    type: "(checked: boolean) => void",
+                    default: "—",
+                    description: "Callback fired when the checked state changes.",
+                  },
+                  {
+                    prop: "disabled",
+                    type: "boolean",
+                    default: "—",
+                    description: "Whether the switch is disabled.",
+                  },
+                  {
+                    prop: "className",
+                    type: "string",
+                    default: "—",
+                    description:
+                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
+                  },
+                ].map(({ prop, type, default: def, description }) => (
+                  <tr key={prop}>
+                    <td className="px-4 py-3 font-mono text-xs text-foreground">
+                      {prop}
+                    </td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
+                      {type}
+                    </td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
+                      {def}
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      {description}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Source */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Source
+          </h2>
+          <CodeBlock
+            filename="src/components/primitives/AppSwitch.tsx"
+            code={`"use client"
+
+import { Switch } from "../ui/switch"
+
+type AppSwitchProps = React.ComponentPropsWithoutRef<typeof Switch>
+
+function AppSwitch(props: AppSwitchProps) {
+  return <Switch {...props} />
+}
+
+export { AppSwitch }`}
+          />
         </div>
       </section>
     </article>

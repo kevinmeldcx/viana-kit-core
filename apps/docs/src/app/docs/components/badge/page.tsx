@@ -46,38 +46,6 @@ export function Example() {
       */}
 
       <section className="space-y-10">
-        {/* Installation */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Installation
-          </h2>
-          <p className="text-muted-foreground leading-7">
-            Add the Badge component to your project using the Viana CLI. This
-            copies the source files directly into your repository and installs
-            any required dependencies.
-          </p>
-          <CodeBlock language="bash" code="npx viana-kit add badge" />
-          <p className="text-muted-foreground leading-7">
-            This will create two files in your project:
-          </p>
-          <ul className="space-y-1 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5">–</span>
-              <code className="font-mono text-foreground">
-                src/components/ui/badge.tsx
-              </code>
-              <span>— the base shadcn/ui primitive (do not modify)</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5">–</span>
-              <code className="font-mono text-foreground">
-                src/components/primitives/AppBadge.tsx
-              </code>
-              <span>— the Viana Kit wrapper (do not modify)</span>
-            </li>
-          </ul>
-        </div>
-
         {/* Import */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">

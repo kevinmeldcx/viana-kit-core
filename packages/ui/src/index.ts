@@ -98,7 +98,7 @@ export {
   AppDrawerTitle,
   AppDrawerDescription,
 } from "./components/primitives/AppDrawer"
-export { AppAlert, AppAlertTitle, AppAlertDescription } from "./components/primitives/AppAlert"
+export { AppAlert, AppAlertTitle, AppAlertDescription, AppAlertContent } from "./components/primitives/AppAlert"
 export {
   AppToastProvider,
   AppToastViewport,

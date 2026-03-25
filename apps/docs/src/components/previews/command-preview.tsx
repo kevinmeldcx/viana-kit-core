@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AppCommand, AppCommandDialog, AppCommandInput, AppCommandList, AppCommandEmpty, AppCommandGroup, AppCommandItem } from "@viana/ui";
 
 export function CommandDefaultPreview() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <AppCommandDialog open={open} onOpenChange={setOpen}>
       <AppCommandInput placeholder="Type a command..." />
