@@ -30,8 +30,8 @@ export default function DropdownMenuPage() {
   AppDropdownMenuLabel,
   AppDropdownMenuSeparator,
   AppDropdownMenuItem,
-  AppButton,
-} from "@viana/ui"
+} from "@/components/primitives/AppDropdownMenu"
+import { AppButton } from "@/components/primitives/AppButton"
 
 export function Example() {
   return (
@@ -75,7 +75,7 @@ export function Example() {
   AppDropdownMenuLabel,
   AppDropdownMenuSeparator,
   AppDropdownMenuItem,
-} from "@viana/ui"`}
+} from "@/components/primitives/AppDropdownMenu"`}
           />
         </div>
       </section>

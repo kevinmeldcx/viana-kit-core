@@ -13,8 +13,8 @@ export default function DialogPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Dialog</h1>
         <p className="text-lg text-muted-foreground">A modal dialog that focuses the user's attention.</p>
       </div>
-      <ComponentPreview preview={<DialogDefaultPreview />} code={`import { AppDialog, AppDialogContent, AppDialogHeader, AppDialogTitle, AppDialogDescription, AppDialogTrigger } from "@viana/ui"
-import { AppButton } from "@viana/ui"AppButton"
+      <ComponentPreview preview={<DialogDefaultPreview />} code={`import { AppDialog, AppDialogContent, AppDialogHeader, AppDialogTitle, AppDialogDescription, AppDialogTrigger } from "@/components/primitives/AppDialog"
+import { AppButton } from "@/components/primitives/AppButton"
 
 export function Example() {
   return (

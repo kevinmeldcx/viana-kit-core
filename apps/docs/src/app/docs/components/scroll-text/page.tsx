@@ -23,7 +23,7 @@ export default function ScrollTextPage() {
 
       <ComponentPreview
         preview={<ScrollTextDefaultPreview />}
-        code={`import { AppScrollText } from "@viana/ui"
+        code={`import { AppScrollText } from "@/components/primitives/AppScrollText"
 
 export function Example() {
   return (
@@ -53,7 +53,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppScrollText } from "@viana/ui"`}
+            code={`import { AppScrollText } from "@/components/primitives/AppScrollText"`}
           />
         </div>
 

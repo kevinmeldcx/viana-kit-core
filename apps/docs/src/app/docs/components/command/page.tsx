@@ -13,7 +13,7 @@ export default function CommandPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Command</h1>
         <p className="text-lg text-muted-foreground">A command palette for searching and executing commands.</p>
       </div>
-      <ComponentPreview preview={<CommandDefaultPreview />} code={`import { AppCommand, AppCommandDialog, AppCommandInput, AppCommandList, AppCommandGroup, AppCommandItem } from "@viana/ui"
+      <ComponentPreview preview={<CommandDefaultPreview />} code={`import { AppCommand, AppCommandDialog, AppCommandInput, AppCommandList, AppCommandGroup, AppCommandItem } from "@/components/primitives/AppCommand"
 
 export function Example() {
   return (

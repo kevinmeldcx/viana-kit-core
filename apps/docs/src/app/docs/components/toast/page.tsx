@@ -23,7 +23,8 @@ export default function ToastPage() {
 
       <ComponentPreview
         preview={<ToastDefaultPreview />}
-        code={`import { AppButton, AppToast, toast } from "@viana/ui"
+        code={`import { AppButton } from "@/components/primitives/AppButton"
+import { AppToast, toast } from "@/components/primitives/AppToast"
 
 export function Example() {
   return (
@@ -51,7 +52,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppToast, toast } from "@viana/ui"`}
+            code={`import { AppToast, toast } from "@/components/primitives/AppToast"`}
           />
         </div>
       </section>

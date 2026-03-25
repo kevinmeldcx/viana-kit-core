@@ -28,7 +28,7 @@ export default function BadgePage() {
       {/* Main preview */}
       <ComponentPreview
         preview={<BadgeDefaultPreview />}
-        code={`import { AppBadge } from "@viana/ui"AppBadge"
+        code={`import { AppBadge } from "@/components/primitives/AppBadge"
 
 export function Example() {
   return <AppBadge>Badge</AppBadge>
@@ -85,7 +85,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppBadge } from "@viana/ui"AppBadge"`}
+            code={`import { AppBadge } from "@/components/primitives/AppBadge"`}
           />
         </div>
 

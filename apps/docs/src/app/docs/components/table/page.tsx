@@ -13,7 +13,7 @@ export default function TablePage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Table</h1>
         <p className="text-lg text-muted-foreground">A responsive table for displaying data.</p>
       </div>
-      <ComponentPreview preview={<TableDefaultPreview />} code={`import { AppTable, AppTableHeader, AppTableBody, AppTableHead, AppTableRow, AppTableCell } from "@viana/ui"
+      <ComponentPreview preview={<TableDefaultPreview />} code={`import { AppTable, AppTableHeader, AppTableBody, AppTableHead, AppTableRow, AppTableCell } from "@/components/primitives/AppTable"
 
 export function Example() {
   return (

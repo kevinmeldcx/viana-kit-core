@@ -24,7 +24,8 @@ export default function CollapsiblePage() {
       <ComponentPreview
         preview={<CollapsibleDefaultPreview />}
         code={`import * as React from "react"
-import { AppCollapsible, AppCollapsibleTrigger, AppCollapsibleContent, AppButton } from "@viana/ui"
+import { AppCollapsible, AppCollapsibleTrigger, AppCollapsibleContent } from "@/components/primitives/AppCollapsible"
+import { AppButton } from "@/components/primitives/AppButton"
 import { ChevronDownIcon } from "lucide-react"
 
 export function Example() {
@@ -70,7 +71,7 @@ export function Example() {
   AppCollapsible,
   AppCollapsibleTrigger,
   AppCollapsibleContent,
-} from "@viana/ui"`}
+} from "@/components/primitives/AppCollapsible"`}
           />
         </div>
       </section>

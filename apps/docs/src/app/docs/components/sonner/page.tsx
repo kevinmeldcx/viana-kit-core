@@ -23,7 +23,8 @@ export default function SonnerPage() {
 
       <ComponentPreview
         preview={<SonnerDefaultPreview />}
-        code={`import { AppButton, sonnerToast } from "@viana/ui"
+        code={`import { AppButton } from "@/components/primitives/AppButton"
+import { sonnerToast } from "@/components/primitives/AppSonner"
 
 export function Example() {
   return (
@@ -59,7 +60,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { sonnerToast } from "@viana/ui"`}
+            code={`import { sonnerToast } from "@/components/primitives/AppSonner"`}
           />
         </div>
       </section>

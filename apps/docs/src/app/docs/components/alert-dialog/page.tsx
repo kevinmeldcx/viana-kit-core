@@ -33,8 +33,8 @@ export default function AlertDialogPage() {
   AppAlertDialogFooter,
   AppAlertDialogAction,
   AppAlertDialogCancel,
-  AppButton,
-} from "@viana/ui"
+} from "@/components/primitives/AppAlertDialog"
+import { AppButton } from "@/components/primitives/AppButton"
 
 export function Example() {
   return (
@@ -86,7 +86,7 @@ export function Example() {
   AppAlertDialogFooter,
   AppAlertDialogAction,
   AppAlertDialogCancel,
-} from "@viana/ui"`}
+} from "@/components/primitives/AppAlertDialog"`}
           />
         </div>
       </section>

@@ -24,7 +24,7 @@ export default function ToggleGroupPage() {
       <ComponentPreview
         preview={<ToggleGroupDefaultPreview />}
         code={`import * as React from "react"
-import { AppToggleGroup, AppToggleGroupItem } from "@viana/ui"
+import { AppToggleGroup, AppToggleGroupItem } from "@/components/primitives/AppToggleGroup"
 import { Bold, Italic, Underline } from "lucide-react"
 
 export function Example() {
@@ -61,7 +61,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppToggleGroup, AppToggleGroupItem } from "@viana/ui"`}
+            code={`import { AppToggleGroup, AppToggleGroupItem } from "@/components/primitives/AppToggleGroup"`}
           />
         </div>
       </section>

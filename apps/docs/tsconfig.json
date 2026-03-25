@@ -19,7 +19,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@viana/ui": ["../../packages/ui/src/components/primitives/index.ts"],
+      "@viana/ui/*": ["../../packages/ui/src/components/primitives/*"],
+      "@viana/tokens": ["../../packages/tokens/src/index.ts"],
+      "@viana/tokens/*": ["../../packages/tokens/src/*"]
     }
   },
   "include": [

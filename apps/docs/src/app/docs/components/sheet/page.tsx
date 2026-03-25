@@ -13,8 +13,8 @@ export default function SheetPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Sheet</h1>
         <p className="text-lg text-muted-foreground">A panel that slides in from the edge of the screen.</p>
       </div>
-      <ComponentPreview preview={<SheetDefaultPreview />} code={`import { AppSheet, AppSheetContent, AppSheetHeader, AppSheetTitle, AppSheetTrigger } from "@viana/ui"
-import { AppButton } from "@viana/ui"AppButton"
+      <ComponentPreview preview={<SheetDefaultPreview />} code={`import { AppSheet, AppSheetContent, AppSheetHeader, AppSheetTitle, AppSheetTrigger } from "@/components/primitives/AppSheet"
+import { AppButton } from "@/components/primitives/AppButton"
 
 export function Example() {
   return (

@@ -18,7 +18,7 @@ export default function TextareaPage() {
 
       <ComponentPreview
         preview={<TextareaDefaultPreview />}
-        code={`import { AppTextarea } from "@viana/ui"
+        code={`import { AppTextarea } from "@/components/primitives/AppTextarea"
 
 export function Example() {
   return <AppTextarea placeholder="Type your message here..." />
@@ -35,7 +35,7 @@ export function Example() {
         </div>
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">Import</h2>
-          <CodeBlock language="tsx" code={`import { AppTextarea } from "@viana/ui"AppTextarea"`} />
+          <CodeBlock language="tsx" code={`import { AppTextarea } from "@/components/primitives/AppTextarea"`} />
         </div>
       </section>
     </article>

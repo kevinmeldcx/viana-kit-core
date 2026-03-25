@@ -13,7 +13,7 @@ export default function SelectPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Select</h1>
         <p className="text-lg text-muted-foreground">A dropdown list for selecting options.</p>
       </div>
-      <ComponentPreview preview={<SelectDefaultPreview />} code={`import { AppSelect, AppSelectContent, AppSelectItem, AppSelectLabel, AppSelectTrigger, AppSelectValue } from "@viana/ui"
+      <ComponentPreview preview={<SelectDefaultPreview />} code={`import { AppSelect, AppSelectContent, AppSelectItem, AppSelectLabel, AppSelectTrigger, AppSelectValue } from "@/components/primitives/AppSelect"
 
 export function Example() {
   return (

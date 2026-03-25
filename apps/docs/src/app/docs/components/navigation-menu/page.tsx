@@ -13,7 +13,7 @@ export default function NavigationMenuPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Navigation Menu</h1>
         <p className="text-lg text-muted-foreground">A set of navigational links with dropdowns.</p>
       </div>
-      <ComponentPreview preview={<NavigationMenuDefaultPreview />} code={`import { AppNavigationMenu, AppNavigationMenuList, AppNavigationMenuItem, AppNavigationMenuTrigger, AppNavigationMenuContent, AppNavigationMenuLink } from "@viana/ui"
+      <ComponentPreview preview={<NavigationMenuDefaultPreview />} code={`import { AppNavigationMenu, AppNavigationMenuList, AppNavigationMenuItem, AppNavigationMenuTrigger, AppNavigationMenuContent, AppNavigationMenuLink } from "@/components/primitives/AppNavigationMenu"
 
 export function Example() {
   return (

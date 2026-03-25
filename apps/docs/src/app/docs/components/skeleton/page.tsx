@@ -13,7 +13,7 @@ export default function SkeletonPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Skeleton</h1>
         <p className="text-lg text-muted-foreground">A placeholder component for loading states.</p>
       </div>
-      <ComponentPreview preview={<SkeletonDefaultPreview />} code={`import { AppSkeleton } from "@viana/ui"
+      <ComponentPreview preview={<SkeletonDefaultPreview />} code={`import { AppSkeleton } from "@/components/primitives/AppSkeleton"
 
 export function Example() {
   return (

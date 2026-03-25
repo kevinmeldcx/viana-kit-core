@@ -13,7 +13,7 @@ export default function TooltipPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Tooltip</h1>
         <p className="text-lg text-muted-foreground">A popup that displays information on hover.</p>
       </div>
-      <ComponentPreview preview={<TooltipDefaultPreview />} code={`import { AppTooltip, AppTooltipContent, AppTooltipProvider, AppTooltipTrigger } from "@viana/ui"
+      <ComponentPreview preview={<TooltipDefaultPreview />} code={`import { AppTooltip, AppTooltipContent, AppTooltipProvider, AppTooltipTrigger } from "@/components/primitives/AppTooltip"
 
 export function Example() {
   return (

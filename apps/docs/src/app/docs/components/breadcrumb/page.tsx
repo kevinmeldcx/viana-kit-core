@@ -13,7 +13,7 @@ export default function BreadcrumbPage() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Breadcrumb</h1>
         <p className="text-lg text-muted-foreground">Shows the user's location in a navigational hierarchy.</p>
       </div>
-      <ComponentPreview preview={<BreadcrumbDefaultPreview />} code={`import { AppBreadcrumb, AppBreadcrumbList, AppBreadcrumbItem, AppBreadcrumbLink, AppBreadcrumbPage, AppBreadcrumbSeparator } from "@viana/ui"
+      <ComponentPreview preview={<BreadcrumbDefaultPreview />} code={`import { AppBreadcrumb, AppBreadcrumbList, AppBreadcrumbItem, AppBreadcrumbLink, AppBreadcrumbPage, AppBreadcrumbSeparator } from "@/components/primitives/AppBreadcrumb"
 
 export function Example() {
   return (

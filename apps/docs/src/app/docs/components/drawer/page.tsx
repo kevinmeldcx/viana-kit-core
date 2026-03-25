@@ -32,8 +32,8 @@ export default function DrawerPage() {
   AppDrawerDescription,
   AppDrawerFooter,
   AppDrawerClose,
-  AppButton,
-} from "@viana/ui"
+} from "@/components/primitives/AppDrawer"
+import { AppButton } from "@/components/primitives/AppButton"
 
 export function Example() {
   return (
@@ -86,7 +86,7 @@ export function Example() {
   AppDrawerDescription,
   AppDrawerFooter,
   AppDrawerClose,
-} from "@viana/ui"`}
+} from "@/components/primitives/AppDrawer"`}
           />
         </div>
       </section>

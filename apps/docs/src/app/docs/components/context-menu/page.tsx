@@ -30,7 +30,7 @@ export default function ContextMenuPage() {
   AppContextMenuItem,
   AppContextMenuSeparator,
   AppContextMenuShortcut,
-} from "@viana/ui"
+} from "@/components/primitives/AppContextMenu"
 
 export function Example() {
   return (
@@ -81,7 +81,7 @@ export function Example() {
   AppContextMenuItem,
   AppContextMenuSeparator,
   AppContextMenuShortcut,
-} from "@viana/ui"`}
+} from "@/components/primitives/AppContextMenu"`}
           />
         </div>
       </section>

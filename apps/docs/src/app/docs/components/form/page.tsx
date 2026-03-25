@@ -24,7 +24,9 @@ export default function FormPage() {
       <ComponentPreview
         preview={<FormDefaultPreview />}
         code={`import { useForm } from "react-hook-form"
-import { AppForm, AppFormField, AppFormItem, AppFormLabel, AppFormControl, AppFormMessage, AppFormDescription, AppButton, AppInput } from "@viana/ui"
+import { AppForm, AppFormField, AppFormItem, AppFormLabel, AppFormControl, AppFormMessage, AppFormDescription } from "@/components/primitives/AppForm"
+import { AppButton } from "@/components/primitives/AppButton"
+import { AppInput } from "@/components/primitives/AppInput"
 
 type FormValues = {
   username: string
@@ -89,9 +91,9 @@ export function Example() {
   AppFormControl,
   AppFormMessage,
   AppFormDescription,
-  AppButton,
-  AppInput,
-} from "@viana/ui"`}
+} from "@/components/primitives/AppForm"
+import { AppButton } from "@/components/primitives/AppButton"
+import { AppInput } from "@/components/primitives/AppInput"`}
           />
         </div>
 

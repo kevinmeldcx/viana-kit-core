@@ -23,7 +23,7 @@ export default function AspectRatioPage() {
 
       <ComponentPreview
         preview={<AspectRatioDefaultPreview />}
-        code={`import { AppAspectRatio } from "@viana/ui"
+        code={`import { AppAspectRatio } from "@/components/primitives/AppAspectRatio"
 
 export function Example() {
   return (
@@ -55,7 +55,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppAspectRatio } from "@viana/ui"`}
+            code={`import { AppAspectRatio } from "@/components/primitives/AppAspectRatio"`}
           />
         </div>
       </section>
