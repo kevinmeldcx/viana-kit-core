@@ -4,7 +4,7 @@ import { AppAccordion, AppAccordionContent, AppAccordionItem, AppAccordionTrigge
 
 export function AccordionDefaultPreview() {
   return (
-    <AppAccordion type="single" collapsible>
+    <AppAccordion type="single" collapsible className="w-75">
       <AppAccordionItem value="item-1">
         <AppAccordionTrigger>What is Viana Kit?</AppAccordionTrigger>
         <AppAccordionContent>

@@ -4,6 +4,12 @@ import { ComponentPreview } from "@/components/component-preview";
 import {
   BadgeDefaultPreview,
   BadgeVariantsPreview,
+  BadgeWithIconPreview,
+  BadgeStatusPreview,
+  BadgeAsLinkPreview,
+  BadgeRemovablePreview,
+  BadgeWithSpinnerPreview,
+  BadgeNotificationPreview,
 } from "@/components/previews/badge-preview";
 
 export const metadata: Metadata = {
@@ -116,6 +122,133 @@ export function Example() {
               </tbody>
             </table>
           </div>
+        </div>
+
+        {/* With icon */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            With icon
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Place a lucide icon before the label. Icons inherit the badge text color automatically.
+          </p>
+          <ComponentPreview
+            preview={<BadgeWithIconPreview />}
+            code={`import { CheckCircle2, Clock, AlertCircle, Star } from "lucide-react"
+
+<AppBadge variant="default"><CheckCircle2 className="h-3 w-3" />Verified</AppBadge>
+<AppBadge variant="secondary"><Clock className="h-3 w-3" />Pending</AppBadge>
+<AppBadge variant="destructive"><AlertCircle className="h-3 w-3" />Failed</AppBadge>
+<AppBadge variant="outline"><Star className="h-3 w-3" />Featured</AppBadge>`}
+          />
+        </div>
+
+        {/* Status */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Status
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Use an <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">outline</code> badge with a colored dot and custom <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">className</code> to communicate system state.
+          </p>
+          <ComponentPreview
+            preview={<BadgeStatusPreview />}
+            code={`<AppBadge variant="outline" className="text-green-600 border-green-300 bg-green-50">
+  <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+  Active
+</AppBadge>
+<AppBadge variant="outline" className="text-amber-600 border-amber-300 bg-amber-50">
+  <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
+  Pending
+</AppBadge>`}
+          />
+        </div>
+
+        {/* As link */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            As link
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Use <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">asChild</code> to render the badge as an anchor tag for clickable tags.
+          </p>
+          <ComponentPreview
+            preview={<BadgeAsLinkPreview />}
+            code={`<AppBadge asChild>
+  <a href="#">New</a>
+</AppBadge>
+<AppBadge variant="secondary" asChild>
+  <a href="#">Design</a>
+</AppBadge>`}
+          />
+        </div>
+
+        {/* Removable */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Removable
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Add a close button inside the badge for removable filter tags.
+          </p>
+          <ComponentPreview
+            preview={<BadgeRemovablePreview />}
+            code={`import { X } from "lucide-react"
+
+<AppBadge variant="secondary" className="gap-1 pr-1">
+  React
+  <button className="rounded-sm hover:bg-muted-foreground/20 p-0.5">
+    <X className="h-3 w-3" />
+  </button>
+</AppBadge>`}
+          />
+        </div>
+
+        {/* With spinner */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            With spinner
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Embed an{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppSpinner
+            </code>{" "}
+            inside a badge to communicate an in-progress state such as deleting
+            or generating.
+          </p>
+          <ComponentPreview
+            preview={<BadgeWithSpinnerPreview />}
+            code={`import { AppSpinner } from "@/components/primitives/AppSpinner"
+
+<AppBadge variant="secondary">
+  <AppSpinner className="h-3 w-3" label="Deleting" />
+  Deleting
+</AppBadge>
+<AppBadge variant="outline">
+  <AppSpinner className="h-3 w-3" label="Generating" />
+  Generating
+</AppBadge>`}
+          />
+        </div>
+
+        {/* Notification count */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Notification count
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Position a badge absolutely over a trigger element using <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">-top-2 -right-4</code> and <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">rounded-full</code>.
+          </p>
+          <ComponentPreview
+            preview={<BadgeNotificationPreview />}
+            code={`<div className="relative inline-flex">
+  <span>Notifications</span>
+  <AppBadge className="absolute -top-2 -right-4 h-5 min-w-5 justify-center rounded-full px-1 text-xs">
+    4
+  </AppBadge>
+</div>`}
+          />
         </div>
 
         {/* API Reference */}

@@ -135,8 +135,8 @@ export function Example() {
               </thead>
               <tbody className="divide-y divide-border">
                 {[
-                  ["default", "Neutral or informational messages with no semantic weight."],
-                  ["destructive", "Errors, failures, or dangerous conditions."],
+                  ["default", "Neutral or informational messages. Renders with brand primary background and icon color."],
+                  ["destructive", "Errors, failures, or dangerous conditions. Renders with destructive background and icon color."],
                   ["success", "Confirmation that an action completed successfully."],
                   ["warning", "Caution — the action is allowed but has consequences."],
                   ["info", "Supplementary information the user should be aware of."],
@@ -223,7 +223,7 @@ export function Example() {
                     prop: "className",
                     type: "string",
                     default: "—",
-                    description: "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
+                    description: "Additional Tailwind classes merged via cn(). Applied after variant classes, so it always wins. Use for one-off overrides; prefer a wrapper block for reusable changes.",
                   },
                 ].map(({ prop, type, default: def, description }) => (
                   <tr key={prop}>
@@ -269,6 +269,11 @@ export function Example() {
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 import { cn } from "@/lib/utils"
 
+const nativeVariantClasses = {
+  default: "bg-background [&>svg]:text-gray-400",
+  destructive: "bg-destructive/5 [&>svg]:text-destructive",
+} as const
+
 const extendedVariantClasses = {
   success: "border text-green-700 dark:text-green-700 [&>svg]:text-green-700",
   warning: "border text-amber-600 dark:text-amber-600 [&>svg]:text-amber-600",
@@ -287,8 +292,10 @@ function AppAlert({ variant = "default", className, ...props }: AppAlertProps) {
     <Alert
       variant={isExtended ? "default" : (variant as "default" | "destructive")}
       className={cn(
-        "flex items-center gap-3 p-4 [&>svg]:static [&>svg]:top-auto [&>svg]:left-auto [&>svg~*]:pl-0 [&>svg+div]:translate-y-0",
-        isExtended ? extendedVariantClasses[variant as keyof typeof extendedVariantClasses] : undefined,
+        "flex items-center gap-3 px-3 py-2 [&>svg]:static [&>svg]:top-auto [&>svg]:left-auto [&>svg~*]:pl-0 [&>svg+div]:translate-y-0",
+        isExtended
+          ? extendedVariantClasses[variant as keyof typeof extendedVariantClasses]
+          : nativeVariantClasses[variant as keyof typeof nativeVariantClasses],
         className
       )}
       {...props}

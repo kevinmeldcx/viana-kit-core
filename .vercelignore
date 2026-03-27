@@ -1,0 +1,10 @@
+node_modules/
+.turbo/
+.git/
+.vscode/
+.idea/
+*.log
+.DS_Store
+apps/docs/node_modules/
+apps/docs/.next/
+apps/docs/.turbo/

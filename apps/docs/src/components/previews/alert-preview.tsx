@@ -2,11 +2,10 @@
 
 import { AppAlert, AppAlertContent, AppAlertTitle, AppAlertDescription, AppButton } from "@viana/ui";
 import { AlertCircleIcon, CheckCircleIcon, InfoIcon, TriangleAlertIcon, XIcon } from "lucide-react";
-import App from "next/app";
 
 export function AlertDefaultPreview() {
   return (
-    <div className="w-[600px] flex flex-col gap-2">
+    <div className="w-150 flex flex-col gap-2">
       <AppAlert>
         <InfoIcon className="w-8 h-8" />
         <AppAlertContent>
@@ -39,6 +38,7 @@ export function AlertAllVariantsPreview() {
   return (
     <div className="flex flex-col gap-4 w-[600px]">
       <AppAlert>
+        <InfoIcon className="w-8 h-8" />
         <AppAlertContent>
           <AppAlertTitle>Default</AppAlertTitle>
           <AppAlertDescription>This is a default alert.</AppAlertDescription>

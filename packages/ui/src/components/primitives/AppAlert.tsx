@@ -2,6 +2,11 @@ import * as React from "react"
 import { Alert, AlertTitle, AlertDescription } from "../ui/alert"
 import { cn } from "../../lib/utils"
 
+const nativeVariantClasses = {
+  default: "bg-background [&>svg]:text-gray-400",
+  destructive: "bg-destructive/5 [&>svg]:text-destructive",
+} as const
+
 const extendedVariantClasses = {
   success: "border text-green-700 dark:text-green-700 [&>svg]:text-green-700",
   warning: "border text-amber-600 dark:text-amber-600 [&>svg]:text-amber-600",
@@ -20,8 +25,10 @@ function AppAlert({ variant = "default", className, ...props }: AppAlertProps) {
     <Alert
       variant={isExtended ? "default" : (variant as "default" | "destructive")}
       className={cn(
-        "flex items-center gap-3 p-4 [&>svg]:static [&>svg]:top-auto [&>svg]:left-auto [&>svg~*]:pl-0 [&>svg+div]:translate-y-0",
-        isExtended ? extendedVariantClasses[variant as keyof typeof extendedVariantClasses] : undefined,
+        "flex items-center gap-3 px-3 py-2 [&>svg]:static [&>svg]:top-auto [&>svg]:left-auto [&>svg~*]:pl-0 [&>svg+div]:translate-y-0",
+        isExtended
+          ? extendedVariantClasses[variant as keyof typeof extendedVariantClasses]
+          : nativeVariantClasses[variant as keyof typeof nativeVariantClasses],
         className
       )}
       {...props}
@@ -35,7 +42,7 @@ const AppAlertTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertTitle
     ref={ref}
-    className={cn("text-xl font-bold mb-0", className)}
+    className={cn("text-lg font-bold mb-0", className)}
     {...props}
   />
 ))

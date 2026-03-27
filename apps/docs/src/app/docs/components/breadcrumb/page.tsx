@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { BreadcrumbDefaultPreview } from "@/components/previews/breadcrumb-preview";
+import {
+  BreadcrumbDefaultPreview,
+  BreadcrumbCustomSeparatorPreview,
+  BreadcrumbDropdownPreview,
+  BreadcrumbCollapsedPreview,
+  BreadcrumbAsChildPreview,
+} from "@/components/previews/breadcrumb-preview";
 
 export const metadata: Metadata = {
   title: "Breadcrumb",
@@ -65,7 +71,166 @@ export function Example() {
           />
         </div>
 
-        {/* API Reference - AppBreadcrumb */}
+        {/* Examples */}
+        <div className="space-y-8">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Examples
+          </h2>
+
+          {/* Custom separator */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Custom separator</h3>
+            <p className="text-sm text-muted-foreground">
+              Pass any icon or element as{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">children</code>{" "}
+              of{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppBreadcrumbSeparator</code>{" "}
+              to replace the default slash.
+            </p>
+            <ComponentPreview
+              preview={<BreadcrumbCustomSeparatorPreview />}
+              code={`import { Slash } from "lucide-react"
+
+<AppBreadcrumb>
+  <AppBreadcrumbList>
+    <AppBreadcrumbItem>
+      <AppBreadcrumbLink href="#">Home</AppBreadcrumbLink>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator>
+      <Slash />
+    </AppBreadcrumbSeparator>
+    <AppBreadcrumbItem>
+      <AppBreadcrumbLink href="#">Components</AppBreadcrumbLink>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator>
+      <Slash />
+    </AppBreadcrumbSeparator>
+    <AppBreadcrumbItem>
+      <AppBreadcrumbPage>Breadcrumb</AppBreadcrumbPage>
+    </AppBreadcrumbItem>
+  </AppBreadcrumbList>
+</AppBreadcrumb>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          {/* Dropdown */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Dropdown</h3>
+            <p className="text-sm text-muted-foreground">
+              Combine{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppBreadcrumbEllipsis</code>{" "}
+              with{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppDropdownMenu</code>{" "}
+              to expose hidden segments on click.
+            </p>
+            <ComponentPreview
+              preview={<BreadcrumbDropdownPreview />}
+              code={`<AppBreadcrumb>
+  <AppBreadcrumbList>
+    <AppBreadcrumbItem>
+      <AppBreadcrumbLink href="#">Home</AppBreadcrumbLink>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator />
+    <AppBreadcrumbItem>
+      <AppDropdownMenu>
+        <AppDropdownMenuTrigger className="flex items-center gap-1">
+          <AppBreadcrumbEllipsis />
+        </AppDropdownMenuTrigger>
+        <AppDropdownMenuContent align="start">
+          <AppDropdownMenuItem>Documentation</AppDropdownMenuItem>
+          <AppDropdownMenuItem>Themes</AppDropdownMenuItem>
+          <AppDropdownMenuItem>GitHub</AppDropdownMenuItem>
+        </AppDropdownMenuContent>
+      </AppDropdownMenu>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator />
+    <AppBreadcrumbItem>
+      <AppBreadcrumbLink href="#">Components</AppBreadcrumbLink>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator />
+    <AppBreadcrumbItem>
+      <AppBreadcrumbPage>Breadcrumb</AppBreadcrumbPage>
+    </AppBreadcrumbItem>
+  </AppBreadcrumbList>
+</AppBreadcrumb>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          {/* Collapsed */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Collapsed</h3>
+            <p className="text-sm text-muted-foreground">
+              Use{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppBreadcrumbEllipsis</code>{" "}
+              as a static placeholder when a trail is too long to display in full.
+            </p>
+            <ComponentPreview
+              preview={<BreadcrumbCollapsedPreview />}
+              code={`<AppBreadcrumb>
+  <AppBreadcrumbList>
+    <AppBreadcrumbItem>
+      <AppBreadcrumbLink href="#">Home</AppBreadcrumbLink>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator />
+    <AppBreadcrumbItem>
+      <AppBreadcrumbEllipsis />
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator />
+    <AppBreadcrumbItem>
+      <AppBreadcrumbLink href="#">Components</AppBreadcrumbLink>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator />
+    <AppBreadcrumbItem>
+      <AppBreadcrumbPage>Breadcrumb</AppBreadcrumbPage>
+    </AppBreadcrumbItem>
+  </AppBreadcrumbList>
+</AppBreadcrumb>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          {/* Link component */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Link component</h3>
+            <p className="text-sm text-muted-foreground">
+              Use{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">asChild</code>{" "}
+              on{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppBreadcrumbLink</code>{" "}
+              to delegate rendering to your router's link component (e.g. Next.js{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">{"<Link>"}</code>).
+            </p>
+            <ComponentPreview
+              preview={<BreadcrumbAsChildPreview />}
+              code={`import Link from "next/link"
+
+<AppBreadcrumb>
+  <AppBreadcrumbList>
+    <AppBreadcrumbItem>
+      <AppBreadcrumbLink asChild>
+        <Link href="/">Home</Link>
+      </AppBreadcrumbLink>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator />
+    <AppBreadcrumbItem>
+      <AppBreadcrumbLink asChild>
+        <Link href="/components">Components</Link>
+      </AppBreadcrumbLink>
+    </AppBreadcrumbItem>
+    <AppBreadcrumbSeparator />
+    <AppBreadcrumbItem>
+      <AppBreadcrumbPage>Breadcrumb</AppBreadcrumbPage>
+    </AppBreadcrumbItem>
+  </AppBreadcrumbList>
+</AppBreadcrumb>`}
+              filename="example.tsx"
+            />
+          </div>
+        </div>
+
+        {/* API Reference */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
             API Reference
@@ -84,99 +249,23 @@ export function Example() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Prop
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Default
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Description
-                  </th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Component</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Description</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {[
-                  {
-                    prop: "className",
-                    type: "string",
-                    default: "—",
-                    description:
-                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
-                  },
-                ].map(({ prop, type, default: def, description }) => (
-                  <tr key={prop}>
-                    <td className="px-4 py-3 font-mono text-xs text-foreground">
-                      {prop}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {type}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {def}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {description}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* API Reference - AppBreadcrumbLink */}
-        <div className="space-y-4">
-          <div className="overflow-hidden rounded-lg border border-border">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border bg-muted/50">
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Prop
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Default
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Description
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {[
-                  {
-                    prop: "asChild",
-                    type: "boolean",
-                    default: "—",
-                    description: "Change the component to the HTML element or component.",
-                  },
-                  {
-                    prop: "className",
-                    type: "string",
-                    default: "—",
-                    description:
-                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
-                  },
-                ].map(({ prop, type, default: def, description }) => (
-                  <tr key={prop}>
-                    <td className="px-4 py-3 font-mono text-xs text-foreground">
-                      {prop}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {type}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {def}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {description}
-                    </td>
+                  { component: "AppBreadcrumbSeparator", prop: "children", type: "ReactNode", description: "Custom separator content. Defaults to a slash icon." },
+                  { component: "AppBreadcrumbLink", prop: "asChild", type: "boolean", description: "Delegates rendering to the child element — use with Next.js Link or other router links." },
+                  { component: "AppBreadcrumbLink", prop: "href", type: "string", description: "The URL the link navigates to." },
+                ].map(({ component, prop, description, type }, i) => (
+                  <tr key={i}>
+                    <td className="px-4 py-3 font-mono text-xs text-foreground">{component}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{prop}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{type}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{description}</td>
                   </tr>
                 ))}
               </tbody>

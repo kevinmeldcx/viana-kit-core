@@ -18,7 +18,7 @@ export default function DocsLayout({
             Viana Kit
           </Link>
           <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">
-            v0.1.0
+            v0.1.4
           </span>
           <div className="ml-auto">
             <ThemeToggle />

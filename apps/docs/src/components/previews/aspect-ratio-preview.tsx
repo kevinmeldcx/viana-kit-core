@@ -4,7 +4,7 @@ import { AppAspectRatio } from "@viana/ui";
 
 export function AspectRatioDefaultPreview() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 w-120">
       <div className="space-y-2">
         <h3 className="text-sm font-medium">16:9 Aspect Ratio</h3>
         <AppAspectRatio ratio={16 / 9}>

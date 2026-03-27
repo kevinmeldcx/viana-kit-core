@@ -24,7 +24,8 @@ export default function DrawerPage() {
       {/* Main preview */}
       <ComponentPreview
         preview={<DrawerDefaultPreview />}
-        code={`import {
+        code={`import { useState } from "react"
+import {
   AppDrawer,
   AppDrawerTrigger,
   AppDrawerContent,
@@ -37,8 +38,10 @@ export default function DrawerPage() {
 import { AppButton } from "@/components/primitives/AppButton"
 
 export function Example() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <AppDrawer>
+    <AppDrawer open={open} onOpenChange={setOpen}>
       <AppDrawerTrigger asChild>
         <AppButton>Open Drawer</AppButton>
       </AppDrawerTrigger>
@@ -46,14 +49,24 @@ export function Example() {
         <AppDrawerHeader>
           <AppDrawerTitle>Edit Profile</AppDrawerTitle>
           <AppDrawerDescription>
-            Make changes to your profile here.
+            Make changes to your profile here. Click save when you are done.
           </AppDrawerDescription>
         </AppDrawerHeader>
+        <div className="px-4 py-6 space-y-4">
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Name</label>
+            <input className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Your name" />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Email</label>
+            <input className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="your@email.com" />
+          </div>
+        </div>
         <AppDrawerFooter>
-          <AppButton>Save Changes</AppButton>
           <AppDrawerClose asChild>
             <AppButton variant="outline">Cancel</AppButton>
           </AppDrawerClose>
+          <AppButton>Save Changes</AppButton>
         </AppDrawerFooter>
       </AppDrawerContent>
     </AppDrawer>
@@ -130,11 +143,23 @@ export function Example() {
               <tbody className="divide-y divide-border">
                 {[
                   {
+                    prop: "open",
+                    type: "boolean",
+                    default: "—",
+                    description: "Controlled open state of the drawer.",
+                  },
+                  {
+                    prop: "onOpenChange",
+                    type: "(open: boolean) => void",
+                    default: "—",
+                    description: "Callback fired when the open state changes.",
+                  },
+                  {
                     prop: "className",
                     type: "string",
                     default: "—",
                     description:
-                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
+                      "Additional Tailwind classes merged via cn(). Applied after variant classes, so it always wins.",
                   },
                 ].map(({ prop, type, default: def, description }) => (
                   <tr key={prop}>

@@ -98,7 +98,7 @@ export function Example() {
                     type: "string",
                     default: "—",
                     description:
-                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
+                      "On AppHoverCardContent — additional Tailwind classes merged via cn(). Applied after the px-2 py-1 drop-shadow-xl brand defaults, so it always wins.",
                   },
                 ].map(({ prop, type, default: def, description }) => (
                   <tr key={prop}>
@@ -130,6 +130,7 @@ export function Example() {
             filename="src/components/primitives/AppHoverCard.tsx"
             code={`"use client"
 
+import { cn } from "@/lib/utils"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
 
 function AppHoverCard(props: React.ComponentProps<typeof HoverCard>) {
@@ -140,8 +141,8 @@ function AppHoverCardTrigger({ children }: { children: React.ReactNode }) {
   return <HoverCardTrigger>{children}</HoverCardTrigger>
 }
 
-function AppHoverCardContent(props: React.ComponentPropsWithoutRef<typeof HoverCardContent>) {
-  return <HoverCardContent {...props} />
+function AppHoverCardContent({ className, ...props }: React.ComponentPropsWithoutRef<typeof HoverCardContent>) {
+  return <HoverCardContent className={cn("px-2 py-1 drop-shadow-xl shadow-none", className)} {...props} />
 }
 
 export { AppHoverCard, AppHoverCardTrigger, AppHoverCardContent }`}

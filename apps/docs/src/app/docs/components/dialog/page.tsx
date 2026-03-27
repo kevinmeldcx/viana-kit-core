@@ -30,7 +30,7 @@ import { AppButton } from "@/components/primitives/AppButton"
 export function Example() {
   return (
     <AppDialog>
-      <AppDialogTrigger>
+      <AppDialogTrigger asChild>
         <AppButton>Open Dialog</AppButton>
       </AppDialogTrigger>
       <AppDialogContent>
@@ -125,7 +125,7 @@ export function Example() {
                     type: "string",
                     default: "—",
                     description:
-                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
+                      "Additional Tailwind classes merged via cn(). Applied after the rounded-md brand default, so it always wins.",
                   },
                 ].map(({ prop, type, default: def, description }) => (
                   <tr key={prop}>
@@ -164,7 +164,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog"
+} from "@/components/ui/dialog"
+import { cn } from "@/lib/utils"
 
 type AppDialogProps = {
   children: React.ReactNode
@@ -180,8 +181,8 @@ function AppDialogTrigger(props: React.ComponentProps<typeof DialogTrigger>) {
   return <DialogTrigger {...props} />
 }
 
-function AppDialogContent(props: React.ComponentPropsWithoutRef<typeof DialogContent>) {
-  return <DialogContent {...props} />
+function AppDialogContent({ className, ...props }: React.ComponentPropsWithoutRef<typeof DialogContent>) {
+  return <DialogContent className={cn("rounded-md", className)} {...props} />
 }
 
 function AppDialogHeader(props: React.HTMLAttributes<HTMLDivElement>) {

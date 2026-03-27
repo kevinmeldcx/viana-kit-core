@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { CardDefaultPreview } from "@/components/previews/card-preview";
+import {
+  CardDefaultPreview,
+  CardLoginPreview,
+  CardWithActionPreview,
+  CardImagePreview,
+  CardStatsPreview,
+} from "@/components/previews/card-preview";
 
 export const metadata: Metadata = {
   title: "Card",
@@ -57,44 +63,12 @@ export function Example() {
 
       {/*
         canonical_id: component-card-v1
-        related_components: ["AppCard", "AppCardHeader", "AppCardTitle", "AppCardDescription", "AppCardContent", "AppCardFooter"]
+        related_components: ["AppCard", "AppCardHeader", "AppCardTitle", "AppCardDescription", "AppCardAction", "AppCardContent", "AppCardFooter"]
         platform_tags: ["web"]
         enforcement_level: strict
       */}
 
       <section className="space-y-10">
-        {/* Installation */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Installation
-          </h2>
-          <p className="text-muted-foreground leading-7">
-            Add the Card component to your project using the Viana CLI. This
-            copies the source files directly into your repository and installs
-            any required dependencies.
-          </p>
-          <CodeBlock language="bash" code="npx viana-kit add card" />
-          <p className="text-muted-foreground leading-7">
-            This will create two files in your project:
-          </p>
-          <ul className="space-y-1 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5">–</span>
-              <code className="font-mono text-foreground">
-                src/components/ui/card.tsx
-              </code>
-              <span>— the base shadcn/ui primitive (do not modify)</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5">–</span>
-              <code className="font-mono text-foreground">
-                src/components/primitives/AppCard.tsx
-              </code>
-              <span>— the Viana Kit wrapper (do not modify)</span>
-            </li>
-          </ul>
-        </div>
-
         {/* Import */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
@@ -107,10 +81,134 @@ export function Example() {
   AppCardHeader,
   AppCardTitle,
   AppCardDescription,
+  AppCardAction,
   AppCardContent,
   AppCardFooter,
 } from "@/components/primitives/AppCard"`}
           />
+        </div>
+
+        {/* Examples */}
+        <div className="space-y-8">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Examples
+          </h2>
+
+          {/* Login */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Login form</h3>
+            <p className="text-sm text-muted-foreground">
+              Compose a login form inside a card using{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppCardContent</code>{" "}
+              for inputs and{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppCardFooter</code>{" "}
+              for actions.
+            </p>
+            <ComponentPreview
+              preview={<CardLoginPreview />}
+              code={`<AppCard className="w-[350px]">
+  <AppCardHeader>
+    <AppCardTitle>Login</AppCardTitle>
+    <AppCardDescription>Enter your credentials to access your account.</AppCardDescription>
+  </AppCardHeader>
+  <AppCardContent className="space-y-4">
+    <div className="space-y-1.5">
+      <AppLabel htmlFor="email">Email</AppLabel>
+      <AppInput id="email" type="email" placeholder="m@example.com" />
+    </div>
+    <div className="space-y-1.5">
+      <AppLabel htmlFor="password">Password</AppLabel>
+      <AppInput id="password" type="password" />
+    </div>
+  </AppCardContent>
+  <AppCardFooter className="flex flex-col gap-2">
+    <AppButton className="w-full">Sign in</AppButton>
+    <AppButton variant="outline" className="w-full">Login with Google</AppButton>
+  </AppCardFooter>
+</AppCard>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          {/* With action */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">With action</h3>
+            <p className="text-sm text-muted-foreground">
+              Use{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppCardAction</code>{" "}
+              inside the header to place a button or link opposite the title.
+            </p>
+            <ComponentPreview
+              preview={<CardWithActionPreview />}
+              code={`<AppCard>
+  <AppCardHeader>
+    <AppCardTitle>Notifications</AppCardTitle>
+    <AppCardDescription>You have 3 unread messages.</AppCardDescription>
+    <AppCardAction>
+      <AppButton variant="outline" size="sm">Mark all read</AppButton>
+    </AppCardAction>
+  </AppCardHeader>
+  <AppCardContent>
+    {/* notification list */}
+  </AppCardContent>
+</AppCard>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          {/* Image */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">With image</h3>
+            <p className="text-sm text-muted-foreground">
+              Place an image before{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">AppCardHeader</code>{" "}
+              and add{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">overflow-hidden</code>{" "}
+              to the card to clip it to the card's border radius.
+            </p>
+            <ComponentPreview
+              preview={<CardImagePreview />}
+              code={`<AppCard className="w-[350px] overflow-hidden">
+  <img src="/event.jpg" alt="Event" className="h-40 w-full object-cover" />
+  <AppCardHeader>
+    <AppBadge variant="secondary">Featured</AppBadge>
+    <AppCardTitle>Design systems meetup</AppCardTitle>
+    <AppCardDescription>
+      Join us for an evening of talks on design tokens and component APIs.
+    </AppCardDescription>
+  </AppCardHeader>
+  <AppCardFooter>
+    <AppButton className="w-full">View Event</AppButton>
+  </AppCardFooter>
+</AppCard>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          {/* Stats */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Stats grid</h3>
+            <p className="text-sm text-muted-foreground">
+              Render multiple compact cards in a grid for dashboard-style metric
+              displays.
+            </p>
+            <ComponentPreview
+              preview={<CardStatsPreview />}
+              code={`<div className="grid grid-cols-2 gap-4">
+  <AppCard>
+    <AppCardHeader>
+      <AppCardDescription>Total Revenue</AppCardDescription>
+      <AppCardTitle className="text-2xl">$45,231.89</AppCardTitle>
+    </AppCardHeader>
+    <AppCardContent>
+      <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+    </AppCardContent>
+  </AppCard>
+  {/* repeat for other stats */}
+</div>`}
+              filename="example.tsx"
+            />
+          </div>
         </div>
 
         {/* Sub-components */}
@@ -118,91 +216,27 @@ export function Example() {
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
             Sub-components
           </h2>
-          <p className="text-muted-foreground leading-7">
-            The Card component is made up of several sub-components:
-          </p>
           <div className="overflow-hidden rounded-lg border border-border text-sm">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
-                  <th className="px-4 py-2.5 text-left font-medium text-foreground">
-                    Component
-                  </th>
-                  <th className="px-4 py-2.5 text-left font-medium text-foreground">
-                    Description
-                  </th>
+                  <th className="px-4 py-2.5 text-left font-medium text-foreground">Component</th>
+                  <th className="px-4 py-2.5 text-left font-medium text-foreground">Description</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {[
-                  ["AppCard", "The main container component"],
-                  ["AppCardHeader", "Container for header content"],
-                  ["AppCardTitle", "Title text element"],
-                  ["AppCardDescription", "Description text element"],
-                  ["AppCardAction", "Action buttons or links"],
-                  ["AppCardContent", "Main content area"],
-                  ["AppCardFooter", "Footer content area"],
+                  ["AppCard", "The root container. Accepts className for sizing and spacing overrides."],
+                  ["AppCardHeader", "Groups title, description, and optional action. Uses CSS grid internally."],
+                  ["AppCardTitle", "Heading element. Renders as a styled h3 by default."],
+                  ["AppCardDescription", "Secondary text below the title. Muted foreground color."],
+                  ["AppCardAction", "Slot in the header for a button or link, aligned to the trailing edge."],
+                  ["AppCardContent", "Main body area with standard padding."],
+                  ["AppCardFooter", "Footer row with flex layout for action buttons."],
                 ].map(([component, description]) => (
                   <tr key={component}>
-                    <td className="px-4 py-2.5 font-mono text-xs text-foreground">
-                      {component}
-                    </td>
-                    <td className="px-4 py-2.5 text-muted-foreground">
-                      {description}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* API Reference */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            API Reference
-          </h2>
-          <p className="text-muted-foreground leading-7">
-            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
-              AppCard
-            </code>{" "}
-            and its sub-components extend their underlying shadcn/ui
-            components.
-          </p>
-          <div className="overflow-hidden rounded-lg border border-border">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border bg-muted/50">
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Prop
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Description
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {[
-                  {
-                    prop: "className",
-                    type: "string",
-                    description:
-                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
-                  },
-                ].map(({ prop, type, description }) => (
-                  <tr key={prop}>
-                    <td className="px-4 py-3 font-mono text-xs text-foreground">
-                      {prop}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {type}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {description}
-                    </td>
+                    <td className="px-4 py-2.5 font-mono text-xs text-foreground">{component}</td>
+                    <td className="px-4 py-2.5 text-muted-foreground">{description}</td>
                   </tr>
                 ))}
               </tbody>
@@ -225,13 +259,35 @@ export function Example() {
   CardAction,
   CardDescription,
   CardContent,
-} from "@/components/ui/card"
+} from "../ui/card"
 
 function AppCard(props: React.ComponentProps<typeof Card>) {
   return <Card {...props} />
 }
 
-// ... other sub-components follow the same pattern
+function AppCardHeader(props: React.ComponentProps<typeof CardHeader>) {
+  return <CardHeader {...props} />
+}
+
+function AppCardTitle(props: React.ComponentProps<typeof CardTitle>) {
+  return <CardTitle {...props} />
+}
+
+function AppCardDescription(props: React.ComponentProps<typeof CardDescription>) {
+  return <CardDescription {...props} />
+}
+
+function AppCardAction(props: React.ComponentProps<typeof CardAction>) {
+  return <CardAction {...props} />
+}
+
+function AppCardContent(props: React.ComponentProps<typeof CardContent>) {
+  return <CardContent {...props} />
+}
+
+function AppCardFooter(props: React.ComponentProps<typeof CardFooter>) {
+  return <CardFooter {...props} />
+}
 
 export {
   AppCard,

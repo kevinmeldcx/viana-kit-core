@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { AlertDialogDefaultPreview } from "@/components/previews/alert-dialog-preview";
+import {
+  AlertDialogDefaultPreview,
+  AlertDialogDestructivePreview,
+  AlertDialogOutlinePreview,
+} from "@/components/previews/alert-dialog-preview";
 
 export const metadata: Metadata = {
   title: "Alert Dialog",
@@ -54,8 +58,8 @@ export function Example() {
           </AppAlertDialogDescription>
         </AppAlertDialogHeader>
         <AppAlertDialogFooter>
-          <AppAlertDialogCancel>Cancel</AppAlertDialogCancel>
-          <AppAlertDialogAction>Continue</AppAlertDialogAction>
+          <AppAlertDialogCancel variant="secondary">Cancel</AppAlertDialogCancel>
+          <AppAlertDialogAction variant="default">Continue</AppAlertDialogAction>
         </AppAlertDialogFooter>
       </AppAlertDialogContent>
     </AppAlertDialog>
@@ -122,6 +126,67 @@ export function Example() {
     </AppAlertDialogFooter>
   </AppAlertDialogContent>
 </AppAlertDialog>`}
+          />
+        </div>
+
+        {/* Variants */}
+        <div className="space-y-6">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Variants
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Both{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppAlertDialogAction
+            </code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppAlertDialogCancel
+            </code>{" "}
+            accept a{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              variant
+            </code>{" "}
+            prop to control their color. Use{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              destructive
+            </code>{" "}
+            on the action for irreversible operations.
+          </p>
+
+          {/* Destructive */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Destructive action</h3>
+            <ComponentPreview
+              preview={<AlertDialogDestructivePreview />}
+              code={`<AppAlertDialogFooter>
+  <AppAlertDialogCancel variant="outline">Cancel</AppAlertDialogCancel>
+  <AppAlertDialogAction variant="destructive">Delete</AppAlertDialogAction>
+</AppAlertDialogFooter>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          {/* Secondary / outline */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Secondary action</h3>
+            <ComponentPreview
+              preview={<AlertDialogOutlinePreview />}
+              code={`<AppAlertDialogFooter>
+  <AppAlertDialogCancel variant="outline">Go back</AppAlertDialogCancel>
+  <AppAlertDialogAction variant="secondary">Submit</AppAlertDialogAction>
+</AppAlertDialogFooter>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          <CodeBlock
+            language="tsx"
+            code={`// Available variants for AppAlertDialogAction and AppAlertDialogCancel
+"default"     // bg-primary — use for standard confirmations
+"destructive" // bg-destructive — use for delete / irreversible actions
+"secondary"   // bg-secondary — use for lower-emphasis confirmations
+"outline"     // transparent with border — use for cancel / dismiss`}
           />
         </div>
 
@@ -248,11 +313,25 @@ export function Example() {
                       "On AppAlertDialogTrigger — merges props onto the child element instead of rendering a <button>.",
                   },
                   {
+                    prop: "variant",
+                    type: '"default" | "destructive" | "secondary" | "outline"',
+                    default: '"default"',
+                    description:
+                      "On AppAlertDialogAction and AppAlertDialogCancel — controls the button color using semantic design tokens.",
+                  },
+                  {
+                    prop: "—",
+                    type: "—",
+                    default: "—",
+                    description:
+                      "AppAlertDialogTitle defaults to text-2xl. AppAlertDialogDescription defaults to text-base. Both overridable via className.",
+                  },
+                  {
                     prop: "className",
                     type: "string",
                     default: "—",
                     description:
-                      "Additional Tailwind classes merged via cn(). Prefer the wrapper pattern for reusable overrides.",
+                      "Additional Tailwind classes merged via cn(). Applied after variant classes, so it always wins.",
                   },
                 ].map(({ prop, type, default: def, description }) => (
                   <tr key={prop}>
@@ -282,7 +361,8 @@ export function Example() {
           </h2>
           <CodeBlock
             filename="src/components/primitives/AppAlertDialog.tsx"
-            code={`import {
+            code={`import * as React from "react"
+import {
   AlertDialog,
   AlertDialogPortal,
   AlertDialogOverlay,
@@ -295,6 +375,27 @@ export function Example() {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog"
+import { cn } from "@/lib/utils"
+
+const actionVariantClasses = {
+  default: "bg-primary text-primary-foreground hover:bg-primary/90",
+  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+  outline: "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+} as const
+
+const cancelVariantClasses = {
+  default: "bg-primary text-primary-foreground hover:bg-primary/90",
+  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+  outline: "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+} as const
+
+type ActionVariant = keyof typeof actionVariantClasses
+
+type AppAlertDialogActionProps = React.ComponentPropsWithoutRef<typeof AlertDialogAction> & {
+  variant?: ActionVariant
+}
 
 const AppAlertDialog = AlertDialog
 const AppAlertDialogPortal = AlertDialogPortal
@@ -303,10 +404,46 @@ const AppAlertDialogTrigger = AlertDialogTrigger
 const AppAlertDialogContent = AlertDialogContent
 const AppAlertDialogHeader = AlertDialogHeader
 const AppAlertDialogFooter = AlertDialogFooter
-const AppAlertDialogTitle = AlertDialogTitle
-const AppAlertDialogDescription = AlertDialogDescription
-const AppAlertDialogAction = AlertDialogAction
-const AppAlertDialogCancel = AlertDialogCancel
+
+const AppAlertDialogTitle = React.forwardRef<
+  React.ComponentRef<typeof AlertDialogTitle>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogTitle>
+>(({ className, ...props }, ref) => (
+  <AlertDialogTitle ref={ref} className={cn("text-2xl", className)} {...props} />
+))
+AppAlertDialogTitle.displayName = "AppAlertDialogTitle"
+
+const AppAlertDialogDescription = React.forwardRef<
+  React.ComponentRef<typeof AlertDialogDescription>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogDescription>
+>(({ className, ...props }, ref) => (
+  <AlertDialogDescription ref={ref} className={cn("text-base", className)} {...props} />
+))
+AppAlertDialogDescription.displayName = "AppAlertDialogDescription"
+
+const AppAlertDialogAction = React.forwardRef<
+  React.ComponentRef<typeof AlertDialogAction>,
+  AppAlertDialogActionProps
+>(({ className, variant = "default", ...props }, ref) => (
+  <AlertDialogAction
+    ref={ref}
+    className={cn(actionVariantClasses[variant], className)}
+    {...props}
+  />
+))
+AppAlertDialogAction.displayName = "AppAlertDialogAction"
+
+const AppAlertDialogCancel = React.forwardRef<
+  React.ComponentRef<typeof AlertDialogCancel>,
+  AppAlertDialogActionProps
+>(({ className, variant = "default", ...props }, ref) => (
+  <AlertDialogCancel
+    ref={ref}
+    className={cn(cancelVariantClasses[variant], className)}
+    {...props}
+  />
+))
+AppAlertDialogCancel.displayName = "AppAlertDialogCancel"
 
 export {
   AppAlertDialog,
@@ -320,7 +457,8 @@ export {
   AppAlertDialogDescription,
   AppAlertDialogAction,
   AppAlertDialogCancel,
-}`}
+}
+export type { AppAlertDialogActionProps, ActionVariant }`}
           />
         </div>
       </section>

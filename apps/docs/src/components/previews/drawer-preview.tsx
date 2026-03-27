@@ -39,10 +39,10 @@ export function DrawerDefaultPreview() {
           </div>
         </div>
         <AppDrawerFooter>
-          <AppButton>Save Changes</AppButton>
           <AppDrawerClose asChild>
             <AppButton variant="outline">Cancel</AppButton>
           </AppDrawerClose>
+          <AppButton>Save Changes</AppButton>
         </AppDrawerFooter>
       </AppDrawerContent>
     </AppDrawer>

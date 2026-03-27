@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog"
+import { cn } from "../../lib/utils"
 
 type AppDialogProps = {
   children: React.ReactNode
@@ -23,8 +24,8 @@ function AppDialogTrigger(props: React.ComponentProps<typeof DialogTrigger>) {
   return <DialogTrigger {...props} />
 }
 
-function AppDialogContent(props: React.ComponentPropsWithoutRef<typeof DialogContent>) {
-  return <DialogContent {...props} />
+function AppDialogContent({ className, ...props }: React.ComponentPropsWithoutRef<typeof DialogContent>) {
+  return <DialogContent className={cn("rounded-md", className)} {...props} />
 }
 
 function AppDialogHeader(props: React.HTMLAttributes<HTMLDivElement>) {
