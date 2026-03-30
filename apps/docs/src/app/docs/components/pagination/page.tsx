@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { PaginationDefaultPreview } from "@/components/previews/pagination-preview";
+import { PaginationDefaultPreview, PaginationIconsOnlyPreview } from "@/components/previews/pagination-preview";
 
 export const metadata: Metadata = {
   title: "Pagination",
@@ -148,6 +148,38 @@ export function Example() {
 <AppPaginationItem>
   <AppPaginationLink href="#">10</AppPaginationLink>
 </AppPaginationItem>`}
+          />
+        </div>
+
+        {/* Icons only */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Icons only
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Use just{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppPaginationPrevious
+            </code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppPaginationNext
+            </code>{" "}
+            for a compact prev/next control — useful in data tables where space is limited.
+          </p>
+          <ComponentPreview
+            preview={<PaginationIconsOnlyPreview />}
+            code={`<AppPagination>
+  <AppPaginationContent>
+    <AppPaginationItem>
+      <AppPaginationPrevious href="#" />
+    </AppPaginationItem>
+    <AppPaginationItem>
+      <AppPaginationNext href="#" />
+    </AppPaginationItem>
+  </AppPaginationContent>
+</AppPagination>`}
+            filename="example.tsx"
           />
         </div>
 

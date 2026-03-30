@@ -10,6 +10,21 @@ import {
   AppPaginationPrevious,
 } from "@viana/ui";
 
+export function PaginationIconsOnlyPreview() {
+  return (
+    <AppPagination>
+      <AppPaginationContent>
+        <AppPaginationItem>
+          <AppPaginationPrevious href="#" />
+        </AppPaginationItem>
+        <AppPaginationItem>
+          <AppPaginationNext href="#" />
+        </AppPaginationItem>
+      </AppPaginationContent>
+    </AppPagination>
+  );
+}
+
 export function PaginationDefaultPreview() {
   return (
     <AppPagination>
