@@ -2,7 +2,7 @@
 
 import { AppButton, sonnerToast } from "@viana/ui";
 
-export function SonnerDescriptionPreview() {
+export function ToasterDescriptionPreview() {
   return (
     <AppButton
       onClick={() =>
@@ -16,7 +16,7 @@ export function SonnerDescriptionPreview() {
   );
 }
 
-export function SonnerPositionPreview() {
+export function ToasterPositionPreview() {
   const positions = [
     "top-left",
     "top-center",
@@ -46,7 +46,7 @@ export function SonnerPositionPreview() {
   );
 }
 
-export function SonnerDefaultPreview() {
+export function ToasterDefaultPreview() {
   return (
     <div className="flex gap-4">
       <AppButton

@@ -1,32 +1,40 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { SonnerDefaultPreview, SonnerDescriptionPreview, SonnerPositionPreview } from "@/components/previews/sonner-preview";
+import { ToasterDefaultPreview, ToasterDescriptionPreview, ToasterPositionPreview } from "@/components/previews/toaster-preview";
 
 export const metadata: Metadata = {
-  title: "Sonner",
+  title: "Toaster",
 };
 
-export default function SonnerPage() {
+export default function ToasterPage() {
   return (
     <article className="mx-auto max-w-3xl px-8 py-10">
       {/* Header */}
       <div className="mb-8 space-y-2">
         <p className="text-sm font-medium text-primary">Components</p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Sonner
+          Toaster
         </h1>
         <p className="text-lg text-muted-foreground">
-          An opinionated toast notification component. Fires toasts from
-          anywhere in your app without prop drilling.
+          An opinionated toast notification component built on{" "}
+          <a
+            href="https://sonner.emilkowal.ski"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-foreground underline underline-offset-4 hover:text-primary transition-colors"
+          >
+            Sonner
+          </a>
+          . Fires toasts from anywhere in your app without prop drilling.
         </p>
       </div>
 
       {/* Main preview */}
       <ComponentPreview
-        preview={<SonnerDefaultPreview />}
+        preview={<ToasterDefaultPreview />}
         code={`import { AppButton } from "@/components/primitives/AppButton"
-import { sonnerToast } from "@/components/primitives/AppSonner"
+import { sonnerToast } from "@/components/primitives/AppToaster"
 
 export function Example() {
   return (
@@ -49,13 +57,37 @@ export function Example() {
       <hr className="border-border my-10" />
 
       {/*
-        canonical_id: component-sonner-v1
+        canonical_id: component-toaster-v1
         related_components: ["AppToaster", "sonnerToast"]
         platform_tags: ["web"]
         enforcement_level: strict
       */}
 
       <section className="space-y-10">
+        {/* About */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            About
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppToaster
+            </code>{" "}
+            is a thin wrapper around{" "}
+            <a
+              href="https://sonner.emilkowal.ski"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-foreground underline underline-offset-4 hover:text-primary transition-colors"
+            >
+              Sonner
+            </a>{" "}
+            — an opinionated, accessible toast library by Emil Kowalski. The
+            wrapper pre-applies Viana Kit design tokens so toasts automatically
+            match your theme without any extra configuration.
+          </p>
+        </div>
+
         {/* Import */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
@@ -63,8 +95,7 @@ export function Example() {
           </h2>
           <CodeBlock
             language="tsx"
-            code={`import { AppToaster } from "@/components/primitives/AppToaster"
-import { sonnerToast } from "@/components/primitives/AppSonner"`}
+            code={`import { AppToaster, sonnerToast } from "@/components/primitives/AppToaster"`}
           />
         </div>
 
@@ -138,7 +169,7 @@ sonnerToast.info("Update available")`}
             in the options object to add a supporting line below the title.
           </p>
           <ComponentPreview
-            preview={<SonnerDescriptionPreview />}
+            preview={<ToasterDescriptionPreview />}
             code={`sonnerToast.success("Event created", {
   description: "Monday, January 3rd at 6:00pm",
 })`}
@@ -167,7 +198,7 @@ sonnerToast.info("Update available")`}
             .
           </p>
           <ComponentPreview
-            preview={<SonnerPositionPreview />}
+            preview={<ToasterPositionPreview />}
             code={`// Global default on AppToaster
 <AppToaster position="top-center" />
 
@@ -196,18 +227,10 @@ sonnerToast("Toast", { position: "top-left" })`}
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Prop
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Default
-                  </th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">
-                    Description
-                  </th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Description</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -228,8 +251,7 @@ sonnerToast("Toast", { position: "top-left" })`}
                     prop: "richColors",
                     type: "boolean",
                     default: "false",
-                    description:
-                      "Use semantically colored backgrounds for success/error/warning/info.",
+                    description: "Use semantically colored backgrounds for success/error/warning/info.",
                   },
                   {
                     prop: "closeButton",
@@ -239,18 +261,10 @@ sonnerToast("Toast", { position: "top-left" })`}
                   },
                 ].map(({ prop, type, default: def, description }) => (
                   <tr key={prop}>
-                    <td className="px-4 py-3 font-mono text-xs text-foreground">
-                      {prop}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {type}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                      {def}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {description}
-                    </td>
+                    <td className="px-4 py-3 font-mono text-xs text-foreground">{prop}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{type}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{def}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{description}</td>
                   </tr>
                 ))}
               </tbody>
@@ -287,7 +301,7 @@ const AppToaster = () => {
   )
 }
 
-export { AppToaster, appToast as toast }`}
+export { AppToaster, appToast as sonnerToast }`}
           />
         </div>
       </section>

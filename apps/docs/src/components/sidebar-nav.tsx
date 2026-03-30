@@ -47,7 +47,7 @@ const navSections = [
       { title: "Sheet", href: "/docs/components/sheet" },
       { title: "Spinner", href: "/docs/components/spinner" },
       { title: "Skeleton", href: "/docs/components/skeleton" },
-      { title: "Sonner", href: "/docs/components/sonner" },
+      { title: "Toaster", href: "/docs/components/toaster" },
       { title: "Switch", href: "/docs/components/switch" },
       { title: "Table", href: "/docs/components/table" },
       { title: "Tabs", href: "/docs/components/tabs" },
