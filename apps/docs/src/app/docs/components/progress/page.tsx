@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { ProgressDefaultPreview } from "@/components/previews/progress-preview";
+import { ProgressDefaultPreview, ProgressLabelPreview, ProgressControlledPreview } from "@/components/previews/progress-preview";
 
 export const metadata: Metadata = {
   title: "Progress",
@@ -50,6 +50,73 @@ export function Example() {
           <CodeBlock
             language="tsx"
             code={`import { AppProgress } from "@/components/primitives/AppProgress"`}
+          />
+        </div>
+
+        {/* Label */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Label
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Pair{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppProgress
+            </code>{" "}
+            with a label row above it to communicate status and the current
+            value to the user.
+          </p>
+          <ComponentPreview
+            preview={<ProgressLabelPreview />}
+            code={`<div className="space-y-1.5">
+  <div className="flex justify-between text-sm text-muted-foreground">
+    <span>Uploading…</span>
+    <span>66%</span>
+  </div>
+  <AppProgress value={66} />
+</div>`}
+            filename="example.tsx"
+          />
+        </div>
+
+        {/* Controlled */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Controlled
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Drive the{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              value
+            </code>{" "}
+            prop from state to reflect real-time progress — for example, a file
+            upload or a multi-step form.
+          </p>
+          <ComponentPreview
+            preview={<ProgressControlledPreview />}
+            code={`"use client"
+
+import { useState } from "react"
+import { AppProgress } from "@/components/primitives/AppProgress"
+
+export function ControlledExample() {
+  const [value, setValue] = useState(33)
+
+  return (
+    <div className="space-y-4">
+      <div className="flex justify-between text-sm text-muted-foreground">
+        <span>Progress</span>
+        <span>{value}%</span>
+      </div>
+      <AppProgress value={value} />
+      <div className="flex gap-2 justify-center">
+        <button onClick={() => setValue((v) => Math.max(0, v - 10))}>−10</button>
+        <button onClick={() => setValue((v) => Math.min(100, v + 10))}>+10</button>
+      </div>
+    </div>
+  )
+}`}
+            filename="example.tsx"
           />
         </div>
 
