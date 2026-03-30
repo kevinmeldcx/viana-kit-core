@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { SonnerDefaultPreview } from "@/components/previews/sonner-preview";
+import { SonnerDefaultPreview, SonnerDescriptionPreview, SonnerPositionPreview } from "@/components/previews/sonner-preview";
 
 export const metadata: Metadata = {
   title: "Sonner",
@@ -130,11 +130,50 @@ sonnerToast.info("Update available")`}
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
             With description
           </h2>
-          <CodeBlock
-            language="tsx"
+          <p className="text-muted-foreground leading-7">
+            Pass a{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              description
+            </code>{" "}
+            in the options object to add a supporting line below the title.
+          </p>
+          <ComponentPreview
+            preview={<SonnerDescriptionPreview />}
             code={`sonnerToast.success("Event created", {
   description: "Monday, January 3rd at 6:00pm",
 })`}
+            filename="example.tsx"
+          />
+        </div>
+
+        {/* Position */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Position
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Set a default position globally on{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              AppToaster
+            </code>
+            , or override it per-call via the{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              position
+            </code>{" "}
+            option. Defaults to{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
+              bottom-right
+            </code>
+            .
+          </p>
+          <ComponentPreview
+            preview={<SonnerPositionPreview />}
+            code={`// Global default on AppToaster
+<AppToaster position="top-center" />
+
+// Per-call override
+sonnerToast("Toast", { position: "top-left" })`}
+            filename="example.tsx"
           />
         </div>
 
