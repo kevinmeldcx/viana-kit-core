@@ -6,7 +6,10 @@ import { usePathname } from "next/navigation";
 const navSections = [
   {
     title: "Getting Started",
-    items: [{ title: "Introduction", href: "/docs/introduction" }],
+    items: [
+      { title: "Introduction", href: "/docs/introduction" },
+      { title: "Design System", href: "/docs/design-system" },
+    ],
   },
   {
     title: "Components",

@@ -137,6 +137,21 @@ const newVianarc = {
 
 fs.writeFileSync(destVianarc, JSON.stringify(newVianarc, null, 2) + "\n", "utf8")
 
+// ─── Sync rules/ ──────────────────────────────────────────────────────────────
+
+const srcRules = path.join(coreRoot, "packages/ui/src/rules")
+const destRules = path.join(targetRoot, "rules")
+let rulesSynced = 0
+
+if (fs.existsSync(srcRules)) {
+  ensureDir(destRules)
+  const ruleFiles = fs.readdirSync(srcRules).filter((f) => f.endsWith(".md"))
+  for (const file of ruleFiles) {
+    fs.copyFileSync(path.join(srcRules, file), path.join(destRules, file))
+    rulesSynced++
+  }
+}
+
 // ─── Summary ──────────────────────────────────────────────────────────────────
 
 console.log("")
@@ -145,4 +160,5 @@ console.log(`  Target  : ${targetRoot}`)
 console.log(`  Version : ${currentVianarc.version} → ${newVersion}`)
 console.log(`  ui/     : ${uiSynced} files copied`)
 console.log(`  primitives/ : ${primitivesSynced} files synced (imports transformed)`)
+console.log(`  rules/  : ${rulesSynced} files copied`)
 console.log("")
