@@ -67,7 +67,7 @@ export function SidebarNav() {
 
   return (
     <nav className="space-y-6">
-      {navSections.map((section) => (
+      {navSections.filter((section) => section.items.length > 0).map((section) => (
         <div key={section.title}>
           <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             {section.title}

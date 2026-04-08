@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { VianaLogo } from "@/components/viana-logo";
 
 export default function DocsLayout({
   children,
@@ -13,9 +14,10 @@ export default function DocsLayout({
         <div className="flex h-14 items-center gap-3 px-6">
           <Link
             href="/docs/introduction"
-            className="text-sm font-semibold text-foreground"
+            className="flex items-center"
+            aria-label="Viana Kit home"
           >
-            Viana Kit
+            <VianaLogo />
           </Link>
           <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">
             v0.1.4

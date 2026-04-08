@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AppText } from "@viana/ui";
+import { LogosSection } from "@/components/logos-section";
 
 export const metadata: Metadata = {
   title: "Design System",
@@ -109,6 +110,11 @@ export default function DesignSystemPage() {
             </div>
           ))}
         </div>
+
+        <hr className="border-border" />
+
+        {/* Logos */}
+        <LogosSection />
 
         <hr className="border-border" />
 

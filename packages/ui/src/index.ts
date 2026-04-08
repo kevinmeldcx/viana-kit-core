@@ -126,3 +126,6 @@ export { AppToggleGroup, AppToggleGroupItem } from "./components/primitives/AppT
 export { AppToaster as SonnerToaster, toast as sonnerToast } from "./components/primitives/AppToaster"
 export { AppAspectRatio } from "./components/primitives/AppAspectRatio"
 export { AppScrollText } from "./components/primitives/AppScrollText"
+
+// Assets
+export { PrimaryLogo, DarkLogo, WhiteLogo, PrimarySymbol, DarkSymbol, WhiteSymbol } from "./assets/logos"

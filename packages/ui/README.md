@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# @viana/ui
 
-## Getting Started
+The Viana Kit component library. This package is the **source of truth** for all UI primitives, layout components, and design tokens used across Viana's web portals.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Structure
+
+```
+src/
+├── components/
+│   ├── ui/          ← Layer 1: shadcn/ui base components (unmodified)
+│   └── primitives/  ← Layer 2: Viana Kit App* wrappers
+├── lib/
+│   └── utils.ts     ← cn() utility
+└── rules/           ← AI-readable usage rules per component
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All primitives are exported from `src/components/primitives/index.ts` and follow the `App*` naming convention.
 
-## Learn More
+### Inputs
 
-To learn more about Next.js, take a look at the following resources:
+| Component | Import |
+|-----------|--------|
+| `AppButton` | `./AppButton` |
+| `AppButtonGroup` | `./AppButtonGroup` |
+| `AppInput` | `./AppInput` |
+| `AppTextarea` | `./AppTextarea` |
+| `AppSelect` | `./AppSelect` |
+| `AppCheckbox` | `./AppCheckbox` |
+| `AppRadioGroup` | `./AppRadioGroup` |
+| `AppSwitch` | `./AppSwitch` |
+| `AppLabel` | `./AppLabel` |
+| `AppField` | `./AppField` |
+| `AppForm` | `./AppForm` |
+| `AppCalendar` | `./AppCalendar` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Display
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Component | Import |
+|-----------|--------|
+| `AppText` | `./AppText` |
+| `AppBadge` | `./AppBadge` |
+| `AppAvatar` | `./AppAvatar` |
+| `AppCard` | `./AppCard` |
+| `AppTable` | `./AppTable` |
+| `AppProgress` | `./AppProgress` |
+| `AppSkeleton` | `./AppSkeleton` |
+| `AppSpinner` | `./AppSpinner` |
+| `AppSeparator` | `./AppSeparator` |
+| `AppScrollArea` | `./AppScrollArea` |
+| `AppScrollText` | `./AppScrollText` |
+| `AppAspectRatio` | `./AppAspectRatio` |
 
-## Deploy on Vercel
+### Feedback & Overlays
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Component | Import |
+|-----------|--------|
+| `AppAlert` | `./AppAlert` |
+| `AppAlertDialog` | `./AppAlertDialog` |
+| `AppDialog` | `./AppDialog` |
+| `AppDrawer` | `./AppDrawer` |
+| `AppSheet` | `./AppSheet` |
+| `AppToaster` / `sonnerToast` | `./AppToaster` |
+| `AppTooltip` | `./AppTooltip` |
+| `AppHoverCard` | `./AppHoverCard` |
+| `AppPopover` | `./AppPopover` |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Navigation
+
+| Component | Import |
+|-----------|--------|
+| `AppBreadcrumb` | `./AppBreadcrumb` |
+| `AppNavigationMenu` | `./AppNavigationMenu` |
+| `AppMenubar` | `./AppMenubar` |
+| `AppPagination` | `./AppPagination` |
+| `AppTabs` | `./AppTabs` |
+| `AppAccordion` | `./AppAccordion` |
+| `AppCollapsible` | `./AppCollapsible` |
+
+### Controls
+
+| Component | Import |
+|-----------|--------|
+| `AppToggle` | `./AppToggle` |
+| `AppToggleGroup` | `./AppToggleGroup` |
+| `AppDropdownMenu` | `./AppDropdownMenu` |
+| `AppContextMenu` | `./AppContextMenu` |
+| `AppCommand` | `./AppCommand` |
+
+---
+
+## Usage (in viana-kit distribution repo)
+
+```tsx
+import { AppButton } from "@/components/primitives/AppButton"
+import { AppCard, AppCardHeader, AppCardTitle, AppCardContent } from "@/components/primitives/AppCard"
+
+export default function Page() {
+  return (
+    <AppCard>
+      <AppCardHeader>
+        <AppCardTitle>Hello</AppCardTitle>
+      </AppCardHeader>
+      <AppCardContent>
+        <AppButton>Get started</AppButton>
+      </AppCardContent>
+    </AppCard>
+  )
+}
+```
+
+---
+
+## Development
+
+This package lives inside `viana-kit-core`. After making changes, sync to the distribution repo:
+
+```bash
+# From viana-kit-core root
+npm run sync
+```
+
+See `AGENTS.md` at the repo root for full contribution guidelines and component architecture rules.

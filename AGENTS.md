@@ -2,6 +2,11 @@
 
 This is the **source repo** for the Viana Kit design system. Read this fully before writing any code.
 
+> **Agent compatibility:** This guide is read by all AI coding agents.
+> - Claude: via `CLAUDE.md` → `@AGENTS.md`
+> - Gemini: via `GEMINI.md` → reads this file
+> - Other agents (Codex, Copilot, etc.): read `AGENTS.md` directly
+
 ---
 
 ## What this repo is
@@ -22,28 +27,31 @@ Changes made here are synced downstream to the `viana-kit` distribution repo via
 viana-kit-core/
 ├── packages/
 │   ├── ui/                        ← Component library
-│   │   └── src/components/
-│   │       ├── ui/                ← Layer 1: shadcn/ui base components
-│   │       └── primitives/        ← Layer 2: Viana Kit App* wrappers
+│   │   └── src/
+│   │       ├── components/
+│   │       │   ├── ui/            ← Layer 1: shadcn/ui base components
+│   │       │   └── primitives/    ← Layer 2: Viana Kit App* wrappers
+│   │       └── rules/             ← AI-readable usage rules per component
 │   └── tokens/                    ← Design tokens (CSS variables, Tailwind config)
 ├── apps/
 │   └── docs/                      ← Documentation site (Next.js)
 │       └── src/
-│           ├── app/docs/components/   ← One page per component
+│           ├── app/docs/
+│           │   └── components/    ← One page per component
 │           └── components/
-│               └── previews/          ← Live preview components for docs
+│               └── previews/      ← Live preview components for docs
 └── scripts/
     └── sync.js                    ← Syncs primitives to viana-kit distribution repo
 ```
 
 ---
 
-## The two-layer component architecture
+## The three-layer component architecture
 
 ```
 packages/ui/src/components/
-├── ui/          ← shadcn/ui base. Contains full styling logic, CVA variants, Radix wiring.
-└── primitives/  ← Viana Kit wrappers. Re-exports ui/ components under App* names.
+├── ui/          ← Layer 1: shadcn/ui base. Full styling logic, CVA variants, Radix wiring.
+└── primitives/  ← Layer 2: Viana Kit App* wrappers. Minimal re-exports with brand defaults.
 ```
 
 **Rules for `ui/` files:**
@@ -122,10 +130,11 @@ node scripts/sync.js --version 0.2.0
 1. Add the shadcn base file to `packages/ui/src/components/ui/newcomponent.tsx`
 2. Add the primitive wrapper to `packages/ui/src/components/primitives/AppNewComponent.tsx`
 3. Export it from `packages/ui/src/components/primitives/index.ts`
-4. Add a preview file at `apps/docs/src/components/previews/newcomponent-preview.tsx`
-5. Add a docs page at `apps/docs/src/app/docs/components/newcomponent/page.tsx`
-6. Add the component to the sidebar in `apps/docs/src/components/sidebar-nav.tsx`
-7. Run `npm run sync` to push changes to viana-kit
+4. Add a rules file at `packages/ui/src/rules/newcomponent.md`
+5. Add a preview file at `apps/docs/src/components/previews/newcomponent-preview.tsx`
+6. Add a docs page at `apps/docs/src/app/docs/components/newcomponent/page.tsx`
+7. Add the component to the sidebar in `apps/docs/src/components/sidebar-nav.tsx`
+8. Run `npm run sync` to push changes to viana-kit
 
 ---
 
