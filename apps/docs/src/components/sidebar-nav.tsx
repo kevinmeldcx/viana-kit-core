@@ -48,6 +48,7 @@ const navSections = [
       { title: "Select", href: "/docs/components/select" },
       { title: "Separator", href: "/docs/components/separator" },
       { title: "Sheet", href: "/docs/components/sheet" },
+      { title: "Sidebar", href: "/docs/components/sidebar" },
       { title: "Spinner", href: "/docs/components/spinner" },
       { title: "Skeleton", href: "/docs/components/skeleton" },
       { title: "Toaster", href: "/docs/components/toaster" },
