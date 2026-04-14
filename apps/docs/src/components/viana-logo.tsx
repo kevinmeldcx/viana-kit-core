@@ -1,40 +1,24 @@
 type VianaLogoProps = {
   className?: string
+  width?: number
+  height?: number
 }
 
-export function VianaLogo({ className }: VianaLogoProps) {
+export function VianaLogo({ className, width = 28, height = 28 }: VianaLogoProps) {
   return (
     <svg
-      width="110"
-      height="24"
-      viewBox="0 0 110 24"
+      width={width}
+      height={height}
+      viewBox="0 0 60 60"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-label="Viana Kit"
     >
-      {/* Mark — geometric V diamond */}
       <path
-        d="M10 3L16 12L10 21L4 12L10 3Z"
+        d="M51.2405 14.7581L32.7563 4.22903C31.0495 3.25699 28.9483 3.25699 27.2437 4.22903L8.75737 14.7581C7.05063 15.7301 6 17.5258 6 19.4699V40.5301C6 42.4742 7.05063 44.2699 8.75737 45.2419L27.2437 55.771C28.9505 56.743 31.0517 56.743 32.7563 55.771L51.2426 45.2419C52.9494 44.2699 54 42.4742 54 40.5301V19.4699C54 17.5258 52.9494 15.7301 51.2426 14.7581H51.2405ZM44.9149 21.0892L31.9846 42.8032L31.8539 43.0247C30.982 44.4892 28.8001 44.4892 27.9282 43.0247L27.7974 42.8032L14.8672 21.0892C14.2503 20.0527 15.0219 18.7559 16.2557 18.7559H18.418C19.5645 18.7559 20.6239 19.3495 21.1971 20.3108L29.8921 34.9129L38.5871 20.3108C39.1603 19.3473 40.2197 18.7559 41.3662 18.7559H43.5285C44.7623 18.7559 45.5361 20.0527 44.917 21.0892H44.9149Z"
         className="fill-primary"
       />
-      <path
-        d="M10 7L14 12L10 17L6 12L10 7Z"
-        className="fill-background"
-      />
-
-      {/* Wordmark */}
-      <text
-        x="24"
-        y="16.5"
-        fontFamily="inherit"
-        fontSize="13"
-        fontWeight="600"
-        letterSpacing="-0.3"
-        className="fill-foreground"
-      >
-        Viana Kit
-      </text>
     </svg>
   )
 }

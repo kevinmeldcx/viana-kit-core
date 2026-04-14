@@ -80,6 +80,11 @@ export default function DesignSystemPage() {
 
       <section className="space-y-14">
 
+        {/* Logos */}
+        <LogosSection />
+
+        <hr className="border-border" />
+
         {/* Colors */}
         <div className="space-y-8">
           <div className="space-y-1">
@@ -110,11 +115,6 @@ export default function DesignSystemPage() {
             </div>
           ))}
         </div>
-
-        <hr className="border-border" />
-
-        {/* Logos */}
-        <LogosSection />
 
         <hr className="border-border" />
 

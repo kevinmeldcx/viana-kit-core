@@ -34,6 +34,7 @@ const navSections = [
       { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
       { title: "Field", href: "/docs/components/field" },
       { title: "Form", href: "/docs/components/form" },
+      { title: "Header", href: "/docs/components/header" },
       { title: "Hover Card", href: "/docs/components/hover-card" },
       { title: "Input", href: "/docs/components/input" },
       { title: "Label", href: "/docs/components/label" },

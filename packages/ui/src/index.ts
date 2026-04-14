@@ -127,5 +127,14 @@ export { AppToaster as SonnerToaster, toast as sonnerToast } from "./components/
 export { AppAspectRatio } from "./components/primitives/AppAspectRatio"
 export { AppScrollText } from "./components/primitives/AppScrollText"
 
+// Blocks
+export {
+  AppHeader,
+  AppHeaderContent,
+  AppHeaderTitle,
+  AppHeaderSearchbar,
+  AppHeaderActions,
+} from "./components/blocks/AppHeader"
+
 // Assets
 export { PrimaryLogo, DarkLogo, WhiteLogo, PrimarySymbol, DarkSymbol, WhiteSymbol } from "./assets/logos"
