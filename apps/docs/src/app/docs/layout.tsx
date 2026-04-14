@@ -14,10 +14,11 @@ export default function DocsLayout({
         <div className="flex h-14 items-center gap-3 px-6">
           <Link
             href="/docs/introduction"
-            className="flex items-center"
+            className="flex items-center gap-2"
             aria-label="Viana Kit home"
           >
             <VianaLogo />
+            <span className="text-sm font-semibold tracking-tight">Viana Kit</span>
           </Link>
           <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">
             v0.1.4
