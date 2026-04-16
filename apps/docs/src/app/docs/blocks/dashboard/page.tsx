@@ -382,13 +382,8 @@ export function Example() {
             </p>
             <CodeBlock
               language="tsx"
-              code={`{/* Override the gradient via CSS variables on a parent */}
-<div className="[--dashboard-gradient-from:oklch(0.20_0.07_280)] [--dashboard-gradient-via:oklch(0.30_0.12_275)] [--dashboard-gradient-to:oklch(0.17_0.09_290)]">
-  <AppDashboard>...</AppDashboard>
-</div>
-
-{/* Or replace entirely via className */}
-<AppDashboard className="bg-none bg-slate-900">`}
+              code={`{/* Replace entirely via className — override the default gradient */}
+<AppDashboard className="bg-none bg-background">`}
             />
           </div>
         </div>
@@ -419,7 +414,7 @@ function AppDashboard({ className, children, ...props }) {
   return (
     <div
       className={cn(
-        "relative flex min-h-svh w-full bg-linear-to-br from-dashboard-gradient-from via-dashboard-gradient-via to-dashboard-gradient-to",
+        "relative flex min-h-svh w-full",
         className
       )}
       {...props}

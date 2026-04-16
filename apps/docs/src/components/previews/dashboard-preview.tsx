@@ -47,7 +47,7 @@ import {
 
 export function DashboardDefaultPreview() {
   return (
-    <div className="relative h-[480px] overflow-hidden rounded-lg border border-border [contain:layout]">
+    <div className="relative h-[980px] overflow-hidden rounded-lg border border-border [contain:layout]">
       <AppSidebarProvider
         className="min-h-0 h-full"
         style={

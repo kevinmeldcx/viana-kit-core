@@ -38,12 +38,14 @@ const targetRoot = targetArg
 const srcUi = path.join(coreRoot, "packages/ui/src/components/ui")
 const srcPrimitives = path.join(coreRoot, "packages/ui/src/components/primitives")
 const srcBlocks = path.join(coreRoot, "packages/ui/src/components/blocks")
+const srcAssets = path.join(coreRoot, "packages/ui/src/assets")
 
 // ─── Target paths (inside viana-kit) ─────────────────────────────────────────
 
 const destUi = path.join(targetRoot, "src/components/ui")
 const destPrimitives = path.join(targetRoot, "src/components/primitives")
 const destBlocks = path.join(targetRoot, "src/components/blocks")
+const destAssets = path.join(targetRoot, "src/assets")
 const destVianarc = path.join(targetRoot, ".vianarc")
 
 // ─── Validation ───────────────────────────────────────────────────────────────
@@ -147,6 +149,30 @@ for (const file of blockFiles) {
   blocksSynced++
 }
 
+// ─── Sync assets/ ─────────────────────────────────────────────────────────────
+
+let assetsSynced = 0
+
+function syncAssetsDir(srcDir, destDir) {
+  if (!fs.existsSync(srcDir)) return
+  ensureDir(destDir)
+  const entries = fs.readdirSync(srcDir, { withFileTypes: true })
+  for (const entry of entries) {
+    const srcPath = path.join(srcDir, entry.name)
+    const destPath = path.join(destDir, entry.name)
+    if (entry.isDirectory()) {
+      syncAssetsDir(srcPath, destPath)
+    } else {
+      fs.copyFileSync(srcPath, destPath)
+      assetsSynced++
+    }
+  }
+}
+
+if (fs.existsSync(srcAssets)) {
+  syncAssetsDir(srcAssets, destAssets)
+}
+
 // ─── Write .vianarc ───────────────────────────────────────────────────────────
 
 const newVianarc = {
@@ -181,5 +207,6 @@ console.log(`  Version : ${currentVianarc.version} → ${newVersion}`)
 console.log(`  ui/     : ${uiSynced} files copied`)
 console.log(`  primitives/ : ${primitivesSynced} files synced (imports transformed)`)
 console.log(`  blocks/ : ${blocksSynced} files synced (imports transformed)`)
+console.log(`  assets/ : ${assetsSynced} files copied`)
 console.log(`  rules/  : ${rulesSynced} files copied`)
 console.log("")

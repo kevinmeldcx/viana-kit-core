@@ -153,11 +153,28 @@ npm run dev
 
 ---
 
+## Dashboard light/dark mode behavior
+
+The dashboard has a deliberate split:
+
+| Area | Theme |
+|------|-------|
+| `AppSidebar` | Always dark — has its own `dark` class baked in |
+| `AppHeader` | Always dark — has its own `dark` class baked in |
+| `AppDashboardBackground` | Always dark — animated dot layer uses dark tokens |
+| `AppDashboardMain` | Follows the page theme (light in light mode, dark in dark mode) |
+
+Do not add `dark` to `AppDashboard`, `AppDashboardContent`, or `AppDashboardMain`. Do not add background colors to `AppSidebar` or `AppHeader` — both are transparent so the animated dot layer shows through.
+
+---
+
 ## Styling best practices
 
 - **Never use inline `style` props** in components. All styling must go through Tailwind classes or CSS variables defined in the token layer.
 - To set CSS custom properties on a component, use Tailwind arbitrary properties (`[--sidebar:transparent]`) instead of `style={{ "--sidebar": "transparent" }}`.
 - To override design tokens, set the variable via Tailwind arbitrary properties on a parent or on the component itself — never via inline styles.
+- **All colors must come from CSS variables defined in `packages/tokens/src/index.css`.** Never use hardcoded color values (`oklch(...)`, `hsl(...)`, `#hex`, `rgb(...)`) in component code. When a color is needed in an inline `style` (e.g. for `background-image` gradients), reference the CSS variable with `var(--token-name)`. For alpha/opacity variants, use `color-mix(in oklch, var(--token-name) N%, transparent)`. If a needed color token does not exist, add it to `index.css` first — do not hardcode the value.
+- **Do not create custom color definition files** (e.g. `colors.ts`, `palette.ts`). The single source of truth for all colors is `packages/tokens/src/index.css`. TypeScript color objects are not needed — components consume colors via Tailwind classes or CSS `var()` references.
 
 ---
 
@@ -166,6 +183,8 @@ npm run dev
 | ❌ Never | ✅ Instead |
 |----------|-----------|
 | Use inline `style` props for styling | Use Tailwind classes or `[--var:value]` arbitrary properties |
+| Hardcode color values (`oklch(...)`, `hsl(...)`, `#hex`, `rgb(...)`) | Use CSS variables from `packages/tokens/src/index.css` via `var(--token)` or Tailwind classes |
+| Create custom color files (`colors.ts`, `palette.ts`, etc.) | Define all colors as CSS variables in `packages/tokens/src/index.css` |
 | Import `@radix-ui/*` in a primitive | Import from `../ui/componentname` |
 | Add CVA variants or custom styling to a primitive | Put that in `ui/` or accept className override |
 | Rebuild component logic that shadcn already provides | Wrap the existing `ui/` component |

@@ -61,7 +61,7 @@ const workspaces = [
 
 export function SidebarDefaultPreview() {
   return (
-    <div className="relative h-96 overflow-hidden rounded-lg border border-border bg-linear-to-br from-dashboard-gradient-from via-dashboard-gradient-via to-dashboard-gradient-to [contain:layout]">
+    <div className="relative h-96 overflow-hidden rounded-lg border border-border dark bg-linear-to-br from-background via-muted to-card [contain:layout]">
       <AppSidebarProvider className="min-h-0 h-full">
         <AppSidebar collapsible="icon">
           <AppSidebarHeader>

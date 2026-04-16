@@ -26,7 +26,7 @@ export function HeaderNoTitlePreview() {
   return (
     <AppSidebarProvider>
       <div
-        className="w-full rounded-lg bg-linear-to-br from-dashboard-gradient-from via-dashboard-gradient-via to-dashboard-gradient-to [--header-height:3.5rem]"
+        className="w-full rounded-lg bg-linear-to-br from-background via-muted to-card [--header-height:3.5rem]"
       >
         <AppHeader>
           <AppHeaderContent>
@@ -65,7 +65,7 @@ export function HeaderDefaultPreview() {
   return (
     <AppSidebarProvider>
       <div
-        className="w-full rounded-lg bg-linear-to-br from-dashboard-gradient-from via-dashboard-gradient-via to-dashboard-gradient-to [--header-height:3.5rem]"
+        className="w-full rounded-lg bg-linear-to-br from-background via-muted to-card [--header-height:3.5rem]"
       >
         <AppHeader>
           <AppHeaderContent>
