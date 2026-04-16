@@ -39,6 +39,8 @@ const srcUi = path.join(coreRoot, "packages/ui/src/components/ui")
 const srcPrimitives = path.join(coreRoot, "packages/ui/src/components/primitives")
 const srcBlocks = path.join(coreRoot, "packages/ui/src/components/blocks")
 const srcAssets = path.join(coreRoot, "packages/ui/src/assets")
+const srcHooks = path.join(coreRoot, "packages/ui/src/hooks")
+const srcTokens = path.join(coreRoot, "packages/tokens/src/index.css")
 
 // ─── Target paths (inside viana-kit) ─────────────────────────────────────────
 
@@ -46,6 +48,8 @@ const destUi = path.join(targetRoot, "src/components/ui")
 const destPrimitives = path.join(targetRoot, "src/components/primitives")
 const destBlocks = path.join(targetRoot, "src/components/blocks")
 const destAssets = path.join(targetRoot, "src/assets")
+const destHooks = path.join(targetRoot, "src/hooks")
+const destGlobalsCss = path.join(targetRoot, "src/app/globals.css")
 const destVianarc = path.join(targetRoot, ".vianarc")
 
 // ─── Validation ───────────────────────────────────────────────────────────────
@@ -91,6 +95,39 @@ if (fs.existsSync(destVianarc)) {
 }
 
 const newVersion = versionArg || bumpPatch(currentVianarc.version || "0.0.0")
+
+// ─── Sync tokens → globals.css ────────────────────────────────────────────────
+//
+// Replaces the managed token block (:root { ... } .dark { ... }) in globals.css
+// with the current content from packages/tokens/src/index.css, preserving any
+// custom additions the consumer has appended below the token block.
+
+let tokensUpdated = false
+
+if (fs.existsSync(srcTokens) && fs.existsSync(destGlobalsCss)) {
+  const tokensSrc = fs.readFileSync(srcTokens, "utf8")
+  const globalsCss = fs.readFileSync(destGlobalsCss, "utf8")
+
+  // Extract only the :root { ... } .dark { ... } token variable blocks from source,
+  // excluding preamble directives (@import, @source, etc.) which differ per project.
+  const rootMatch = tokensSrc.match(/(^:root\s*\{[\s\S]*?^\})/m)
+  const darkMatch = tokensSrc.match(/(^\.dark\s*\{[\s\S]*?^\})/m)
+
+  if (rootMatch && darkMatch) {
+    const newTokenBlock = rootMatch[1] + "\n\n" + darkMatch[1]
+
+    // Replace :root { ... } .dark { ... } in the destination, preserving everything else.
+    const replaced = globalsCss.replace(
+      /^:root\s*\{[\s\S]*?^\}(\s*)^\.dark\s*\{[\s\S]*?^\}/m,
+      newTokenBlock
+    )
+
+    if (replaced !== globalsCss) {
+      fs.writeFileSync(destGlobalsCss, replaced, "utf8")
+      tokensUpdated = true
+    }
+  }
+}
 
 // ─── Sync ui/ ─────────────────────────────────────────────────────────────────
 
@@ -149,6 +186,20 @@ for (const file of blockFiles) {
   blocksSynced++
 }
 
+// ─── Sync hooks/ ──────────────────────────────────────────────────────────────
+
+ensureDir(destHooks)
+
+const hookFiles = fs.readdirSync(srcHooks).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"))
+let hooksSynced = 0
+
+for (const file of hookFiles) {
+  const src = path.join(srcHooks, file)
+  const dest = path.join(destHooks, file)
+  fs.copyFileSync(src, dest)
+  hooksSynced++
+}
+
 // ─── Sync assets/ ─────────────────────────────────────────────────────────────
 
 let assetsSynced = 0
@@ -204,9 +255,11 @@ console.log("")
 console.log("✓ Viana Kit sync complete")
 console.log(`  Target  : ${targetRoot}`)
 console.log(`  Version : ${currentVianarc.version} → ${newVersion}`)
+console.log(`  tokens  : ${tokensUpdated ? "globals.css token block updated" : "skipped (globals.css not found)"}`)
 console.log(`  ui/     : ${uiSynced} files copied`)
 console.log(`  primitives/ : ${primitivesSynced} files synced (imports transformed)`)
 console.log(`  blocks/ : ${blocksSynced} files synced (imports transformed)`)
+console.log(`  hooks/  : ${hooksSynced} files copied`)
 console.log(`  assets/ : ${assetsSynced} files copied`)
 console.log(`  rules/  : ${rulesSynced} files copied`)
 console.log("")
