@@ -29,7 +29,7 @@ export default function HeaderPage() {
       <ComponentPreview
         fullWidth
         preview={<HeaderDefaultPreview />}
-        code={`import { Search } from "lucide-react"
+        code={`import { LayoutGrid, Search } from "lucide-react"
 import {
   AppHeader,
   AppHeaderContent,
@@ -57,11 +57,8 @@ export function Example() {
         <AppHeaderTitle>Dashboard</AppHeaderTitle>
         <AppHeaderSearchbar>
           <AppButtonGroup className="w-full max-w-sm">
-            <AppInput
-              placeholder="Search for sites, sensors, and more..."
-              leftAdornment={<Search className="size-4" />}
-            />
-            <AppButton variant="default">
+            <AppInput placeholder="Search for sites, sensors, and more..." />
+            <AppButton variant="outline">
               <Search className="size-4" />
             </AppButton>
           </AppButtonGroup>
@@ -76,6 +73,9 @@ export function Example() {
               <AppSelectItem value="network-2">Acme Network</AppSelectItem>
             </AppSelectContent>
           </AppSelect>
+          <AppButton variant="ghost" size="icon">
+            <LayoutGrid className="size-4" />
+          </AppButton>
           <AppAvatar className="size-8">
             <AppAvatarFallback>KA</AppAvatarFallback>
           </AppAvatar>

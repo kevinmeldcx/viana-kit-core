@@ -1,6 +1,6 @@
 "use client";
 
-import { Search } from "lucide-react";
+import { LayoutGrid, Search } from "lucide-react";
 import {
   AppHeader,
   AppHeaderContent,
@@ -50,6 +50,9 @@ export function HeaderNoTitlePreview() {
                   <AppSelectItem value="network-2">Acme Network</AppSelectItem>
                 </AppSelectContent>
               </AppSelect>
+              <AppButton variant="ghost" size="icon">
+                <LayoutGrid className="size-4" />
+              </AppButton>
               <AppAvatar className="size-8">
                 <AppAvatarFallback>KA</AppAvatarFallback>
               </AppAvatar>
@@ -90,6 +93,9 @@ export function HeaderDefaultPreview() {
                   <AppSelectItem value="network-2">Acme Network</AppSelectItem>
                 </AppSelectContent>
               </AppSelect>
+              <AppButton variant="ghost" size="icon">
+                <LayoutGrid className="size-4" />
+              </AppButton>
               <AppAvatar className="size-8">
                 <AppAvatarFallback>KA</AppAvatarFallback>
               </AppAvatar>
