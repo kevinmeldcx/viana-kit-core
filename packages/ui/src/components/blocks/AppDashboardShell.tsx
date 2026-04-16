@@ -17,11 +17,11 @@ import {
   AppSidebarBrand,
   AppSidebarTrigger,
   AppSidebarRail,
-} from "@/components/primitives/AppSidebar"
-import { AppSeparator } from "@/components/primitives/AppSeparator"
-import { AppButtonGroup } from "@/components/primitives/AppButtonGroup"
-import { AppButton } from "@/components/primitives/AppButton"
-import { AppInput } from "@/components/primitives/AppInput"
+} from "../primitives/AppSidebar"
+import { AppSeparator } from "../primitives/AppSeparator"
+import { AppButtonGroup } from "../primitives/AppButtonGroup"
+import { AppButton } from "../primitives/AppButton"
+import { AppInput } from "../primitives/AppInput"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

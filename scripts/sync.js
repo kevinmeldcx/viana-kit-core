@@ -78,9 +78,11 @@ function bumpPatch(version) {
 }
 
 function transformPrimitive(content) {
-  // Primitives in viana-kit-core use relative imports for the monorepo transpile setup.
-  // viana-kit is a standard Next.js app — replace relative utils import with the @/ alias.
-  return content.replace(/from ["']\.\.\/\.\.\/lib\/utils["']/g, 'from "@/lib/utils"')
+  // In viana-kit-core, blocks and primitives use relative imports for the monorepo
+  // transpile setup. viana-kit is a standard Next.js app — rewrite to @/ aliases.
+  return content
+    .replace(/from ["']\.\.\/\.\.\/lib\/utils["']/g, 'from "@/lib/utils"')
+    .replace(/from ["']\.\.\/primitives\//g, 'from "@/components/primitives/')
 }
 
 // ─── Read current .vianarc ────────────────────────────────────────────────────
@@ -255,7 +257,7 @@ console.log("")
 console.log("✓ Viana Kit sync complete")
 console.log(`  Target  : ${targetRoot}`)
 console.log(`  Version : ${currentVianarc.version} → ${newVersion}`)
-console.log(`  tokens  : ${tokensUpdated ? "globals.css token block updated" : "skipped (globals.css not found)"}`)
+console.log(`  tokens  : ${tokensUpdated ? "globals.css token block updated" : fs.existsSync(destGlobalsCss) ? "already up to date" : "skipped (globals.css not found)"}`)
 console.log(`  ui/     : ${uiSynced} files copied`)
 console.log(`  primitives/ : ${primitivesSynced} files synced (imports transformed)`)
 console.log(`  blocks/ : ${blocksSynced} files synced (imports transformed)`)
