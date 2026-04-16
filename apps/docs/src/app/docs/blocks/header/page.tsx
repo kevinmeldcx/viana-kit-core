@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { HeaderDefaultPreview } from "@/components/previews/header-preview";
+import {
+  HeaderDefaultPreview,
+  HeaderNoTitlePreview,
+} from "@/components/previews/header-preview";
 
 export const metadata: Metadata = {
   title: "Header",
@@ -9,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function HeaderPage() {
   return (
-    <article className="mx-auto max-w-3xl px-8 py-10">
+    <article className="mx-auto w-full px-8 py-10">
       {/* Header */}
       <div className="mb-8 space-y-2">
         <p className="text-sm font-medium text-primary">Blocks</p>
@@ -24,6 +27,7 @@ export default function HeaderPage() {
 
       {/* Main preview */}
       <ComponentPreview
+        fullWidth
         preview={<HeaderDefaultPreview />}
         code={`import { Search } from "lucide-react"
 import {
@@ -471,18 +475,24 @@ export function Example() {
             <h3 className="text-base font-semibold text-foreground">
               Searchbar without title
             </h3>
-            <CodeBlock
-              language="tsx"
+            <p className="text-sm leading-6 text-muted-foreground">
+              Omit{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">
+                AppHeaderTitle
+              </code>{" "}
+              when the current page context is already clear. The searchbar
+              expands to fill the available space.
+            </p>
+            <ComponentPreview
+              fullWidth
+              preview={<HeaderNoTitlePreview />}
               code={`<AppHeaderContent>
   <AppSidebarTrigger />
   <AppHeaderSearchbar>
-    <AppButtonGroup className="w-full max-w-md">
-      <AppInput
-        placeholder="Search for sites, sensors, and more..."
-        leftAdornment={<Search className="size-4" />}
-      />
-      <AppButton variant="default">
-        <Search className="size-4" />
+    <AppButtonGroup className="w-full max-w-sm">
+      <AppInput placeholder="Search for sites, sensors, and more..." />
+      <AppButton variant="outline">
+        <Search className="h-4 w-4" />
       </AppButton>
     </AppButtonGroup>
   </AppHeaderSearchbar>
@@ -491,6 +501,7 @@ export function Example() {
     <AppAvatar>...</AppAvatar>
   </AppHeaderActions>
 </AppHeaderContent>`}
+              filename="no-title.tsx"
             />
           </div>
         </div>
@@ -509,7 +520,7 @@ function AppHeader({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
   return (
     <header
       className={cn(
-        "flex h-(--header-height) shrink-0 items-center gap-2 border-b border-border transition-[width,height] ease-linear",
+        "dark flex h-(--header-height) shrink-0 items-center gap-2 border-b border-header-border bg-header text-header-foreground transition-[width,height] ease-linear",
         className
       )}
       {...props}
@@ -529,7 +540,7 @@ function AppHeaderContent({ className, ...props }: React.HTMLAttributes<HTMLDivE
 function AppHeaderTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
-      className={cn("shrink-0 text-sm font-medium text-foreground", className)}
+      className={cn("shrink-0 text-sm font-medium text-header-foreground", className)}
       {...props}
     />
   )

@@ -61,9 +61,9 @@ const workspaces = [
 
 export function SidebarDefaultPreview() {
   return (
-    <div className="relative h-96 overflow-hidden rounded-lg border border-border [contain:layout]">
+    <div className="relative h-96 overflow-hidden rounded-lg border border-border bg-linear-to-br from-dashboard-gradient-from via-dashboard-gradient-via to-dashboard-gradient-to [contain:layout]">
       <AppSidebarProvider className="min-h-0 h-full">
-        <AppSidebar collapsible="offcanvas">
+        <AppSidebar collapsible="icon">
           <AppSidebarHeader>
             <AppSidebarBrand dropdown={workspaces} />
           </AppSidebarHeader>
@@ -79,6 +79,7 @@ export function SidebarDefaultPreview() {
                       <AppSidebarMenuItem key={item.title}>
                         <AppSidebarMenuButton
                           isActive={item.title === "Dashboard"}
+                          tooltip={item.title}
                         >
                           <item.icon />
                           <span>{item.title}</span>
@@ -91,18 +92,18 @@ export function SidebarDefaultPreview() {
             ))}
           </AppSidebarContent>
           <AppSidebarFooter>
-            <span className="px-2 text-xs text-muted-foreground">v1.0.0</span>
+            <span className="px-2 text-xs text-sidebar-foreground/50">v1.0.0</span>
           </AppSidebarFooter>
           <AppSidebarRail />
         </AppSidebar>
-        <AppSidebarInset className="bg-background">
-          <header className="flex items-center gap-2 border-b border-border px-4 py-3">
-            <AppSidebarTrigger />
-            <span className="text-sm text-muted-foreground">Main content</span>
+        <AppSidebarInset className="bg-transparent">
+          <header className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+            <AppSidebarTrigger className="text-sidebar-foreground" />
+            <span className="text-sm text-sidebar-foreground/70">Main content</span>
           </header>
           <div className="p-4">
-            <p className="text-sm text-muted-foreground">
-              Use the trigger or drag the rail to resize.
+            <p className="text-sm text-sidebar-foreground/70">
+              Use the trigger or drag the rail to collapse to icons.
             </p>
           </div>
         </AppSidebarInset>

@@ -12,6 +12,13 @@ const navSections = [
     ],
   },
   {
+    title: "Blocks",
+    items: [
+      { title: "Dashboard", href: "/docs/blocks/dashboard" },
+      { title: "Header", href: "/docs/blocks/header" },
+    ],
+  },
+  {
     title: "Components",
     items: [
       { title: "Accordion", href: "/docs/components/accordion" },
@@ -34,7 +41,6 @@ const navSections = [
       { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
       { title: "Field", href: "/docs/components/field" },
       { title: "Form", href: "/docs/components/form" },
-      { title: "Header", href: "/docs/components/header" },
       { title: "Hover Card", href: "/docs/components/hover-card" },
       { title: "Input", href: "/docs/components/input" },
       { title: "Label", href: "/docs/components/label" },

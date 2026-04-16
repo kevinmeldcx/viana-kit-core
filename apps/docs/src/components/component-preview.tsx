@@ -6,12 +6,14 @@ interface ComponentPreviewProps {
   preview: React.ReactNode;
   code: string;
   filename?: string;
+  fullWidth?: boolean;
 }
 
 export function ComponentPreview({
   preview,
   code,
   filename,
+  fullWidth,
 }: ComponentPreviewProps) {
   const [tab, setTab] = useState<"preview" | "code">("preview");
 
@@ -39,8 +41,8 @@ export function ComponentPreview({
       </div>
 
       {tab === "preview" ? (
-        <div className="flex min-h-[180px] items-center justify-center bg-muted-background p-10">
-          <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className={`flex min-h-[180px] bg-muted-background ${fullWidth ? "p-6" : "items-center justify-center p-10"}`}>
+          <div className={fullWidth ? "w-full" : "flex flex-wrap items-center justify-center gap-3"}>
             {preview}
           </div>
         </div>

@@ -37,11 +37,13 @@ const targetRoot = targetArg
 
 const srcUi = path.join(coreRoot, "packages/ui/src/components/ui")
 const srcPrimitives = path.join(coreRoot, "packages/ui/src/components/primitives")
+const srcBlocks = path.join(coreRoot, "packages/ui/src/components/blocks")
 
 // ─── Target paths (inside viana-kit) ─────────────────────────────────────────
 
 const destUi = path.join(targetRoot, "src/components/ui")
 const destPrimitives = path.join(targetRoot, "src/components/primitives")
+const destBlocks = path.join(targetRoot, "src/components/blocks")
 const destVianarc = path.join(targetRoot, ".vianarc")
 
 // ─── Validation ───────────────────────────────────────────────────────────────
@@ -52,7 +54,7 @@ if (!fs.existsSync(targetRoot)) {
   process.exit(1)
 }
 
-if (!fs.existsSync(srcUi) || !fs.existsSync(srcPrimitives)) {
+if (!fs.existsSync(srcUi) || !fs.existsSync(srcPrimitives) || !fs.existsSync(srcBlocks)) {
   console.error("✗ Source directories not found. Run this script from viana-kit-core root.")
   process.exit(1)
 }
@@ -127,6 +129,24 @@ for (const file of primitiveFiles) {
   primitivesSynced++
 }
 
+// ─── Sync blocks/ ─────────────────────────────────────────────────────────
+
+ensureDir(destBlocks)
+
+const blockFiles = fs.readdirSync(srcBlocks).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"))
+let blocksSynced = 0
+
+for (const file of blockFiles) {
+  const src = path.join(srcBlocks, file)
+  const dest = path.join(destBlocks, file)
+
+  let content = fs.readFileSync(src, "utf8")
+  content = transformPrimitive(content) // same import transform applies
+  fs.writeFileSync(dest, content, "utf8")
+
+  blocksSynced++
+}
+
 // ─── Write .vianarc ───────────────────────────────────────────────────────────
 
 const newVianarc = {
@@ -160,5 +180,6 @@ console.log(`  Target  : ${targetRoot}`)
 console.log(`  Version : ${currentVianarc.version} → ${newVersion}`)
 console.log(`  ui/     : ${uiSynced} files copied`)
 console.log(`  primitives/ : ${primitivesSynced} files synced (imports transformed)`)
+console.log(`  blocks/ : ${blocksSynced} files synced (imports transformed)`)
 console.log(`  rules/  : ${rulesSynced} files copied`)
 console.log("")

@@ -80,9 +80,9 @@ const workspaces = [
 export function Example() {
   return (
     <AppSidebarProvider>
-      <AppSidebar collapsible="offcanvas">
+      <AppSidebar collapsible="icon">
         <AppSidebarHeader>
-          {/* logo defaults to <PrimaryLogo width={90} height={28} /> centered */}
+          {/* logo defaults to <WhiteLogo width={90} height={28} /> centered */}
           <AppSidebarBrand dropdown={workspaces} />
         </AppSidebarHeader>
         <AppSidebarContent>
@@ -95,7 +95,7 @@ export function Example() {
                 <AppSidebarMenu>
                   {section.items.map((item) => (
                     <AppSidebarMenuItem key={item.title}>
-                      <AppSidebarMenuButton isActive={item.title === "Dashboard"}>
+                      <AppSidebarMenuButton isActive={item.title === "Dashboard"} tooltip={item.title}>
                         <item.icon />
                         <span>{item.title}</span>
                       </AppSidebarMenuButton>
@@ -281,7 +281,8 @@ export function Example() {
                 </thead>
                 <tbody className="divide-y divide-border">
                   {[
-                    { prop: "logo", type: "string | ReactNode", default: "<PrimaryLogo width={90} height={28} />", description: "Text label or logo component. Defaults to the Viana Kit primary logo at sidebar header size." },
+                    { prop: "logo", type: "string | ReactNode", default: "<WhiteLogo width={90} height={28} />", description: "Text label or logo component. Defaults to the white Viana Kit logo for use on dark backgrounds." },
+                    { prop: "collapsedLogo", type: "ReactNode", default: "<WhiteSymbol width={24} height={24} />", description: "Icon shown in the header when the sidebar is collapsed to icon mode." },
                     { prop: "dropdown", type: "AppSidebarBrandDropdownItem[]", default: "—", description: "Structured item list. When omitted the brand renders as a plain non-interactive element." },
                     { prop: "showChevron", type: "boolean", default: "true", description: "Show the caret icon. Only applies when dropdown is provided." },
                     { prop: "className", type: "string", default: "—", description: "Additional classes for the brand container." },
@@ -319,8 +320,8 @@ export function Example() {
               AppSidebarMenuButton
             </h3>
             <p className="text-sm text-muted-foreground leading-6">
-              No background fill in the default or hover state. The accent
-              background is applied{" "}
+              No background fill in the default or hover state. The primary
+              brand color background is applied{" "}
               <strong className="font-medium text-foreground">
                 only when{" "}
                 <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">
@@ -354,7 +355,7 @@ export function Example() {
                 <tbody className="divide-y divide-border">
                   {[
                     { prop: "asChild", type: "boolean", default: "false", description: "Render as child element (e.g. a router Link)." },
-                    { prop: "isActive", type: "boolean", default: "false", description: "Marks this item as the active route. Applies accent background + medium font weight." },
+                    { prop: "isActive", type: "boolean", default: "false", description: "Marks this item as the active route. Applies primary brand color background + medium font weight." },
                     { prop: "variant", type: '"default" | "outline"', default: '"default"', description: "Visual style." },
                     { prop: "size", type: '"default" | "sm" | "lg"', default: '"default"', description: "Height and text size." },
                     { prop: "tooltip", type: "string | TooltipContentProps", default: "—", description: "Tooltip shown when sidebar is collapsed to icon mode." },
@@ -388,7 +389,7 @@ export function Example() {
               <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono text-foreground">
                 logo
               </code>{" "}
-              prop entirely to use the built-in Viana Kit primary logo at{" "}
+              prop entirely to use the built-in white Viana Kit logo at{" "}
               <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono text-foreground">
                 90×28
               </code>
@@ -437,10 +438,10 @@ export function Example() {
             </p>
             <CodeBlock
               language="tsx"
-              code={`import { PrimaryLogo } from "@/assets/logos"
+              code={`import { WhiteLogo } from "@/assets/logos"
 
 <AppSidebarHeader>
-  <AppSidebarBrand logo={<PrimaryLogo width={90} height={28} />} />
+  <AppSidebarBrand logo={<WhiteLogo width={90} height={28} />} />
 </AppSidebarHeader>`}
             />
           </div>
@@ -572,7 +573,7 @@ export function Example() {
             <CodeBlock
               language="tsx"
               code={`<AppSidebarProvider>
-  <AppSidebar collapsible="offcanvas">
+  <AppSidebar collapsible="icon">
     <AppSidebarHeader>
       <AppSidebarBrand dropdown={workspaces} />
     </AppSidebarHeader>
@@ -597,7 +598,7 @@ export function Example() {
             <p className="text-sm text-muted-foreground leading-6">
               When embedding a sidebar inside a fixed-height container,{" "}
               <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono text-foreground">
-                collapsible="offcanvas"
+                collapsible="icon"
               </code>{" "}
               uses{" "}
               <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono text-foreground">
@@ -613,7 +614,7 @@ export function Example() {
               language="tsx"
               code={`<div className="relative h-96 overflow-hidden rounded-lg border [contain:layout]">
   <AppSidebarProvider className="min-h-0 h-full">
-    <AppSidebar collapsible="offcanvas">...</AppSidebar>
+    <AppSidebar collapsible="icon">...</AppSidebar>
     <AppSidebarInset>...</AppSidebarInset>
   </AppSidebarProvider>
 </div>`}
@@ -633,7 +634,7 @@ export function Example() {
 import * as React from "react"
 import { ChevronDown } from "lucide-react"
 import { cn } from "../../lib/utils"
-import { PrimaryLogo } from "../../assets/logos"
+import { WhiteLogo, WhiteSymbol } from "../../assets/logos"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -648,23 +649,28 @@ export type AppSidebarBrandDropdownItem =
   | { label: string; onClick?: () => void; icon?: React.ReactNode; disabled?: boolean }
 
 function AppSidebarBrand({
-  logo = <PrimaryLogo width={90} height={28} />,
+  logo = <WhiteLogo width={90} height={28} />,
+  collapsedLogo = <WhiteSymbol width={24} height={24} />,
   dropdown,
   showChevron = true,
   className,
 }) {
-  // Logo is always centered; chevron is absolute so it doesn't shift the logo
+  const { state } = useSidebar()
+  const isCollapsed = state === "collapsed"
+
   const inner = (
     <div className="relative flex w-full items-center justify-center py-1">
-      {typeof logo === "string"
-        ? <span className="text-sm font-semibold text-foreground">{logo}</span>
-        : logo}
-      {dropdown && showChevron && (
+      {isCollapsed
+        ? collapsedLogo
+        : typeof logo === "string"
+          ? <span className="text-sm font-semibold text-foreground">{logo}</span>
+          : logo}
+      {!isCollapsed && dropdown && showChevron && (
         <ChevronDown className="absolute right-0 size-4 shrink-0 text-muted-foreground" />
       )}
     </div>
   )
-  if (!dropdown) {
+  if (!dropdown || isCollapsed) {
     return <div className={cn("flex items-center px-2", className)}>{inner}</div>
   }
   return (
@@ -696,8 +702,8 @@ function AppSidebarMenuButton({ className, ...props }) {
         "active:bg-transparent active:text-sidebar-foreground",
         // data-active: matches ALL buttons in Tailwind v4 (attribute always present) — reset
         "data-active:bg-transparent data-active:font-normal data-active:text-sidebar-foreground",
-        // Re-apply accent only for isActive={true}
-        "data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground",
+        // Re-apply primary brand color only for isActive={true}
+        "data-[active=true]:bg-primary data-[active=true]:font-medium data-[active=true]:text-primary-foreground",
         className
       )}
       {...props}

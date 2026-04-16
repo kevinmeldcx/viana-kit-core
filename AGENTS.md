@@ -153,10 +153,19 @@ npm run dev
 
 ---
 
+## Styling best practices
+
+- **Never use inline `style` props** in components. All styling must go through Tailwind classes or CSS variables defined in the token layer.
+- To set CSS custom properties on a component, use Tailwind arbitrary properties (`[--sidebar:transparent]`) instead of `style={{ "--sidebar": "transparent" }}`.
+- To override design tokens, set the variable via Tailwind arbitrary properties on a parent or on the component itself — never via inline styles.
+
+---
+
 ## What NOT to do
 
 | ❌ Never | ✅ Instead |
 |----------|-----------|
+| Use inline `style` props for styling | Use Tailwind classes or `[--var:value]` arbitrary properties |
 | Import `@radix-ui/*` in a primitive | Import from `../ui/componentname` |
 | Add CVA variants or custom styling to a primitive | Put that in `ui/` or accept className override |
 | Rebuild component logic that shadcn already provides | Wrap the existing `ui/` component |
