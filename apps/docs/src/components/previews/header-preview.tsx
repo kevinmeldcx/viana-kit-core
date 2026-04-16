@@ -26,11 +26,11 @@ export function HeaderNoTitlePreview() {
   return (
     <AppSidebarProvider>
       <div
-        className="w-full rounded-lg bg-linear-to-br from-background via-muted to-card [--header-height:3.5rem]"
+        className="dark w-full rounded-lg bg-linear-to-br from-background via-muted to-card [--header-height:3.5rem]"
       >
         <AppHeader>
           <AppHeaderContent>
-            <AppSidebarTrigger className="text-header-foreground" />
+            <AppSidebarTrigger />
             <AppSeparator orientation="vertical" className="mx-1 h-4" />
             <AppHeaderSearchbar>
               <AppButtonGroup className="w-full max-w-sm">
@@ -65,11 +65,11 @@ export function HeaderDefaultPreview() {
   return (
     <AppSidebarProvider>
       <div
-        className="w-full rounded-lg bg-linear-to-br from-background via-muted to-card [--header-height:3.5rem]"
+        className="dark w-full rounded-lg bg-linear-to-br from-background via-muted to-card [--header-height:3.5rem]"
       >
         <AppHeader>
           <AppHeaderContent>
-            <AppSidebarTrigger className="text-header-foreground" />
+            <AppSidebarTrigger />
             <AppSeparator orientation="vertical" className="mx-1 h-4" />
             <AppHeaderTitle>Dashboard</AppHeaderTitle>
             <AppHeaderSearchbar>
