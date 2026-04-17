@@ -131,62 +131,64 @@ if (fs.existsSync(srcTokens) && fs.existsSync(destGlobalsCss)) {
   }
 }
 
+// ─── Helper: sync a directory (copy new/changed, delete removed) ─────────────
+
+function syncDir(srcDir, destDir, transform) {
+  ensureDir(destDir)
+  const srcFiles = new Set(
+    fs.readdirSync(srcDir).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"))
+  )
+  // Remove files in dest that no longer exist in src
+  if (fs.existsSync(destDir)) {
+    for (const file of fs.readdirSync(destDir).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"))) {
+      if (!srcFiles.has(file)) {
+        fs.rmSync(path.join(destDir, file))
+      }
+    }
+  }
+  // Copy/transform files from src
+  let count = 0
+  for (const file of srcFiles) {
+    const dest = path.join(destDir, file)
+    let content = fs.readFileSync(path.join(srcDir, file), "utf8")
+    if (transform) content = transform(content)
+    fs.writeFileSync(dest, content, "utf8")
+    count++
+  }
+  return count
+}
+
 // ─── Sync ui/ ─────────────────────────────────────────────────────────────────
 
-ensureDir(destUi)
-
-const uiFiles = fs.readdirSync(srcUi).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"))
-let uiSynced = 0
-
-for (const file of uiFiles) {
-  const src = path.join(srcUi, file)
-  const dest = path.join(destUi, file)
-  fs.copyFileSync(src, dest)
-  uiSynced++
-}
+const uiSynced = syncDir(srcUi, destUi, null)
 
 // ─── Sync primitives/ ─────────────────────────────────────────────────────────
 
-ensureDir(destPrimitives)
-
 const primitiveFiles = fs.readdirSync(srcPrimitives).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"))
 const updatedComponents = { ...currentVianarc.components }
-let primitivesSynced = 0
 
-for (const file of primitiveFiles) {
-  const src = path.join(srcPrimitives, file)
-  const dest = path.join(destPrimitives, file)
-
-  let content = fs.readFileSync(src, "utf8")
-  content = transformPrimitive(content)
-  fs.writeFileSync(dest, content, "utf8")
-
-  // Track App* component names (skip index.ts and hooks)
-  if (file.startsWith("App") && file.endsWith(".tsx")) {
-    const componentName = file.replace(".tsx", "")
-    updatedComponents[componentName] = newVersion
+// Remove .vianarc entries for deleted primitives
+if (fs.existsSync(destPrimitives)) {
+  for (const file of fs.readdirSync(destPrimitives).filter((f) => f.endsWith(".tsx"))) {
+    if (!primitiveFiles.includes(file)) {
+      const name = file.replace(".tsx", "")
+      delete updatedComponents[name]
+    }
   }
+}
 
-  primitivesSynced++
+const primitivesSynced = syncDir(srcPrimitives, destPrimitives, transformPrimitive)
+
+// Track App* component names in .vianarc
+for (const file of primitiveFiles) {
+  if (file.startsWith("App") && file.endsWith(".tsx")) {
+    updatedComponents[file.replace(".tsx", "")] = newVersion
+  }
 }
 
 // ─── Sync blocks/ ─────────────────────────────────────────────────────────
 
-ensureDir(destBlocks)
-
-const blockFiles = fs.readdirSync(srcBlocks).filter((f) => f.endsWith(".tsx") || f.endsWith(".ts"))
-let blocksSynced = 0
-
-for (const file of blockFiles) {
-  const src = path.join(srcBlocks, file)
-  const dest = path.join(destBlocks, file)
-
-  let content = fs.readFileSync(src, "utf8")
-  content = transformPrimitive(content) // same import transform applies
-  fs.writeFileSync(dest, content, "utf8")
-
-  blocksSynced++
-}
+const blocksSynced = syncDir(srcBlocks, destBlocks, transformPrimitive)
 
 // ─── Sync hooks/ ──────────────────────────────────────────────────────────────
 
