@@ -309,7 +309,7 @@ const AppAlertTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertTitle
     ref={ref}
-    className={cn("text-xl font-bold mb-0", className)}
+    className={cn("text-base font-bold mb-0", className)}
     {...props}
   />
 ))
