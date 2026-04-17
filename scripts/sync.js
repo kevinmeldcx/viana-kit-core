@@ -236,6 +236,48 @@ const newVianarc = {
 
 fs.writeFileSync(destVianarc, JSON.stringify(newVianarc, null, 2) + "\n", "utf8")
 
+// ─── Sync component runtime deps → target package.json ───────────────────────
+//
+// Reads packages/ui/package.json and merges any component runtime deps that are
+// missing from the target package.json. Skips framework/infrastructure packages
+// that the target manages independently (next, react, tailwind, typescript, etc.).
+
+const INFRA_PACKAGES = new Set([
+  "next", "react", "react-dom",
+  "typescript", "eslint", "eslint-config-next",
+  "tailwindcss", "@tailwindcss/postcss",
+  "@types/node", "@types/react", "@types/react-dom",
+  "shadcn",
+])
+
+const srcUiPackageJson = path.join(coreRoot, "packages/ui/package.json")
+const destPackageJson = path.join(targetRoot, "package.json")
+let depsAdded = []
+
+if (fs.existsSync(srcUiPackageJson) && fs.existsSync(destPackageJson)) {
+  const srcPkg = JSON.parse(fs.readFileSync(srcUiPackageJson, "utf8"))
+  const destPkg = JSON.parse(fs.readFileSync(destPackageJson, "utf8"))
+
+  const srcDeps = { ...srcPkg.dependencies }
+  destPkg.dependencies = destPkg.dependencies || {}
+
+  for (const [name, version] of Object.entries(srcDeps)) {
+    if (INFRA_PACKAGES.has(name)) continue
+    if (!destPkg.dependencies[name]) {
+      destPkg.dependencies[name] = version
+      depsAdded.push(name)
+    }
+  }
+
+  if (depsAdded.length > 0) {
+    // Keep keys alphabetically sorted for readable diffs
+    destPkg.dependencies = Object.fromEntries(
+      Object.entries(destPkg.dependencies).sort(([a], [b]) => a.localeCompare(b))
+    )
+    fs.writeFileSync(destPackageJson, JSON.stringify(destPkg, null, 2) + "\n", "utf8")
+  }
+}
+
 // ─── Sync rules/ ──────────────────────────────────────────────────────────────
 
 const srcRules = path.join(coreRoot, "packages/ui/src/rules")
@@ -264,4 +306,9 @@ console.log(`  blocks/ : ${blocksSynced} files synced (imports transformed)`)
 console.log(`  hooks/  : ${hooksSynced} files copied`)
 console.log(`  assets/ : ${assetsSynced} files copied`)
 console.log(`  rules/  : ${rulesSynced} files copied`)
+if (depsAdded.length > 0) {
+  console.log(`  deps    : added ${depsAdded.join(", ")} to package.json`)
+} else {
+  console.log(`  deps    : package.json already up to date`)
+}
 console.log("")
