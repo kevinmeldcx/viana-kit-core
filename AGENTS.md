@@ -155,16 +155,25 @@ npm run dev
 
 ## Dashboard light/dark mode behavior
 
-The dashboard has a deliberate split:
+The dashboard has a deliberate split between the **background** (sidebar, header, background) and the **main content area**. Use the `backgroundTheme` prop on `AppDashboard` to lock the background to a fixed mode.
 
-| Area | Theme |
-|------|-------|
-| `AppSidebar` | Always dark — has its own `dark` class baked in |
-| `AppHeader` | Always dark — has its own `dark` class baked in |
-| `AppDashboardBackground` | Always dark — animated dot layer uses dark tokens |
-| `AppDashboardMain` | Follows the page theme (light in light mode, dark in dark mode) |
+| Area | Default | Controlled by |
+|------|---------|---------------|
+| `AppSidebar` | Dark | `backgroundTheme` prop on `AppDashboard` |
+| `AppHeader` | Dark | `backgroundTheme` prop on `AppDashboard` |
+| `AppDashboardBackground` | Dark | `backgroundTheme` prop on `AppDashboard` |
+| `AppDashboardMain` | Follows page theme | Page-level `dark` class (unchanged) |
 
-Do not add `dark` to `AppDashboard`, `AppDashboardContent`, or `AppDashboardMain`. Do not add background colors to `AppSidebar` or `AppHeader` — both are transparent so the animated dot layer shows through.
+**`backgroundTheme` values:**
+
+| Value | Behavior |
+|-------|----------|
+| `"dark"` (default) | Sidebar/header/background locked to dark regardless of page theme |
+| `"light"` | Sidebar/header/background locked to light regardless of page theme |
+
+This is a one-time decision per app. The main content area still responds to the page theme toggle independently.
+
+Do not add `dark` directly to `AppSidebar`, `AppHeader`, or `AppDashboardBackground` — this is managed by `AppDashboard` via `backgroundTheme`. Do not add `dark` to `AppDashboard`, `AppDashboardContent`, or `AppDashboardMain`. Do not add background colors to `AppSidebar` or `AppHeader` — both are transparent so the animated background layer shows through.
 
 ---
 

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { DashboardDefaultPreview } from "@/components/previews/dashboard-preview";
+import {
+  DashboardDefaultPreview,
+  DashboardLockedLightPreview,
+} from "@/components/previews/dashboard-preview";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -91,11 +94,12 @@ export default function Page() {
               <tbody className="divide-y divide-border">
                 {[
                   { prop: "nav", type: "AppDashboardNavSection[]", default: "required", description: "Sidebar navigation sections. Each section renders a group with an optional label." },
-                  { prop: "headerActions", type: "ReactNode", default: "Network select + bento + avatar", description: "Right-side header slot. Pass null to render nothing." },
+                  { prop: "headerActions", type: "ReactNode", default: "Network select + bento + theme toggle + avatar", description: "Right-side header slot. Pass null to render nothing." },
                   { prop: "headerSearchbar", type: "ReactNode", default: "Search input group", description: "Searchbar slot. Pass null to suppress entirely." },
                   { prop: "sidebarWidth", type: "string", default: '"14rem"', description: "Overrides the --sidebar-width CSS variable." },
                   { prop: "headerHeight", type: "string", default: '"3.5rem"', description: "Overrides the --header-height CSS variable." },
                   { prop: "mainClassName", type: "string", default: '"p-6"', description: "Extra classes on the main content area." },
+                  { prop: "backgroundTheme", type: '"dark" | "light"', default: '"dark"', description: 'Locks the sidebar, header, and background to a fixed mode regardless of the page theme toggle.' },
                   { prop: "children", type: "ReactNode", default: "required", description: "Your page content." },
                 ].map(({ prop, type, default: def, description }) => (
                   <tr key={prop}>
@@ -169,6 +173,34 @@ type AppDashboardNavItem = {
 </AppDashboard>`}
             />
           </div>
+        </div>
+
+        {/* Background theme */}
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <h2 className="text-xl font-semibold tracking-tight text-foreground">
+              Background theme
+            </h2>
+            <p className="text-muted-foreground">
+              The <code className="rounded bg-muted px-1 py-0.5 font-mono text-sm">backgroundTheme</code> prop
+              locks the sidebar, header, and background to a fixed mode. The main content area still
+              responds to the page&apos;s theme toggle independently. Set it once — it never changes at runtime.
+            </p>
+          </div>
+          <ComponentPreview
+            fullWidth
+            preview={<DashboardLockedLightPreview />}
+            code={`// Dark background (default)
+<AppDashboard nav={nav} backgroundTheme="dark">
+  <PageContent />
+</AppDashboard>
+
+// Light background
+<AppDashboard nav={nav} backgroundTheme="light">
+  <PageContent />
+</AppDashboard>`}
+            filename="page.tsx"
+          />
         </div>
       </section>
     </article>

@@ -16,6 +16,7 @@ const navSections = [
     items: [
       { title: "Dashboard", href: "/docs/blocks/dashboard" },
       { title: "Header", href: "/docs/blocks/header" },
+      { title: "Page Title", href: "/docs/blocks/pagetitle" },
     ],
   },
   {

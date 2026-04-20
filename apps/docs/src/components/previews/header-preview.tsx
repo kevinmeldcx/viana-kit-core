@@ -20,6 +20,7 @@ import {
   AppSeparator,
   AppSidebarProvider,
   AppSidebarTrigger,
+  AppThemeToggle,
 } from "@viana/ui";
 
 export function HeaderNoTitlePreview() {
@@ -53,6 +54,7 @@ export function HeaderNoTitlePreview() {
               <AppButton variant="ghost" size="icon">
                 <LayoutGrid className="size-4" />
               </AppButton>
+              <AppThemeToggle />
               <AppAvatar className="size-8">
                 <AppAvatarFallback>KA</AppAvatarFallback>
               </AppAvatar>
@@ -96,6 +98,7 @@ export function HeaderDefaultPreview() {
               <AppButton variant="ghost" size="icon">
                 <LayoutGrid className="size-4" />
               </AppButton>
+              <AppThemeToggle />
               <AppAvatar className="size-8">
                 <AppAvatarFallback>KA</AppAvatarFallback>
               </AppAvatar>

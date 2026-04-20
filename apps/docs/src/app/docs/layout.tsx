@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SidebarNav } from "@/components/sidebar-nav";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { VianaLogo } from "@/components/viana-logo";
+import { AppThemeToggle } from "@viana/ui";
 
 export default function DocsLayout({
   children,
@@ -24,7 +24,7 @@ export default function DocsLayout({
             v0.1.4
           </span>
           <div className="ml-auto">
-            <ThemeToggle />
+            <AppThemeToggle />
           </div>
         </div>
       </header>

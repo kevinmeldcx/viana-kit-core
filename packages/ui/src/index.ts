@@ -136,5 +136,8 @@ export {
   AppHeaderActions,
 } from "./components/blocks/AppHeader"
 
+// Theme
+export { AppThemeProvider, useAppTheme, AppThemeToggle, type AppTheme, type AppThemeProviderProps } from "./components/primitives/AppThemeProvider"
+
 // Assets
 export { PrimaryLogo, DarkLogo, WhiteLogo, PrimarySymbol, DarkSymbol, WhiteSymbol } from "./assets/logos"

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
-import { AppToaster } from "@viana/ui";
+import { AppThemeProvider, AppToaster } from "@viana/ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body className="min-h-full bg-background text-foreground antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        <AppThemeProvider storageKey="viana-docs-theme">{children}</AppThemeProvider>
         <AppToaster />
       </body>
     </html>
