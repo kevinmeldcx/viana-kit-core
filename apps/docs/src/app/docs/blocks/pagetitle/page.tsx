@@ -6,6 +6,8 @@ import {
   PageTitleWithActionsPreview,
   PageTitleHiddenPreview,
   PageTitleStandalonePreview,
+  PageTitleWithIconPreview,
+  PageTitlePrimaryColorPreview,
 } from "@/components/previews/pagetitle-preview";
 
 export const metadata: Metadata = {
@@ -176,6 +178,63 @@ import { AppButton } from "@/components/primitives/AppButton"
               filename="example.tsx"
             />
           </div>
+
+          {/* With icon */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">With icon</h3>
+            <p className="text-sm text-muted-foreground">
+              Pass any{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">ReactNode</code>{" "}
+              to the{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">icon</code>{" "}
+              prop — an <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">&lt;img&gt;</code>, SVG, or Lucide icon. The icon renders to the left of the title stack and is optional.
+            </p>
+            <ComponentPreview
+              fullWidth
+              preview={<PageTitleWithIconPreview />}
+              code={`<AppDashboard
+  nav={nav}
+  pageTitle={{
+    title: "Hi Kevin! Welcome to Viana",
+    subtitle: "Stay up to date to everything in your network",
+    breadcrumbs: [{ label: "Dashboard" }],
+    titleColor: "primary",
+    icon: (
+      <img
+        src="/persistent-icon.png"
+        alt="Dashboard"
+        className="size-16 rounded-xl"
+      />
+    ),
+  }}
+>
+  <PageContent />
+</AppDashboard>`}
+              filename="page.tsx"
+            />
+          </div>
+
+          {/* Primary title color */}
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-foreground">Primary title color</h3>
+            <p className="text-sm text-muted-foreground">
+              Set{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">titleColor="primary"</code>{" "}
+              to render the h1 in the brand blue color. The default is{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">"default"</code>{" "}
+              which uses <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">text-foreground</code>.
+            </p>
+            <ComponentPreview
+              preview={<PageTitlePrimaryColorPreview />}
+              code={`<AppPageTitle
+  title="Hi Kevin! Welcome to Viana"
+  subtitle="Stay up to date to everything in your network"
+  breadcrumbs={[{ label: "Dashboard" }]}
+  titleColor="primary"
+/>`}
+              filename="example.tsx"
+            />
+          </div>
         </div>
 
         {/* API Reference */}
@@ -195,10 +254,12 @@ import { AppButton } from "@/components/primitives/AppButton"
               </thead>
               <tbody className="divide-y divide-border">
                 {[
-                  { prop: "title", type: "string", default: "required", description: "Page heading rendered as an <h1>." },
+                  { prop: "title", type: "string", default: "auto", description: "Page heading rendered as an <h1>. Auto-derived from the last pathname segment when omitted." },
                   { prop: "subtitle", type: "string", default: "—", description: "Optional description rendered below the heading." },
                   { prop: "breadcrumbs", type: "AppPageTitleBreadcrumb[]", default: "auto", description: "Explicit breadcrumb trail. Auto-generated from window.location.pathname when omitted." },
                   { prop: "actions", type: "ReactNode", default: "—", description: "Right-side slot. Accepts buttons, selects, or any elements. Empty by default." },
+                  { prop: "icon", type: "ReactNode", default: "—", description: "Optional icon rendered to the left of the title stack. Accepts <img>, SVG, or Lucide icons." },
+                  { prop: "titleColor", type: '"default" | "primary"', default: '"default"', description: 'Controls the h1 color. "default" uses text-foreground; "primary" uses the brand blue.' },
                   { prop: "hidden", type: "boolean", default: "false", description: "Hides the entire block." },
                   { prop: "className", type: "string", default: "—", description: "Extra classes on the root element." },
                 ].map(({ prop, type, default: def, description }, i) => (
@@ -264,10 +325,12 @@ export type AppPageTitleBreadcrumb = {
 }
 
 export type AppPageTitleProps = {
-  title: string
+  title?: string
   subtitle?: string
   breadcrumbs?: AppPageTitleBreadcrumb[]
   actions?: React.ReactNode
+  icon?: React.ReactNode
+  titleColor?: "default" | "primary"
   hidden?: boolean
   className?: string
 }

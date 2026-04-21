@@ -95,3 +95,43 @@ export function PageTitleStandalonePreview() {
     </div>
   );
 }
+
+// With icon — icon rendered to the left, primary title color
+export function PageTitleWithIconPreview() {
+  return (
+    <div className="relative h-[560px] overflow-hidden rounded-lg border border-border [contain:layout]">
+      <AppDashboard
+        nav={nav}
+        pageTitle={{
+          title: "Hi Kevin! Welcome to Viana",
+          subtitle: "Stay up to date to everything in your network",
+          breadcrumbs: [{ label: "Dashboard" }],
+          titleColor: "primary",
+          icon: (
+            <img
+              src="/persistent-icon.png"
+              alt="Dashboard"
+              className="size-16 rounded-xl"
+            />
+          ),
+        }}
+      >
+        <p className="text-sm text-muted-foreground">Page content</p>
+      </AppDashboard>
+    </div>
+  );
+}
+
+// Primary title color — no icon
+export function PageTitlePrimaryColorPreview() {
+  return (
+    <div className="rounded-lg border border-border bg-background p-6">
+      <AppPageTitle
+        title="Hi Kevin! Welcome to Viana"
+        subtitle="Stay up to date to everything in your network"
+        breadcrumbs={[{ label: "Dashboard" }]}
+        titleColor="primary"
+      />
+    </div>
+  );
+}
