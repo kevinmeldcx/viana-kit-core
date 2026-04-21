@@ -17,7 +17,7 @@ This is the **source repo** for the Viana Kit design system. Read this fully bef
 - Design tokens (`packages/tokens/`)
 - The documentation site (`apps/docs/`)
 
-Changes made here are synced downstream to the `viana-kit` distribution repo via `npm run sync`.
+Changes made here are synced downstream to the `viana-kit` distribution repo via `npm run sync` — but only after review and approval. See the [development workflow](#development-workflow) below.
 
 ---
 
@@ -97,9 +97,64 @@ const AppAlert = React.forwardRef(({ className, variant, ...props }, ref) => (
 
 ---
 
+## Development workflow
+
+Work in `viana-kit-core` follows a **build → review → publish** cycle. The docs site (`apps/docs/`) reads directly from `packages/ui/src/` via workspace references, so you can review all changes live without syncing.
+
+```
+BUILD                          REVIEW                        PUBLISH
+─────────────────────────      ──────────────────────        ────────────────────────────────
+Edit packages/ui/src/     →    npm run dev                →  (user approves)
+Edit apps/docs/                verify at localhost:3000        write rules file
+                                back-and-forth adjustments     update AGENTS.md if needed
+                                iterate freely                 update docs if needed
+                                no sync, no commit             npm run sync
+                                                               verify sync output
+                                                               update viana-kit/AGENTS.md
+                                                               update viana-kit/README.md if needed
+                                                               commit + push viana-kit-core
+                                                               commit + push viana-kit
+```
+
+**Key rules:**
+- **Do not run sync during the build or review phase.** Sync pushes to the distribution repo — only run it when work is approved.
+- **Do not commit or push during the build or review phase.** Commits happen once per completed, approved component — not after every file edit.
+- **The user signals publish** by saying something like "looks good", "this is good now", or "let's publish this".
+
+---
+
+## Adding a new component
+
+### Phase 1 — Build (iterate freely)
+
+1. Add the shadcn base file to `packages/ui/src/components/ui/newcomponent.tsx`
+2. Add the primitive wrapper to `packages/ui/src/components/primitives/AppNewComponent.tsx`
+3. Export it from `packages/ui/src/components/primitives/index.ts`
+4. Add a preview file at `apps/docs/src/components/previews/newcomponent-preview.tsx`
+5. Add a docs page at `apps/docs/src/app/docs/components/newcomponent/page.tsx`
+6. Add the component to the sidebar in `apps/docs/src/components/sidebar-nav.tsx`
+7. Run `npm run dev` and verify at `http://localhost:3000/docs/components/newcomponent`
+8. Adjust and iterate based on review feedback — repeat steps 1–7 as needed.
+
+> **Stop here.** Do not proceed to Phase 2 until the user explicitly approves the component.
+
+### Phase 2 — Publish (after user approval only)
+
+1. Add a rules file at `packages/ui/src/rules/newcomponent.md` — props reference, usage examples, dos and don'ts
+2. Update `viana-kit-core/AGENTS.md` if needed — add the primitive to any component tables in this file
+3. Update docs page instructions or examples if needed
+4. Run `npm run sync` to push to viana-kit
+5. Verify sync output — confirm files landed in `viana-kit/src/components/primitives/` and `viana-kit/rules/`
+6. Update `viana-kit/AGENTS.md` — add the new primitive to the component rules table
+7. Update `viana-kit/README.md` if the public API surface changed (new exports, new props, new block)
+8. Stage and commit `viana-kit-core`, then push
+9. Stage and commit `viana-kit`, then push
+
+---
+
 ## Syncing to viana-kit
 
-After making changes to `ui/` or `primitives/`, sync them to the distribution repo:
+Sync is a **publish step, not a build step**. During active development, changes are visible directly in the docs dev server — no sync needed.
 
 ```bash
 # Sync to the default sibling directory (../viana-kit)
@@ -116,25 +171,17 @@ node scripts/sync.js --version 0.2.0
 1. Copies all `packages/ui/src/components/ui/*.tsx` → `viana-kit/src/components/ui/` (verbatim)
 2. Copies all `packages/ui/src/components/primitives/*.tsx` → `viana-kit/src/components/primitives/` with import transform:
    - `../../lib/utils` → `@/lib/utils` (viana-kit uses Next.js `@/` alias)
-3. Bumps the patch version in `viana-kit/.vianarc` and updates all component entries
+3. Copies all `packages/ui/src/rules/*.md` → `viana-kit/rules/`
+4. Bumps the patch version in `viana-kit/.vianarc` and updates all component entries
 
-**Always run sync after:**
-- Fixing or updating any primitive file
-- Adding a new primitive
-- Updating a `ui/` base component
+**Run sync only when:**
+- The component has been reviewed and approved by the user
+- You are ready to publish to the `viana-kit` distribution repo
 
----
-
-## Adding a new component
-
-1. Add the shadcn base file to `packages/ui/src/components/ui/newcomponent.tsx`
-2. Add the primitive wrapper to `packages/ui/src/components/primitives/AppNewComponent.tsx`
-3. Export it from `packages/ui/src/components/primitives/index.ts`
-4. Add a rules file at `packages/ui/src/rules/newcomponent.md`
-5. Add a preview file at `apps/docs/src/components/previews/newcomponent-preview.tsx`
-6. Add a docs page at `apps/docs/src/app/docs/components/newcomponent/page.tsx`
-7. Add the component to the sidebar in `apps/docs/src/components/sidebar-nav.tsx`
-8. Run `npm run sync` to push changes to viana-kit
+**Do not run sync:**
+- After every file edit
+- During iterative review cycles
+- Before the user has approved the work
 
 ---
 
@@ -198,4 +245,36 @@ Do not add `dark` directly to `AppSidebar`, `AppHeader`, or `AppDashboardBackgro
 | Add CVA variants or custom styling to a primitive | Put that in `ui/` or accept className override |
 | Rebuild component logic that shadcn already provides | Wrap the existing `ui/` component |
 | Manually copy files to viana-kit | Run `npm run sync` |
-| Edit `viana-kit` files directly for testing | Edit core, sync, verify in viana-kit |
+| Edit `viana-kit` files directly for testing | Edit in core, then sync after approval |
+| Run sync before user approval | Build → review in docs → user approves → then sync |
+| Commit or push during active development | Wait for user approval, then commit both repos together |
+
+---
+
+## Skill workflow (architect → engineer → review → publish)
+
+When using the `/architect` and `/engineer` Claude Code skills, the same build → review → publish lifecycle applies. Skills enforce this automatically, but the rules above apply to any agent working in this repo.
+
+```
+/architect  →  plan only, no files written
+     ↓
+/engineer (Phase 1 — Build)
+     implement in packages/ui/src/ + apps/docs/
+     stop after sidebar nav entry
+     report: "Run npm run dev and check localhost:3000/docs/components/[name]"
+     ↓
+User reviews, requests adjustments → /engineer iterates (still Phase 1)
+     ↓
+User approves: "looks good" / "this is good now" / "let's publish this"
+     ↓
+/engineer (Phase 2 — Publish)
+     write rules file → packages/ui/src/rules/
+     update viana-kit-core/AGENTS.md if needed
+     update docs page if needed
+     npm run sync
+     verify sync output in viana-kit/
+     update viana-kit/AGENTS.md component table
+     update viana-kit/README.md if public API changed
+     stage + commit + push viana-kit-core
+     stage + commit + push viana-kit
+```
