@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { CollapsibleDefaultPreview } from "@/components/previews/collapsible-preview";
+import {
+  CollapsibleDefaultPreview,
+  CollapsibleControlledPreview,
+  CollapsibleUncontrolledPreview,
+  CollapsibleDisabledPreview,
+  CollapsibleNestedPreview,
+} from "@/components/previews/collapsible-preview";
 
 export const metadata: Metadata = {
   title: "Collapsible",
@@ -149,6 +155,150 @@ export function Example() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+
+        {/* Examples */}
+        <div className="space-y-6">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Examples
+          </h2>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-semibold text-foreground">Controlled</h3>
+            <p className="text-sm text-muted-foreground">
+              Use <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">open</code> and{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">onOpenChange</code> to
+              fully control the open state from outside the component.
+            </p>
+            <ComponentPreview
+              preview={<CollapsibleControlledPreview />}
+              code={`const [isOpen, setIsOpen] = React.useState(false)
+
+<AppCollapsible open={isOpen} onOpenChange={setIsOpen}>
+  <div className="flex items-center justify-between space-x-4">
+    <h4 className="text-sm font-semibold">@peduarte starred 3 repositories</h4>
+    <AppCollapsibleTrigger asChild>
+      <AppButton variant="ghost" size="sm">
+        <ChevronsUpDown className="h-4 w-4" />
+      </AppButton>
+    </AppCollapsibleTrigger>
+  </div>
+  <div className="rounded-md border px-4 py-2 font-mono text-sm">
+    @radix-ui/primitives
+  </div>
+  <AppCollapsibleContent className="space-y-2">
+    <div className="rounded-md border px-4 py-2 font-mono text-sm">
+      @radix-ui/colors
+    </div>
+    <div className="rounded-md border px-4 py-2 font-mono text-sm">
+      @stitches/react
+    </div>
+  </AppCollapsibleContent>
+</AppCollapsible>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-semibold text-foreground">Uncontrolled (defaultOpen)</h3>
+            <p className="text-sm text-muted-foreground">
+              Use <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">defaultOpen</code> to
+              start expanded without managing state yourself.
+            </p>
+            <ComponentPreview
+              preview={<CollapsibleUncontrolledPreview />}
+              code={`<AppCollapsible defaultOpen className="space-y-2">
+  <div className="flex items-center justify-between space-x-4">
+    <h4 className="text-sm font-semibold">Release notes</h4>
+    <AppCollapsibleTrigger asChild>
+      <AppButton variant="ghost" size="sm">
+        <ChevronDownIcon className="h-4 w-4" />
+      </AppButton>
+    </AppCollapsibleTrigger>
+  </div>
+  <AppCollapsibleContent className="space-y-2">
+    <div className="rounded-md border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
+      v1.2.0 — Added dark mode support.
+    </div>
+  </AppCollapsibleContent>
+</AppCollapsible>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-semibold text-foreground">Disabled</h3>
+            <p className="text-sm text-muted-foreground">
+              The <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">disabled</code> prop
+              prevents user interaction with the trigger.
+            </p>
+            <ComponentPreview
+              preview={<CollapsibleDisabledPreview />}
+              code={`<AppCollapsible disabled>
+  <div className="flex items-center justify-between space-x-4">
+    <h4 className="text-sm font-semibold text-muted-foreground">Restricted section</h4>
+    <AppCollapsibleTrigger asChild>
+      <AppButton variant="ghost" size="sm" disabled>
+        <ChevronDownIcon className="h-4 w-4" />
+      </AppButton>
+    </AppCollapsibleTrigger>
+  </div>
+  <AppCollapsibleContent>
+    <div className="rounded-md border px-4 py-2 text-sm">Hidden content</div>
+  </AppCollapsibleContent>
+</AppCollapsible>`}
+              filename="example.tsx"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="text-base font-semibold text-foreground">Nested</h3>
+            <p className="text-sm text-muted-foreground">
+              Collapsibles can be nested to any depth. Each maintains its own independent open state.
+              This is the foundation of the{" "}
+              <a href="/docs/blocks/location-tree-filter" className="text-primary underline underline-offset-4">
+                Location Tree Filter
+              </a>{" "}
+              block.
+            </p>
+            <ComponentPreview
+              preview={<CollapsibleNestedPreview />}
+              code={`const [outerOpen, setOuterOpen] = React.useState(true)
+const [innerOpen, setInnerOpen] = React.useState(false)
+
+<AppCollapsible open={outerOpen} onOpenChange={setOuterOpen}>
+  <div className="flex items-center justify-between">
+    <h4 className="text-sm font-semibold">Asia Pacific</h4>
+    <AppCollapsibleTrigger asChild>
+      <AppButton variant="ghost" size="sm">
+        <ChevronDownIcon className="h-4 w-4" />
+      </AppButton>
+    </AppCollapsibleTrigger>
+  </div>
+  <AppCollapsibleContent>
+    <div className="ml-4 mt-1">
+      <AppCollapsible open={innerOpen} onOpenChange={setInnerOpen}>
+        <div className="flex items-center justify-between">
+          <h5 className="text-sm text-muted-foreground">Philippines</h5>
+          <AppCollapsibleTrigger asChild>
+            <AppButton variant="ghost" size="sm">
+              <ChevronDownIcon className="h-3 w-3" />
+            </AppButton>
+          </AppCollapsibleTrigger>
+        </div>
+        <AppCollapsibleContent>
+          <div className="ml-4 space-y-1 text-sm text-muted-foreground">
+            <p>Manila</p>
+            <p>Cebu City</p>
+          </div>
+        </AppCollapsibleContent>
+      </AppCollapsible>
+    </div>
+  </AppCollapsibleContent>
+</AppCollapsible>`}
+              filename="example.tsx"
+            />
           </div>
         </div>
 
