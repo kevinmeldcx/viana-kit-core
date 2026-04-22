@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ComponentPreview } from "@/components/component-preview";
-import { CheckboxDefaultPreview } from "@/components/previews/checkbox-preview";
+import {
+  CheckboxDefaultPreview,
+  CheckboxWithDescriptionPreview,
+  CheckboxDisabledPreview,
+  CheckboxGroupPreview,
+} from "@/components/previews/checkbox-preview";
 
 export const metadata: Metadata = {
   title: "Checkbox",
@@ -89,6 +94,28 @@ export function Example() {
           />
         </div>
 
+        {/* With description */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            With description
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Add a description below the label to provide additional context.
+          </p>
+          <ComponentPreview
+            preview={<CheckboxWithDescriptionPreview />}
+            code={`<div className="flex items-start gap-3">
+  <AppCheckbox id="notifications" className="mt-0.5" />
+  <div className="grid gap-1">
+    <AppLabel htmlFor="notifications">Enable notifications</AppLabel>
+    <p className="text-sm text-muted-foreground">
+      You can enable or disable notifications at any time.
+    </p>
+  </div>
+</div>`}
+          />
+        </div>
+
         {/* Disabled */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
@@ -99,14 +126,54 @@ export function Example() {
             <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground">
               disabled
             </code>{" "}
-            prop to prevent interaction. The label cursor also updates
-            automatically.
+            prop to prevent interaction. Works for both unchecked and
+            pre-checked states.
           </p>
-          <CodeBlock
-            language="tsx"
-            code={`<div className="flex items-center gap-2">
-  <AppCheckbox id="disabled" disabled />
-  <AppLabel htmlFor="disabled">Disabled option</AppLabel>
+          <ComponentPreview
+            preview={<CheckboxDisabledPreview />}
+            code={`{/* Disabled unchecked */}
+<div className="flex items-center gap-2">
+  <AppCheckbox id="disabled-unchecked" disabled />
+  <AppLabel htmlFor="disabled-unchecked" className="opacity-50 cursor-not-allowed">
+    Disabled (unchecked)
+  </AppLabel>
+</div>
+
+{/* Disabled checked */}
+<div className="flex items-center gap-2">
+  <AppCheckbox id="disabled-checked" disabled defaultChecked />
+  <AppLabel htmlFor="disabled-checked" className="opacity-50 cursor-not-allowed">
+    Disabled (checked)
+  </AppLabel>
+</div>`}
+          />
+        </div>
+
+        {/* Checkbox group */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Checkbox group
+          </h2>
+          <p className="text-muted-foreground leading-7">
+            Stack multiple checkboxes for multi-select scenarios. Each
+            checkbox is independent — there is no shared group state.
+          </p>
+          <ComponentPreview
+            preview={<CheckboxGroupPreview />}
+            code={`<div className="space-y-3">
+  <p className="text-sm font-medium text-foreground">Notify me about...</p>
+  <div className="flex items-center gap-2">
+    <AppCheckbox id="comments" />
+    <AppLabel htmlFor="comments">New comments</AppLabel>
+  </div>
+  <div className="flex items-center gap-2">
+    <AppCheckbox id="mentions" />
+    <AppLabel htmlFor="mentions">Direct mentions</AppLabel>
+  </div>
+  <div className="flex items-center gap-2">
+    <AppCheckbox id="updates" />
+    <AppLabel htmlFor="updates">Product updates</AppLabel>
+  </div>
 </div>`}
           />
         </div>
@@ -177,6 +244,18 @@ export function Example() {
                     description: "Marks the checkbox as required in a form.",
                   },
                   {
+                    prop: "name",
+                    type: "string",
+                    default: "—",
+                    description: "Submitted with its owning form as part of a name/value pair.",
+                  },
+                  {
+                    prop: "value",
+                    type: "string",
+                    default: "'on'",
+                    description: "The value given as data when submitted in a form.",
+                  },
+                  {
                     prop: "className",
                     type: "string",
                     default: "—",
@@ -213,7 +292,7 @@ export function Example() {
             filename="src/components/primitives/AppCheckbox.tsx"
             code={`"use client"
 
-import { Checkbox as CheckboxPrimitive } from "@/components/ui/checkbox"
+import { Checkbox as CheckboxPrimitive } from "../ui/checkbox"
 
 type AppCheckboxProps = React.ComponentPropsWithoutRef<typeof CheckboxPrimitive>
 
