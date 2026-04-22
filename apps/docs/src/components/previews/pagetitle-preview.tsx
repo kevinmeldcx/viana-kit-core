@@ -1,35 +1,13 @@
 "use client";
 
-import { MapPin, Plus, Server, Cctv, LineChart, FileText, LayoutDashboard } from "lucide-react";
+import { Plus } from "lucide-react";
 import { AppDashboard, AppButton, AppPageTitle } from "@viana/ui";
-
-const nav = [
-  {
-    items: [{ title: "Dashboards", icon: LayoutDashboard }],
-  },
-  {
-    label: "Manage",
-    items: [
-      { title: "Site", icon: MapPin, isActive: true },
-      { title: "Devices", icon: Server },
-      { title: "Sensor", icon: Cctv },
-    ],
-  },
-  {
-    label: "Insights",
-    items: [
-      { title: "X-ray", icon: LineChart },
-      { title: "Manifest", icon: FileText },
-    ],
-  },
-];
 
 // Default — title + subtitle, no actions, breadcrumbs auto-generated
 export function PageTitleDefaultPreview() {
   return (
     <div className="relative h-[560px] overflow-hidden rounded-lg border border-border [contain:layout]">
       <AppDashboard
-        nav={nav}
         pageTitle={{
           title: "Site",
           subtitle: "Stay up to date to everything in your network",
@@ -47,7 +25,7 @@ export function PageTitleWithActionsPreview() {
   return (
     <div className="relative h-[560px] overflow-hidden rounded-lg border border-border [contain:layout]">
       <AppDashboard
-        nav={nav}
+
         pageTitle={{
           title: "Site",
           subtitle: "Stay up to date to everything in your network",
@@ -70,7 +48,7 @@ export function PageTitleWithActionsPreview() {
 export function PageTitleHiddenPreview() {
   return (
     <div className="relative h-[560px] overflow-hidden rounded-lg border border-border [contain:layout]">
-      <AppDashboard nav={nav} pageTitle={false}>
+      <AppDashboard pageTitle={false}>
         <p className="text-sm text-muted-foreground">Page content (no title block)</p>
       </AppDashboard>
     </div>
@@ -101,7 +79,7 @@ export function PageTitleWithIconPreview() {
   return (
     <div className="relative h-[560px] overflow-hidden rounded-lg border border-border [contain:layout]">
       <AppDashboard
-        nav={nav}
+
         pageTitle={{
           title: "Hi Kevin! Welcome to Viana",
           subtitle: "Stay up to date to everything in your network",

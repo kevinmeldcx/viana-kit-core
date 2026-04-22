@@ -1,34 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { LayoutDashboard, MapPin, Server, Cctv, LineChart, FileText } from "lucide-react";
 import { AppDashboard } from "@viana/ui";
-
-const nav = [
-  {
-    items: [{ title: "Dashboards", icon: LayoutDashboard, isActive: true }],
-  },
-  {
-    label: "Manage",
-    items: [
-      { title: "Sites", icon: MapPin },
-      { title: "Devices", icon: Server },
-      { title: "Sensors", icon: Cctv },
-    ],
-  },
-  {
-    label: "Insights",
-    items: [
-      { title: "X-ray", icon: LineChart },
-      { title: "Manifest", icon: FileText },
-    ],
-  },
-];
 
 export function DashboardDefaultPreview() {
   return (
     <div className="relative h-[980px] overflow-hidden rounded-lg border border-border [contain:layout]">
-      <AppDashboard nav={nav}>
+      <AppDashboard>
         <p className="text-sm text-muted-foreground">Page content</p>
       </AppDashboard>
     </div>
@@ -39,7 +17,7 @@ export function DashboardDefaultPreview() {
 export function DashboardLockedLightPreview() {
   return (
     <div className="relative h-[980px] overflow-hidden rounded-lg border border-border [contain:layout]">
-      <AppDashboard nav={nav} backgroundTheme="light">
+      <AppDashboard backgroundTheme="light">
         <p className="text-sm text-muted-foreground">Page content</p>
       </AppDashboard>
     </div>

@@ -1,15 +1,6 @@
 "use client";
 
 import {
-  Cctv,
-  Download,
-  FileText,
-  LayoutDashboard,
-  LineChart,
-  MapPin,
-  Server,
-} from "lucide-react";
-import {
   AppSidebar,
   AppSidebarBrand,
   AppSidebarContent,
@@ -25,32 +16,8 @@ import {
   AppSidebarProvider,
   AppSidebarRail,
   AppSidebarTrigger,
+  DEFAULT_NAV,
 } from "@viana/ui";
-
-const navSections = [
-  {
-    items: [{ title: "Dashboard", icon: LayoutDashboard }],
-  },
-  {
-    label: "Manage",
-    items: [
-      { title: "Site", icon: MapPin },
-      { title: "Devices", icon: Server },
-      { title: "Sensor", icon: Cctv },
-    ],
-  },
-  {
-    label: "Insights",
-    items: [
-      { title: "X-ray", icon: LineChart },
-      { title: "Manifest", icon: FileText },
-    ],
-  },
-  {
-    label: "Downloads",
-    items: [{ title: "Installers", icon: Download }],
-  },
-];
 
 const workspaces = [
   { label: "Acme Corp" },
@@ -68,7 +35,7 @@ export function SidebarDefaultPreview() {
             <AppSidebarBrand dropdown={workspaces} />
           </AppSidebarHeader>
           <AppSidebarContent>
-            {navSections.map((section, i) => (
+            {DEFAULT_NAV.map((section, i) => (
               <AppSidebarGroup key={i}>
                 {section.label && (
                   <AppSidebarGroupLabel>{section.label}</AppSidebarGroupLabel>
@@ -78,7 +45,7 @@ export function SidebarDefaultPreview() {
                     {section.items.map((item) => (
                       <AppSidebarMenuItem key={item.title}>
                         <AppSidebarMenuButton
-                          isActive={item.title === "Dashboard"}
+                          isActive={item.title === "Dashboards"}
                           tooltip={item.title}
                         >
                           <item.icon />
