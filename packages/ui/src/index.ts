@@ -136,6 +136,13 @@ export {
   AppHeaderActions,
 } from "./components/blocks/AppHeader"
 
+export {
+  AppLocationTreeFilter,
+  type AppLocationTreeFilterProps,
+  type TreeNode,
+  type UnallocatedConfig,
+} from "./components/blocks/AppLocationTreeFilter"
+
 // Theme
 export { AppThemeProvider, useAppTheme, AppThemeToggle, type AppTheme, type AppThemeProviderProps } from "./components/primitives/AppThemeProvider"
 

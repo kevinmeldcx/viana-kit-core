@@ -17,6 +17,7 @@ const navSections = [
       { title: "Dashboard", href: "/docs/blocks/dashboard" },
       { title: "Header", href: "/docs/blocks/header" },
       { title: "Page Title", href: "/docs/blocks/pagetitle" },
+      { title: "Location Tree Filter", href: "/docs/blocks/location-tree-filter" },
     ],
   },
   {
