@@ -143,6 +143,25 @@ export {
   type UnallocatedConfig,
 } from "./components/blocks/AppLocationTreeFilter"
 
+export {
+  TableManager,
+  TableManagerToolbar,
+  TableManagerSearch,
+  TableManagerToolbarActions,
+  TableManagerMultiFilter,
+  TableManagerDateRange,
+  TableManagerRowsPerPage,
+  TableManagerPagination,
+  TableManagerColumnToggle,
+  TableManagerExport,
+  TableManagerContent,
+  TableManagerFooter,
+  type TableManagerColumnDef,
+  type TableManagerFilterOption,
+  type TableManagerExportOption,
+  type TableManagerProps,
+} from "./components/blocks/TableManager"
+
 // Theme
 export { AppThemeProvider, useAppTheme, AppThemeToggle, type AppTheme, type AppThemeProviderProps } from "./components/primitives/AppThemeProvider"
 
