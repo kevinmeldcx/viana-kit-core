@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { AppText } from "@viana/ui";
 import { LogosSection } from "@/components/logos-section";
+import { IconsSection } from "@/components/icons-section";
+import { ServiceAppletsSection } from "@/components/service-applets-section";
 
 export const metadata: Metadata = {
   title: "Design System",
@@ -169,6 +171,32 @@ export default function DesignSystemPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        <hr className="border-border" />
+
+        {/* Icons */}
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <h2 className="text-xl font-semibold tracking-tight text-foreground">Icons</h2>
+            <p className="text-sm text-muted-foreground">
+              Custom SVG nav icons for the sidebar, and <strong className="text-foreground">lucide-react</strong> for all general-purpose UI icons.
+            </p>
+          </div>
+          <IconsSection />
+        </div>
+
+        <hr className="border-border" />
+
+        {/* Service Applets */}
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <h2 className="text-xl font-semibold tracking-tight text-foreground">Service Applets</h2>
+            <p className="text-sm text-muted-foreground">
+              Branded app imagery for each Viana service applet. Use these assets wherever a visual identifier for a product or service is needed.
+            </p>
+          </div>
+          <ServiceAppletsSection />
         </div>
 
         <hr className="border-border" />

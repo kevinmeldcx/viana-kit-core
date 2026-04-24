@@ -19,9 +19,9 @@ import {
   type TableManagerFilterOption,
   type TableManagerExportOption,
 } from "@viana/ui";
-import samiIcon from "../../../../../packages/ui/src/assets/Service-applets-apps/SAMi For Environments.png";
-import zoneIcon from "../../../../../packages/ui/src/assets/Service-applets-apps/viana-service-applets-zone engagement 1.png";
-import shelfIcon from "../../../../../packages/ui/src/assets/Service-applets-apps/viana-service-applet-petra 1.png";
+import samiIcon from "../../../../../packages/ui/src/assets/Service-applets-apps/sami-for-environment.png";
+import zoneIcon from "../../../../../packages/ui/src/assets/Service-applets-apps/zone-engagement.png";
+import shelfIcon from "../../../../../packages/ui/src/assets/Service-applets-apps/petra.png";
 
 // ─── Sample data ──────────────────────────────────────────────────────────────
 
