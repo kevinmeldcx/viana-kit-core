@@ -38,7 +38,7 @@ export default function PageTitlePage() {
 import { AppDashboard } from "@/components/blocks/AppDashboard"
 
 const nav = [
-  { items: [{ title: "Dashboards", icon: LayoutDashboard }] },
+  { items: [{ title: "Dashboard", icon: LayoutDashboard }] },
   {
     label: "Manage",
     items: [

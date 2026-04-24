@@ -84,18 +84,18 @@ class PerlinNoise {
 
 const WAVE_CONFIG = {
   // Grid
-  GRID_X_GAP: 10,
-  GRID_Y_GAP: 32,
+  GRID_X_GAP: 7,
+  GRID_Y_GAP: 22,
   GRID_WIDTH_OFFSET: 80,
-  GRID_HEIGHT_OFFSET: 30,
+  GRID_HEIGHT_OFFSET: 200,
   // Perlin wave
-  WAVE_TIME_X_FACTOR: 0.013,
-  WAVE_NOISE_X_FACTOR: 0.003,
-  WAVE_TIME_Y_FACTOR: 0.0022,
-  WAVE_NOISE_Y_FACTOR: 0.0015,
-  WAVE_NOISE_MAGNITUDE: 9,
-  WAVE_AMPLITUDE_X: 30,
-  WAVE_AMPLITUDE_Y: 14,
+  WAVE_TIME_X_FACTOR: 0.003,
+  WAVE_NOISE_X_FACTOR: 0.0046,
+  WAVE_TIME_Y_FACTOR: 0.0009,
+  WAVE_NOISE_Y_FACTOR: 0.0019,
+  WAVE_NOISE_MAGNITUDE: 3,
+  WAVE_AMPLITUDE_X: 50,
+  WAVE_AMPLITUDE_Y: 64,
   // Mouse
   MOUSE_INFLUENCE_RADIUS: 175,
   MOUSE_FALLOFF_FACTOR: 0.001,
@@ -108,8 +108,8 @@ const WAVE_CONFIG = {
   CURSOR_DISPLACEMENT_STRENGTH: 0.6,
   MAX_CURSOR_DISPLACEMENT: 500,
   // Line opacity
-  LINE_BASE_OPACITY: 0.45,
-  LINE_HOVER_OPACITY: 0.85,
+  LINE_BASE_OPACITY: 0.15,
+  LINE_HOVER_OPACITY: 0.35,
 } as const
 
 // ─── Internal types ───────────────────────────────────────────────────────────
@@ -134,8 +134,8 @@ type AnimState = {
 /**
  * AppDashboardBackground — Canvas-driven Perlin noise wave grid with mouse-follow glow.
  * Renders as an absolute-positioned layer behind all dashboard content.
- * Background uses bg-gradient-to-br from --card to --secondary.
- * Wave lines use --accent; glow uses --primary, --muted, --sidebar-primary.
+ * Background uses bg-gradient-to-br from --sidebar to --sidebar-accent.
+ * Wave lines use --sidebar-ring; glow uses --sidebar-primary, --sidebar-accent.
  * @note If a prop you need is missing, stop and inform the design team.
  */
 function AppDashboardBackground({
@@ -172,7 +172,7 @@ function AppDashboardBackground({
     s.ctx = canvas.getContext("2d")
 
     // Read line color from CSS variable — resolves to dark token since container has .dark class
-    const computed = getComputedStyle(container).getPropertyValue("--accent").trim()
+    const computed = getComputedStyle(container).getPropertyValue("--sidebar-ring").trim()
     if (computed) s.lineColor = computed
 
     const setSize = () => {
@@ -342,7 +342,7 @@ function AppDashboardBackground({
   return (
     <motion.div
       ref={containerRef}
-      className={cn("absolute inset-0 overflow-hidden bg-gradient-to-br from-card to-secondary", className)}
+      className={cn("absolute inset-0 overflow-hidden bg-gradient-to-br from-sidebar to-sidebar-accent", className)}
       {...props}
     >
       <canvas
@@ -365,7 +365,7 @@ function AppDashboardBackground({
             className="absolute inset-0 rounded-full"
             style={{
               background:
-                "radial-gradient(circle at center, color-mix(in oklch, var(--primary) 50%, transparent) 0%, color-mix(in oklch, var(--muted) 10%, transparent) 30%, transparent 90%)",
+                "radial-gradient(circle at center, color-mix(in oklch, var(--sidebar-primary) 50%, transparent) 0%, color-mix(in oklch, var(--sidebar-accent) 10%, transparent) 30%, transparent 90%)",
               filter: "blur(100px)",
             }}
           />
@@ -500,7 +500,7 @@ export type AppDashboardBackgroundTheme =
 export type AppDashboardProps = {
   /**
    * Sidebar navigation sections.
-   * Defaults to the built-in Viana nav (Dashboards, Manage, Insights, Downloads)
+   * Defaults to the built-in Viana nav (Dashboard, Manage, Insights, Downloads)
    * when omitted. Pass a custom array to override entirely.
    */
   nav?: AppDashboardNavSection[]

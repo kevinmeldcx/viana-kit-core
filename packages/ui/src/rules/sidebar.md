@@ -84,7 +84,7 @@ import { DEFAULT_NAV } from "@/components/primitives/AppSidebar"
 
 | Group label | Menu item |
 |---|---|
-| *(no label)* | Dashboards |
+| *(no label)* | Dashboard |
 | MANAGE | Site, Devices, Sensor |
 | INSIGHTS | X-ray, Manifest |
 | DOWNLOADS | Installers |
@@ -107,7 +107,7 @@ import { DEFAULT_NAV } from "@/components/primitives/AppSidebar"
           {section.items.map((item) => (
             <AppSidebarMenuItem key={item.title}>
               <AppSidebarMenuButton
-                isActive={item.title === "Dashboards"}
+                isActive={item.title === "Dashboard"}
                 tooltip={item.title}
               >
                 <item.icon />
@@ -290,7 +290,7 @@ import { DEFAULT_NAV } from "@/components/primitives/AppSidebar"
               {section.items.map((item) => (
                 <AppSidebarMenuItem key={item.title}>
                   <AppSidebarMenuButton
-                    isActive={item.title === "Dashboards"}
+                    isActive={item.title === "Dashboard"}
                     tooltip={item.title}
                   >
                     <item.icon />

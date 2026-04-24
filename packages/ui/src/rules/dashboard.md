@@ -142,14 +142,15 @@ export default function Page() {
 
 ## AppDashboardBackground color tokens
 
-`AppDashboardBackground` renders in the mode set by `backgroundTheme` (dark by default). Colors resolve from whichever theme class is active on the element:
+`AppDashboardBackground` renders in the mode set by `backgroundTheme` (dark by default). All colors are scoped to the `--sidebar-*` token family — adjust them in `packages/tokens/src/index.css` without side effects on any other UI.
 
 | Role | Token | Usage |
 |------|-------|-------|
-| Background | `--card` → `--secondary` | `bg-gradient-to-br from-card to-secondary` |
-| Wave lines | `--accent` | Canvas `strokeStyle`, read via `getComputedStyle` at mount |
-| Mouse glow core | `--primary` | 50% opacity, blurred 100px |
-| Mouse glow mid ring | `--muted` | 10% opacity, blurred 100px |
+| Background gradient start | `--sidebar` | `bg-gradient-to-br from-sidebar …` |
+| Background gradient end | `--sidebar-accent` | `… to-sidebar-accent` |
+| Wave lines | `--sidebar-ring` | Canvas `strokeStyle`, read via `getComputedStyle` at mount |
+| Mouse glow core | `--sidebar-primary` | 50% opacity, blurred 100px |
+| Mouse glow mid ring | `--sidebar-accent` | 10% opacity, blurred 100px |
 | Mouse glow overlay | `--sidebar-primary` | 20% opacity, `mix-blend-mode: screen`, blurred 100px |
 
 ## Rules

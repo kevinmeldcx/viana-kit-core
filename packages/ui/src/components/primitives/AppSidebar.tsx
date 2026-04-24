@@ -67,16 +67,28 @@ export type AppSidebarBrandDropdownItem =
     }
 
 export type AppSidebarBrandProps = {
-  logo?: string | React.ReactNode
-  collapsedLogo?: React.ReactNode
+  logo?: string | { src: string } | React.ReactNode
+  collapsedLogo?: string | { src: string } | React.ReactNode
+  logoAlt?: string
   dropdown?: AppSidebarBrandDropdownItem[]
   showChevron?: boolean
   className?: string
 }
 
+const IMAGE_EXT = /\.(png|jpg|jpeg|gif|webp|avif|svg)(\?.*)?$/i
+
+function resolveLogoSrc(logo: string | { src: string } | React.ReactNode): string | null {
+  if (typeof logo === "string" && IMAGE_EXT.test(logo)) return logo
+  if (logo !== null && typeof logo === "object" && !React.isValidElement(logo) && "src" in (logo as object)) {
+    return (logo as { src: string }).src
+  }
+  return null
+}
+
 function AppSidebarBrand({
   logo = <WhiteLogo width={90} height={28} />,
   collapsedLogo = <WhiteSymbol width={24} height={24} />,
+  logoAlt = "",
   dropdown,
   showChevron = true,
   className,
@@ -84,15 +96,26 @@ function AppSidebarBrand({
   const { state } = useSidebar()
   const isCollapsed = state === "collapsed"
 
+  function renderLogo(src: string | { src: string } | React.ReactNode, collapsed: boolean) {
+    const imgSrc = resolveLogoSrc(src)
+    if (imgSrc) {
+      return (
+        <img
+          src={imgSrc}
+          alt={logoAlt}
+          className={cn("w-auto object-contain", collapsed ? "h-6" : "h-7")}
+        />
+      )
+    }
+    if (typeof src === "string") {
+      return <span className="text-sm font-semibold text-foreground">{src}</span>
+    }
+    return <span className="[filter:var(--logo-filter,invert(1))]">{src as React.ReactNode}</span>
+  }
+
   const inner = (
     <div className="relative flex w-full items-center justify-center py-1">
-      {isCollapsed ? (
-        <span className="[filter:var(--logo-filter,invert(1))]">{collapsedLogo}</span>
-      ) : typeof logo === "string" ? (
-        <span className="text-sm font-semibold text-foreground">{logo}</span>
-      ) : (
-        <span className="[filter:var(--logo-filter,invert(1))]">{logo}</span>
-      )}
+      {isCollapsed ? renderLogo(collapsedLogo, true) : renderLogo(logo, false)}
       {!isCollapsed && dropdown && showChevron && (
         <ChevronDown className="absolute right-0 size-4 shrink-0 text-muted-foreground" />
       )}
@@ -209,7 +232,7 @@ export type AppSidebarDefaultNavSection = {
 export const DEFAULT_NAV: AppSidebarDefaultNavSection[] = [
   {
     items: [
-      { title: "Dashboards", icon: DashboardNavIcon, isActive: false, href: "#" },
+      { title: "Dashboard", icon: DashboardNavIcon, isActive: false, href: "#" },
     ],
   },
   {

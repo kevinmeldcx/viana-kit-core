@@ -45,7 +45,7 @@ export function SidebarDefaultPreview() {
                     {section.items.map((item) => (
                       <AppSidebarMenuItem key={item.title}>
                         <AppSidebarMenuButton
-                          isActive={item.title === "Dashboards"}
+                          isActive={item.title === "Dashboard"}
                           tooltip={item.title}
                         >
                           <item.icon />
